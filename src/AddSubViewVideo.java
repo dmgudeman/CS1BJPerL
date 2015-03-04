@@ -1,7 +1,14 @@
+
+
+
 /**
  * Contains a GUI View for an interface that allows you to add a new video entry based on title, format, location, notes, and star
  * Author Dominick Scottolini
  * 
+<<<<<<< HEAD
+=======
+ * 
+>>>>>>> e5d69dd67718c233c7b81d5a02501092a2a4a192
  */
  
 import javax.swing.*;   
