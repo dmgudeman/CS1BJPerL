@@ -7,14 +7,14 @@ import java.util.Iterator;
  * Author DG
  */
 
-public class List implements Collection{
+public class oldlist implements Collection{
    
 	public Media list;
 	/**
 	 * Default Constructor for List Class
 	 * Author DG
 	 */
-	public List() {
+	public oldlist() {
 		
 	}
 
@@ -22,7 +22,7 @@ public class List implements Collection{
 	 *  Search Method to search for title and/or type inherited from Collections class
 	 *  Author DG
 	 */
-	public void binarySearch(List searchText) {
+	public void binarySearch(oldlist searchText) {
 		
 	}
 
