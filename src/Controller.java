@@ -22,5 +22,8 @@ public class Controller {
 		 list.add(thing02);
 		 list.add(thing01);
 		 System.out.println(list.toString());	
+		 
+		
 	}
+
 }
