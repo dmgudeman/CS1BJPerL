@@ -1,6 +1,10 @@
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.*;
 
 
@@ -10,7 +14,7 @@ import javax.swing.*;
  * JFrame that addresses the entire list.
  * Version 1 David Gudeman
  */
-public class MediaView extends JFrame implements ActionListener {
+public class OldMediaView extends JFrame implements Observer {
 	// set constants for the frame
 	private static final int FRAME_WIDTH = 300;
 	private static final int FRAME_HEIGHT = 200;
@@ -25,12 +29,14 @@ public class MediaView extends JFrame implements ActionListener {
 	private JButton mainVideoGameButton;
 	private JButton mainBookButton;
 	private JLabel prompt;
+	private AllMediaView allMediaView;
+	private SongView songView;
 
 	/**
 	 * Non parameterized constructor for this class, creates a JFrame and places
 	 * buttons in the frame
 	 */
-	public MediaView() {
+	public OldMediaView() {
 		// creates frame
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		setLocation(FRAME_X_ORIGIN, FRAME_Y_ORIGIN);
@@ -55,22 +61,39 @@ public class MediaView extends JFrame implements ActionListener {
 		this.add(mainVideoGameButton);
 		this.add(mainBookButton);
 		this.setVisible(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// add ActionListeners
-		mainAllButton.addActionListener(this);
-		mainSongButton.addActionListener(this);
-		mainVideoButton.addActionListener(this);
-		mainVideoGameButton.addActionListener(this);
-		mainBookButton.addActionListener(this);
+		mainAllButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("Button has been clicked");
+				if (allMediaView == null){
+					allMediaView = new AllMediaView();
+				} else {
+					songView.setVisible(true);
+				}
+			}
+		});
+		mainSongButton.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent ae) {
+			System.out.println("Button has been clicked");
+			if (songView == null){
+				songView = new SongView();
+			} else {
+				songView.setVisible(true);
+			}
+		}
+	});
+		//mainVideoButton.addActionListener(this);
+		//mainVideoGameButton.addActionListener(this);
+		//mainBookButton.addActionListener(this);
 
 		// makes frame visible and exits on close
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setVisible(true);
 	}
 
 	/**
 	 * Performs method specific to an event triggered by a specific button
-	 */
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// if statement to clarify action event
@@ -92,5 +115,25 @@ public class MediaView extends JFrame implements ActionListener {
 		
 
 	}
+	*/
 
+	/**
+	 * Takes in a controller Object as a parameter registers
+	 * the controller object as a listener for the convertButton
+	 * to be enacted 
+	 */
+	//public void addController(ActionListener controller) {
+	//	mainAllButton.addActionListener(controller);
+	//}
+	/**
+	 * This is a method necessary to implement the Observer interface.
+	 * It takes two parameters o is the observable object and 
+	 * arg an argument passed to the notifyObservers method.
+	 */
+	@Override
+	public void update(Observable o, Object arg) {
+		//double celsius = (double) arg;
+		//DecimalFormat df = new DecimalFormat("#.00");
+		//celsOutput.setText(df.format(celsius));
+	}
 }

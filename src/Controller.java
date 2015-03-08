@@ -1,7 +1,7 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
-
-
 
 /**
  * Controller Class. Drives the program and communicates between the View (GUI) and 
@@ -9,31 +9,39 @@ import java.util.List;
  * Author: DG 
  */
 
-public class Controller {
+public class Controller implements ActionListener {
+	private MediaLibrary mediaLibrary;
+	private OpenDashboardView openDashboardView;
+	private AllMediaView allMediaView;
+	private BookView bookView;
+	private AddSubViewBook addSubViewBook;
+	private DeleteSubView deleteSubView;
 	
-	private List<Media> list = new LinkedList<Media>();
-	
-	public void doStuff() {
-		Media thing01 = new Media ("This", "DVD", "Library", "Hello Notes", "video");
-		//	System.out.println(thing01.toString());
-			
-			Media thing02 = new Song ("This02", "Song2", "Library02", "notes02", "artist02", "genre02", "");
-		//	System.out.println(thing02.toString());
-			Media thing03 = new Books ("This03", "Book03", "Library03", "notes03", "author03", "");
-			//System.out.println(thing03.toString());
-			 list.add(thing03);
-			 list.add(thing02);
-			 list.add(thing01);
-			 System.out.println(list.toString());
+
+	/**
+	 * parameterized Constructor for this controller class that takes both the
+	 * model (ConvertModel) and the view (ConvertView). Allows the
+	 * actionPerformed method of the ActionListener to be called from this class
+	 */
+	public Controller(MediaLibrary mediaLibrary, OpenDashboardView openDashboardView) {
+		this.mediaLibrary= mediaLibrary;
+		this.openDashboardView = openDashboardView;
 	}
-	
-	public static void main(String[] args) {
-	  
-		Controller controller = new Controller();
+
+	public Controller(MediaLibrary mediaLibrary2, OldMediaView mainView) {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * This method is called when there is an action initiated from the
+	 * ActionListener. This methods takes the Fahrenheit input from the view and
+	 * directs the model convert it to Celsius converted to Celsius
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
 		
-		controller.doStuff();
-		 
-		
+		//e.getSource();
+		System.out.println(e.getSource());
 	}
 
 }
