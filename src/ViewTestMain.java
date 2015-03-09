@@ -11,11 +11,12 @@ public class ViewTestMain {
 
 	
 	public static void main(String[] args) {
-		OldMediaView mainView = new OldMediaView();
+	//	OldMediaView mainView = new OldMediaView();
 	//	BookView bookView = new BookView();
 	//	AddSubViewVideo addSubViewVideo  = new AddSubViewVideo();
 		MediaLibrary mediaLibrary = new MediaLibrary();
-		Controller controller = new Controller(mediaLibrary, mainView);
+		OpenDashboardView openDashboardView = new OpenDashboardView();
+		Controller controller = new Controller(mediaLibrary, openDashboardView);
 
 		//ConvertView mainView = new ConvertView();
 		//ConvertController mainControl = new ConvertController(mainModel, mainView);

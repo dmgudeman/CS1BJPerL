@@ -30,7 +30,7 @@ public class OldMediaView extends JFrame implements Observer {
 	private JButton mainBookButton;
 	private JLabel prompt;
 	private AllMediaView allMediaView;
-	private SongView songView;
+	private SongViewOld songView;
 
 	/**
 	 * Non parameterized constructor for this class, creates a JFrame and places
@@ -78,7 +78,7 @@ public class OldMediaView extends JFrame implements Observer {
 		public void actionPerformed(ActionEvent ae) {
 			System.out.println("Button has been clicked");
 			if (songView == null){
-				songView = new SongView();
+				songView = new SongViewOld();
 			} else {
 				songView.setVisible(true);
 			}
