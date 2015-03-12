@@ -22,7 +22,7 @@ public class SongView extends JFrame implements Observer {
 
 	// set constants for the frame
 	private static final int FRAME_WIDTH = 400;
-	private static final int FRAME_HEIGHT = 600;
+	private static final int FRAME_HEIGHT = 700;
 //	private static final int FRAME_X_ORIGIN = 50;
 //	private static final int FRAME_Y_ORIGIN = 50;
 	
@@ -36,6 +36,7 @@ public class SongView extends JFrame implements Observer {
 	private TextArea textArea;
 	private JLabel prompt;
 	private JButton homeButton;
+	private JButton printButton;
 	
 	
 	//private static JTextField output;
@@ -77,6 +78,8 @@ public class SongView extends JFrame implements Observer {
 		textArea = new TextArea(5, 30);
 		textArea.setEditable(false);
 		homeButton = new JButton("HOME");
+		printButton = new JButton("PRINT");
+		
 		
 		
 		// makes an object to allow the grid layout
@@ -109,7 +112,9 @@ public class SongView extends JFrame implements Observer {
 		c.gridwidth = 2;
 		panel.add(homeButton, c);
 		
-		
+		c.gridx = 1;
+		c.gridy = 6;
+		panel.add(printButton, c);
 		
 	
 		frame.add(panel);
@@ -139,21 +144,26 @@ public class SongView extends JFrame implements Observer {
 					}
 				}
 			});
-			homeButton.addActionListener(new ActionListener(){
+		homeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Home Button has been clicked");
-			
-		    	if (mediaView == null){
+
+				if (mediaView == null) {
 					mediaView = new MediaView();
-					
-					
+
 				} else {
 					mediaView.setVisible(true);
-				
-				}
-		    	
+				}	    	
 			} 
-			
+
+		});
+		printButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("Print Button has been clicked");
+
+				    	
+			} 
+
 		});
 	
 	}

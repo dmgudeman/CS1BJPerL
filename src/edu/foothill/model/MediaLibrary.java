@@ -117,4 +117,44 @@ public class MediaLibrary extends Observable implements Serializable {
 		}
 		clearChanged();
 	}
+	/**
+	 * Method sorts the media library by type of entry and within type of entry, sorted by title.
+	 * Author - Shmuel
+	 * @param sortField
+	 */
+	public void sortByField() {
+		String sortFieldI;
+		String sortFieldIIPlusOne;
+		Media tempMedia = new Media();
+		
+			for (int sortIndex = 0; sortIndex < 2; sortIndex++) {
+				for (int i = 0; i < mediaLibrary.size() - 1; i++) {
+					for (int j = 0; j < mediaLibrary.size() - 1 - i; j++) {
+
+						if (sortIndex == 0) { // first sort on first name
+							sortFieldI = mediaLibrary.get(j).getTitle();
+							sortFieldIIPlusOne = mediaLibrary.get(j + 1)
+									.getTitle();
+						} else { // Sort on second name after the sort on first
+									// name
+									// is complete
+							sortFieldI = mediaLibrary.get(j).getType();
+							sortFieldIIPlusOne = mediaLibrary.get(j + 1)
+									.getType();
+						}
+						sortFieldI = sortFieldI.toLowerCase();
+						sortFieldIIPlusOne = sortFieldIIPlusOne.toLowerCase();
+						if (sortFieldI.compareTo(sortFieldIIPlusOne) > 0) {
+							// need to swap Person Objects
+							tempMedia = mediaLibrary.get(j);
+							mediaLibrary.remove(j);
+							mediaLibrary.add(j + 1, tempMedia);
+
+						}
+
+					}
+				}
+
+			}
+}
 }

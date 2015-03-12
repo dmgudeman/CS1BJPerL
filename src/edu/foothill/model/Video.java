@@ -14,17 +14,20 @@ public class Video extends Media{
 	 * location, format and notes.  It adds parameters star and Video type.
 	 * Author DG
 	 */
-	public Video(String title, String location, String format, String notes, String star, String type) {
-		super(title, location, format, notes, type);
+	public Video(String title, String location, String format, String notes, String star) {
+		super();
 		this.star = star;
 	}
 
+	public Video(){
+		
+	}
 	// getters and setters. DG
 	public String getStar() {
 		return star;
 	}
 
-	public void setAuthor(String star) {
+	public void setStar(String star) {
 		this.star = star;
 	}
 

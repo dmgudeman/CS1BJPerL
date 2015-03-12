@@ -14,8 +14,12 @@ public class VideoGame extends Media{
 	 * location, format and notes.  It adds parameters VideoGame type.
 	 * Author DG
 	 */
-	public VideoGame(String title, String location, String format, String notes, String type) {
-		super(title, location, format, notes, type);
+	public VideoGame(String title, String location, String format, String notes) {
+		super();
+	}
+
+	public VideoGame() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getType() {

@@ -38,9 +38,10 @@ public class Controller implements ViewListener {
 			if (event.getCommand().equals(Command.ADD)){
 				mediaLibrary.addMedia(event.getMedia());
 			   
-			}
-		} else if (event.getSource() == AddSubViewBook.class){ 
+			} else if (event.getCommand().equals(Command.PRINT)){
+				System.out.println("PLACEHOLDER FOR TOSTRING");
+			} 
+		}	
 		   
-	}
 	}
 }

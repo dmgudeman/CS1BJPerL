@@ -1,13 +1,6 @@
 package edu.foothill.view.gui;
 
 import javax.swing.*;   
-/**
- * Contains a GUI View for an interface that allows you to add a new video entry based on title, format, location, notes, and star
- * Author Dominick Scottolini
- * V2 David Gudeman
- * 
- */
- 
 
 import edu.foothill.controller.gui.ViewEvent;
 import edu.foothill.controller.gui.ViewListener;
@@ -27,6 +20,7 @@ import java.awt.event.ActionListener;
 public class AddSubViewSong extends JFrame implements ActionListener
 													
 {	
+	
 	// create a frame
 	private static final int FRAME_WIDTH = 400;
 	private static final int FRAME_HEIGHT = 600;
@@ -41,6 +35,7 @@ public class AddSubViewSong extends JFrame implements ActionListener
 	private JButton addButton;
 	private JButton backButton;
 	private JButton homeButton;
+	private JButton printButton;
 	
 	private JTextField title;
 	private JTextField artist;
@@ -94,6 +89,7 @@ public class AddSubViewSong extends JFrame implements ActionListener
 		addButton = new JButton("Add");
 		backButton = new JButton("Back");
 		homeButton = new JButton("Home");
+		printButton = new JButton("Print");
 		// adds the initialized elements to the frame
 /*	this.add(songprompt);
 		this.add(addButton);
@@ -196,6 +192,11 @@ GridBagConstraints c = new GridBagConstraints();
 		c.gridy = 9;
 	
 		panel.add(homeButton, c);
+		
+		c.gridx =1;
+		c.gridy = 10;
+		c.gridwidth = 2;
+		panel.add(printButton, c);
 	
 		
 		frame.add(panel);
@@ -216,6 +217,14 @@ GridBagConstraints c = new GridBagConstraints();
 				controller.viewEventOccured(new ViewEvent(AddSubViewSong.class, song, Command.ADD));
 				
 			}
+		});
+		printButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("Print Button has been clicked");
+			     
+				controller.viewEventOccured(new ViewEvent(AddSubViewSong.class, null, Command.PRINT));	    	
+			} 
+
 		});
 	}
 		

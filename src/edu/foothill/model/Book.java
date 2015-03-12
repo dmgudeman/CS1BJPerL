@@ -5,7 +5,7 @@ package edu.foothill.model;
  * Adds parameters author and Book type to the Media class information
  * Author DG  
  */
-public class Books extends Media {
+public class Book extends Media {
    
 	private String author;
 	private String type = "Book";
@@ -15,12 +15,15 @@ public class Books extends Media {
 	 * location, format and notes.  It adds parameters author and Book type.
 	 * Author DG
 	 */
-	public Books(String title, String location, String format, String notes, String author, String type) {
-		super(title, location, format, notes, type);
+	public Book(String title, String location, String format, String notes, String author) {
+		super();
 		this.author = author;
 	}
-
-	//Getters and setters DG
+    public Book(){
+    	
+    }
+	
+    //Getters and setters DG
 	public String getAuthor() {
 		return author;
 	}
@@ -37,6 +40,7 @@ public class Books extends Media {
 		this.type = type;
 	}
 
+	
 	/**
 	* Returns a String containing all the data stored in this object. DG
     */

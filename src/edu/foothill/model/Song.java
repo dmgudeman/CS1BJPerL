@@ -23,6 +23,9 @@ public class Song extends Media{
 		this.genre = genre;
 		
 	}
+	public Song(){
+		
+	}
 	//getters and setters for subclass, DG
 	public String getArtist() {
 		return artist;

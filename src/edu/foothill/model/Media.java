@@ -32,6 +32,9 @@ public class Media {
 		this.notes = notes;
 	}
 	
+	public Media() {
+		
+	}
 	// getters and setters for the variables of this class, DG
 	public String getType() {
 		return type;
