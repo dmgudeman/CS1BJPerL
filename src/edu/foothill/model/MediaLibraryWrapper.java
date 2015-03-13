@@ -2,14 +2,22 @@ package edu.foothill.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * This creates ArrayLists for each of the four media types. Allows
+ * more efficient searching of the various media groups.  
+ * David Gudeman
+ */
 public class MediaLibraryWrapper {
-
+    
+	//creates four array lists based on media type. makes manipulation
+	// if the media types as a group more efficient for sorting and presenting
+	// and populating the textAreas in the the various Media View. DG
 	private List<Song> songs = new ArrayList<Song>();
 	private List<Book> books = new ArrayList<Book>();
 	private List<Video> videos = new ArrayList<Video>();
 	private List<VideoGame> videogames = new ArrayList<VideoGame>();
 
+	// getter for the various Lists DG
 	public List<Song> getSongs() {
 		return songs;
 	}
@@ -25,7 +33,7 @@ public class MediaLibraryWrapper {
 	public List<VideoGame> getVideogames() {
 		return videogames;
 	}
-
+    // toString function for entire library DG
 	public String toString() {
 		String libraryString = "Library as a printable string";
 		if (!(songs.isEmpty() && books.isEmpty() && videos.isEmpty() && videogames
@@ -48,7 +56,7 @@ public class MediaLibraryWrapper {
 		}
 		return (libraryString);
 	}
-
+    // toString for Songs DG
 	public String toStringSongs() {
 		String libraryString = "Songs as a printable string";
 		if (songs.isEmpty()) {
@@ -60,7 +68,6 @@ public class MediaLibraryWrapper {
 				libraryString += songs.get(i) + "\n";
 			}
 		}
-
 		return (libraryString);
-	}
+	} 
 }

@@ -24,8 +24,7 @@ public class AddSubViewSong extends JFrame implements ActionListener
 	// create a frame
 	private static final int FRAME_WIDTH = 400;
 	private static final int FRAME_HEIGHT = 600;
-	//private static final int FRAME_X_ORIGIN = 150;
-	//private static final int FRAME_Y_ORIGIN = 250;
+	
 		
 	// declare variables needed 
 	JFrame frame = new JFrame();
@@ -107,9 +106,11 @@ public class AddSubViewSong extends JFrame implements ActionListener
 		c.gridwidth = 2;
 		panel.add(songPrompt, c);
 		
+		
 		c.gridx = 0;
 		c.gridy = 1;
 		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.EAST;
 		panel.add(titlePrompt, c);
 			
 		c.gridx = 1;

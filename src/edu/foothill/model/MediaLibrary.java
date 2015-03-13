@@ -103,7 +103,6 @@ public class MediaLibrary extends Observable implements Serializable {
 	public void deleteEntries(String mediaType, String mediaTitle) {
 		// TODO Auto-generated method stub
 		System.out.println("Deleted specific entries from the media library");
-
 	}
 
 	/**
@@ -135,7 +134,7 @@ public class MediaLibrary extends Observable implements Serializable {
 						}
 
 					});
-		}else if (type.equals(Type.Song)) {
+		} else if (type.equals(Type.Song)) {
 			Collections.sort(mediaLibraryWrapper.getSongs(),
 					new Comparator<Song>() {
 						@Override
@@ -145,5 +144,6 @@ public class MediaLibrary extends Observable implements Serializable {
 
 					});
 		}
+		// need to add the sortByTitle for video, videoGame
 	}
 }
