@@ -13,8 +13,8 @@ public class Persistence {
 
 	private String mediaLibraryFileName;
 	private File mediaLibraryFile;
-	private MediaLibrary mediaLibraryFromDisk;
-
+	//private MediaLibrary mediaLibraryFromDisk; Schmuels
+    private MediaLibraryWrapper mediaLibraryWrapperFromDisk;
 	/**
 	 * Non-parameterized constructor for the Disk Class. Note that if you do not
 	 * specify file name it defaults to Temp.ser
@@ -47,7 +47,7 @@ public class Persistence {
 	 * @return - Returns true if write operation was successful and false if it
 	 *         failed.
 	 */
-	public boolean writeToDisk(MediaLibrary mediaLibraryObject) {
+	public boolean writeToDisk(MediaLibraryWrapper mediaLibraryObject) { // changed S
 		FileOutputStream fileOutput = null;
 		ObjectOutputStream objectOutput = null;
 		boolean successfulWriteToDisk=true;
@@ -106,7 +106,9 @@ public class Persistence {
 
 			}
 			try {
-				mediaLibraryFromDisk = (MediaLibrary) objectInputStream
+				//mediaLibraryFromDisk = (MediaLibrary) objectInputStream S
+				//		.readObject(); S
+				mediaLibraryWrapperFromDisk = (MediaLibraryWrapper) objectInputStream
 						.readObject();
 			} catch (IOException e) {
 
@@ -133,12 +135,19 @@ public class Persistence {
 	 * @return - Returns ContMediaLibrary object containing the media library object
 	 *         which was read from the disk.
 	 */
-	public MediaLibrary getDiskFileObject() {
+/*	public MediaLibrary getDiskFileObject() {
 		if (!mediaLibraryFile.exists()) {
 			mediaLibraryFromDisk = null;
 
 		}
 		return mediaLibraryFromDisk;
+	} S */ 
+	public MediaLibraryWrapper getDiskFileObject() {
+		if (!mediaLibraryFile.exists()) {
+			mediaLibraryWrapperFromDisk = null;
+
+		}
+		return mediaLibraryWrapperFromDisk;
 	}
 
 }

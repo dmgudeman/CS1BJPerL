@@ -12,15 +12,19 @@ public class TestMediaLibrary {
 	public static void main(String[] args) {
 		MediaView view = new MediaView();
 		MediaLibrary model = new MediaLibrary();
-
-		Controller controller = new Controller(model, view, "mediaLibrary.ser");
-
+		
 		// adds the view to be an observer
 		model.addObserver(view);
 
+				
+
+		Controller controller = new Controller(model, view, "mediaLibrary.ser");
+		
 		// registers the controller to be a listener of the button activator on
 		// the view.
 		view.addController(controller);
+		
+		controller.loadFile();
 
 //		int menuOptionSelection;
 //		ConsoleView consoleView;

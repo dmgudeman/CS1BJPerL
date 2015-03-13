@@ -3,6 +3,7 @@ package edu.foothill.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 /**
  * In observerObservable pattern, you cannot pass a list (only an Object) so created a wrapper to wrap 
  * list in an object
@@ -11,7 +12,7 @@ import java.util.List;
  * populating the search bar in the various views. Holds the data.
  * David Gudeman
  */
-public class MediaLibraryWrapper implements Serializable {
+public class MediaLibraryWrapper extends Observable implements Serializable {
 	private static final long serialVersionUID = 1L;
     
 	//creates four array lists based on media type. makes manipulation

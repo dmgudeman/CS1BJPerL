@@ -8,6 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,8 +53,8 @@ public class MediaView extends JFrame implements Observer {
 
 	private AllMediaView allMediaView;
 	private SongView songView;
-
-	private List<Media> allMedia = new ArrayList<Media>();
+	
+	private MediaLibraryWrapper mediaLibraryWrapper;
 
 	/**
 	 * Non parameterized constructor for this class, creates a JFrame and places
@@ -160,16 +162,22 @@ public class MediaView extends JFrame implements Observer {
 		// going to
 		// the next JFrame
 		final MediaView self = this;
+		songView = new SongView(self, controller);
+		songView.setVisible(false);
+		allMediaView = new AllMediaView();
+		allMediaView.setVisible(false);
 
 		// add ActionListeners
 		mainAllButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Button has been clicked");
-				if (allMediaView == null) {
-					allMediaView = new AllMediaView();
-				} else {
-					allMediaView.setVisible(true);
-				}
+				java.awt.EventQueue.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						self.setVisible(false);
+						allMediaView.setVisible(true);	
+					}
+				});
 				// controller.viewEventOccured(new ViewEvent(MediaView.class,
 				// null));
 			}
@@ -178,17 +186,14 @@ public class MediaView extends JFrame implements Observer {
 		mainSongButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Button has been clicked");
-				if (songView == null) {
-					songView = new SongView(self, controller);
-				} else {
-				
-					
-				}
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
 						self.setVisible(false);
 						songView.setVisible(true);	
+						if (!mainSearch.getText().isEmpty()){
+						songView.setSearchText(mainSearch.getText());
+						}
 					}
 				});
 			}
@@ -200,6 +205,14 @@ public class MediaView extends JFrame implements Observer {
 				self.dispatchEvent(new WindowEvent(self, WindowEvent.WINDOW_CLOSING));				
 			}
 		});
+		mainSearch.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mouseClicked(MouseEvent mouseEvent){
+				mainSearch.setText("");
+			}
+		});
+	
+		
 	}
 
 	/**
@@ -209,12 +222,10 @@ public class MediaView extends JFrame implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		// if(o instanceof MediaLibrary) {
-		// MediaLibraryWrapper media = (MediaLibraryWrapper)arg;
-		// //allMedia = media.getMediaLibrary();
-		// for (Media m : allMedia){
-		// System.out.println(m.getType() +"  "+ m.getTitle());
-		// }
-		// }
+		if (o instanceof MediaLibrary) {
+			this.mediaLibraryWrapper = (MediaLibraryWrapper) arg;
+			songView.setMediaLibraryWrapper(mediaLibraryWrapper);
+
+		}
 	}
 }

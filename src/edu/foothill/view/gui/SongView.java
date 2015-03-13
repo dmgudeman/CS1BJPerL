@@ -3,6 +3,10 @@ package edu.foothill.view.gui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
 import java.util.Observer;
@@ -14,6 +18,8 @@ import javax.swing.border.EmptyBorder;
 import edu.foothill.controller.gui.ViewEvent;
 import edu.foothill.controller.gui.ViewListener;
 import edu.foothill.model.Command;
+import edu.foothill.model.MediaLibraryWrapper;
+import edu.foothill.model.Song;
 
 /**
  * This class creates a JFrame to takes search Text and search the Song Class.
@@ -21,16 +27,17 @@ import edu.foothill.model.Command;
  * media type or a JFrame that addresses the entire list. Version 1 David
  * Gudeman
  */
-public class SongView extends JFrame implements Observer {
+public class SongView extends JFrame {
 
 	// set constants for the frame
 	private static final int FRAME_WIDTH = 400;
 	private static final int FRAME_HEIGHT = 700;
 	// private static final int FRAME_X_ORIGIN = 50;
 	// private static final int FRAME_Y_ORIGIN = 50;
+	private Song matchedSong;
 
 	// initialize the elements in the frame and panel
-//	private JFrame frame;
+	// private JFrame frame;
 	private JPanel panel;
 	private JTextField search;
 	private JButton addButton;
@@ -44,12 +51,14 @@ public class SongView extends JFrame implements Observer {
 	// private static JTextField output;
 	private AddSubViewSong addSubViewSong;
 	private MediaView mediaView;
+	private MediaLibraryWrapper mediaLibraryWrapper;
 
 	/**
 	 * Non parameterized constructor for this class. It calls the method gui
 	 * which creates a JFrame a JPanel and places buttons in the frame.
 	 */
 	public SongView(MediaView mediaView, ViewListener controller) {
+		
 		gui(controller);
 		this.mediaView = mediaView;
 	}
@@ -59,8 +68,13 @@ public class SongView extends JFrame implements Observer {
 	 * buttons in the frame
 	 */
 	public void gui(ViewListener controller) {
+		// removes the buttons from the standard upper left area to force the
+		// user to use the exit button to close, ensuring saving of the data
+		setUndecorated(true);
+		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+		
 		// creates frame
-		//frame = new JFrame("Songs");
+		// frame = new JFrame("Songs");
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		setResizable(false);
 		this.setVisible(true);
@@ -77,7 +91,9 @@ public class SongView extends JFrame implements Observer {
 		search = new JTextField("Search for a song here", 20);
 		addButton = new JButton("  ADD SONG ");
 		deleteButton = new JButton("DELETE SONG");
-		textArea = new TextArea("After a search your songs will\nappear here", 15, 30);
+		deleteButton.setEnabled(false);
+		textArea = new TextArea("After a search your songs will\nappear here",
+				15, 30);
 		textArea.setEditable(false);
 		homeButton = new JButton("HOME");
 		printButton = new JButton("PRINT");
@@ -133,6 +149,8 @@ public class SongView extends JFrame implements Observer {
 		// makes frame visible and exits on close
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
+		
+		
 
 		// add ActionListeners
 		final SongView self = this;
@@ -143,21 +161,20 @@ public class SongView extends JFrame implements Observer {
 					addSubViewSong = new AddSubViewSong(mediaView, self);
 					addSubViewSong.addController(controller);
 				} else {
-					//addSubViewSong.setVisible(true);
-					
-					
+					// addSubViewSong.setVisible(true);
+
 				}
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						//frame.toBack();
+						// frame.toBack();
 						mediaView.setVisible(false);
 						addSubViewSong.setVisible(true);
 
-						//addSubViewSong.toFront();
-						//addSubViewSong.repaint();
+						// addSubViewSong.toFront();
+						// addSubViewSong.repaint();
 						self.setVisible(false);
-						
+
 					}
 				});
 			}
@@ -168,19 +185,20 @@ public class SongView extends JFrame implements Observer {
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-					self.toBack();
-						mediaView.setVisible(true);	
+						self.toBack();
+						mediaView.setVisible(true);
 						self.setVisible(false);
 					}
 				});
 			}
 		});
-/*		printButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Print Button has been clicked");
-			}
-
-		});*/
+		/*
+		 * printButton.addActionListener(new ActionListener() { public void
+		 * actionPerformed(ActionEvent ae) {
+		 * System.out.println("Print Button has been clicked"); }
+		 * 
+		 * });
+		 */
 		printButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Print Button has been clicked");
@@ -198,14 +216,86 @@ public class SongView extends JFrame implements Observer {
 						WindowEvent.WINDOW_CLOSING));
 			}
 		});
+		search.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(searchHelper(search.getText())){
+					deleteButton.setEnabled(true);
+				}else{
+					deleteButton.setEnabled(false);
+				}
+			}
+
+		});
+		search.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mouseClicked(MouseEvent mouseEvent){
+				search.setText("");
+			}
+		});
+		deleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("Delete Button has been clicked");
+				controller.viewEventOccured(new ViewEvent(SongView.class, matchedSong,
+						Command.DELETE));
+				deleteButton.setEnabled(false);
+				search.setText("");
+				
+			}
+		});
+		
 	}
 
 	public AddSubViewSong getAddSubViewSong() {
 		return addSubViewSong;
 	}
 
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+	public void setMediaLibraryWrapper(MediaLibraryWrapper mediaLibraryWrapper) {
+		this.mediaLibraryWrapper = mediaLibraryWrapper;
+		repopulateTextArea();
 
+	}
+
+	private void repopulateTextArea() {
+		textArea.setText("");
+		for (Song song : mediaLibraryWrapper.getSongs()) {
+			textArea.append(song.getTitle() + "\n");
+		}
+	}
+	public void setSearchText(String text){
+		this.search.setText(text);
+		searchHelper(text);
+	}
+	private boolean searchHelper(String text){
+		if (text.isEmpty()) {
+			repopulateTextArea();
+			return false;
+		}
+		for (Song song : mediaLibraryWrapper.getSongs()) {
+			if (text.trim()
+					.equalsIgnoreCase(song.getTitle())) {
+				textArea.setText(song.getTitle().trim());
+				textArea.repaint();
+				this.matchedSong = song;
+				return true;
+			} else {
+				this.matchedSong = null;
+				repopulateTextArea();
+			}
+		}
+		return false;
 	}
 }

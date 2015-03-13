@@ -37,7 +37,7 @@ public class MyController {
 
 		boolean successfulDiskRead = diskHandler.readFromDisk();
 		if (successfulDiskRead) {
-			mediaLibrary = diskHandler.getDiskFileObject();
+		//	mediaLibrary = diskHandler.getDiskFileObject(); S
 		}
 		System.out.print("After reading from Disk \n" + mediaLibrary);
 
@@ -82,7 +82,7 @@ public class MyController {
 
 		}
 
-		diskHandler.writeToDisk(mediaLibrary);
+//		diskHandler.writeToDisk(mediaLibrary); S
 		System.out.println("Exiting library program");
 		System.exit(0);
 	}
@@ -237,7 +237,7 @@ public class MyController {
 	 * Method saves media library to disk and exits the program
 	 */
 	public static void saveAndGoodby(MediaLibrary mediaLibrary){
-		diskHandler.writeToDisk(mediaLibrary);
+//		diskHandler.writeToDisk(mediaLibrary); S
 		System.out.println("Exiting library program");
 		System.exit(0);
 	}

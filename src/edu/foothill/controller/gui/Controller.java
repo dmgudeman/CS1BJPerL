@@ -37,15 +37,26 @@ public class Controller implements ViewListener {
 		this.persistence = new Persistence(filename);
 	}
 
+	public void loadFile() {
+		if (persistence.readFromDisk()) {
+			mediaLibrary
+					.setMediaLibraryWrapper(persistence.getDiskFileObject());
+			mediaLibrary.notifyObservers();
+		}
+
+	}
+
 	@Override
 	public void viewEventOccured(ViewEvent event) {
 		if (event.getCommand().equals(Command.SAVE)) {
 			System.out.println("We saved");
-			persistence.writeToDisk(mediaLibrary);
+			persistence.writeToDisk(mediaLibrary.getMediaLibraryWrapper());
 			persistence.readFromDisk();
 			System.out.println("writing from disk");
 			System.out.println(persistence.getDiskFileObject().toString());
 
+		} else if (event.getCommand().equals(Command.DELETE)) {
+			mediaLibrary.removeMedia(event.getMedia());
 		} else if (event.getSource() == AddSubViewSong.class) {
 			System.out.println(event.getCommand());
 			if (event.getCommand().equals(Command.ADD)) {

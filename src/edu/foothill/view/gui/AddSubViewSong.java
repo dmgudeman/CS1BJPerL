@@ -57,6 +57,11 @@ public class AddSubViewSong extends JFrame implements ActionListener
 	 */
 	public AddSubViewSong(final MediaView mediaView,final SongView songView) 
 	{
+		// removes the buttons from the standard upper left area to force the
+		// user to use the exit button to close, ensuring saving of the data
+		setUndecorated(true);
+		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+		
 		this.songView = songView;
 		this.mediaView = mediaView;
 		//creates frame

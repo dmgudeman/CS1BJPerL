@@ -29,7 +29,13 @@ public class MediaLibrary extends Observable implements Serializable {
 	public MediaLibrary() {
 
 	}
-
+    public void setMediaLibraryWrapper(MediaLibraryWrapper mediaLibraryWrapper){
+    	this.mediaLibraryWrapper = mediaLibraryWrapper;
+    }
+    public MediaLibraryWrapper getMediaLibraryWrapper() {
+    	return mediaLibraryWrapper;
+    }
+    
 	/**
 	 * Method adds media to the library - Author Shmuel
 	 */
@@ -52,6 +58,29 @@ public class MediaLibrary extends Observable implements Serializable {
 		}
 
 		System.out.println("Added " + media.getType() + " to library");
+		System.out.println(mediaLibraryWrapper.toString());
+
+		notifyObservers(mediaLibraryWrapper);
+	}
+	public void removeMedia(Media media) {
+		switch (media.getType()) {
+		case Book:
+			mediaLibraryWrapper.getBooks().remove((Book) media);
+			break;
+		case Song:
+			mediaLibraryWrapper.getSongs().remove((Song) media);
+			break;
+		case Video:
+			mediaLibraryWrapper.getVideos().remove((Video) media);
+			break;
+		case VideoGame:
+			mediaLibraryWrapper.getVideogames().remove((VideoGame) media);
+			break;
+		default:
+			break;
+		}
+
+		System.out.println("Removed " + media.getType() + " from library");
 		System.out.println(mediaLibraryWrapper.toString());
 
 		notifyObservers(mediaLibraryWrapper);
@@ -120,18 +149,21 @@ public class MediaLibrary extends Observable implements Serializable {
 	 */
 	public void notifyObservers(Object mediaLibraryWrapper) {
 		for (Observer observer : observers) {
-			observer.update(this, mediaLibraryWrapper);
+			observer.update(this, this.mediaLibraryWrapper);
 		}
 		clearChanged();
 	}
 
+	public void notifyObservers() {
+		this.notifyObservers(mediaLibraryWrapper);
+	}
 	public void sortByTitle(Type type) {
 		if (type.equals(Type.Book)) {
 			Collections.sort(mediaLibraryWrapper.getBooks(),
 					new Comparator<Book>() {
 						@Override
 						public int compare(Book book1, Book book2) {
-							return book1.getTitle().compareTo(book2.getTitle());
+							return book1.getTitle().toLowerCase().compareTo(book2.getTitle().toLowerCase());
 						}
 
 					});
@@ -140,7 +172,7 @@ public class MediaLibrary extends Observable implements Serializable {
 					new Comparator<Song>() {
 						@Override
 						public int compare(Song song1, Song song2) {
-							return song1.getTitle().compareTo(song2.getTitle());
+							return song1.getTitle().toLowerCase().compareTo(song2.getTitle().toLowerCase());
 						}
 
 					});
