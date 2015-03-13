@@ -1,11 +1,15 @@
 package edu.foothill.model;
+
+import java.io.Serializable;
+
 /**
  * One object of VidoeGame Type class and holds information about one Media object. 
  * This subclass extends Media Class. 
  * Adds parameters VideoGame type to the Media class information.
  * Author DG  
  */
-public class VideoGame extends Media{
+public class VideoGame extends Media implements Serializable{
+	private static final long serialVersionUID = 1L;
 
 
 	

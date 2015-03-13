@@ -1,11 +1,14 @@
 package edu.foothill.model;
+
+import java.io.Serializable;
+
 /**
  * One object of Book type class and holds information about one Media object. 
  * This subclass extends Media Class. 
  * Adds parameters author and Book type to the Media class information
  * Author DG  
  */
-public class Book extends Media {
+public class Book extends Media implements Serializable {
    
 	private String author;
 	

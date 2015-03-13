@@ -1,13 +1,18 @@
 package edu.foothill.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 /**
+ * In observerObservable pattern, you cannot pass a list (only an Object) so created a wrapper to wrap 
+ * list in an object
  * This creates ArrayLists for each of the four media types. Allows
- * more efficient searching of the various media groups.  
+ * more efficient searching of the various media groups. Faciliates
+ * populating the search bar in the various views. Holds the data.
  * David Gudeman
  */
-public class MediaLibraryWrapper {
+public class MediaLibraryWrapper implements Serializable {
+	private static final long serialVersionUID = 1L;
     
 	//creates four array lists based on media type. makes manipulation
 	// if the media types as a group more efficient for sorting and presenting

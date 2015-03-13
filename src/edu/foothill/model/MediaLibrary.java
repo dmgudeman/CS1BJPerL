@@ -14,10 +14,11 @@ import java.util.Observer;
  * One object of MediaLibrary Class represents the library of the various media.
  * one list of the Media Objects. Version 1: Author DG Version 2: Shmuel removed
  * references to Collection interface. Added the following methods:addMedia,
- * getLibraryByType, getLibraryByTitle,
+ * getLibraryByType, getLibraryByTitle,  Mainly used for business logic.
  */
 
 public class MediaLibrary extends Observable implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private MediaLibraryWrapper mediaLibraryWrapper = new MediaLibraryWrapper();
 	private List<Observer> observers = new ArrayList<Observer>();

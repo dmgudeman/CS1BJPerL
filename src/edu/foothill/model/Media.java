@@ -1,4 +1,5 @@
 package edu.foothill.model;
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -10,7 +11,8 @@ import java.util.List;
 */
 
 // variables holding basic information that all media types have in common DG
-public abstract class Media {
+public abstract class Media implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String title; 
 	private String location;
 	private String format;

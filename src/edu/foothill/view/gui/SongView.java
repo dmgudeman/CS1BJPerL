@@ -30,7 +30,7 @@ public class SongView extends JFrame implements Observer {
 	// private static final int FRAME_Y_ORIGIN = 50;
 
 	// initialize the elements in the frame and panel
-	private JFrame frame;
+//	private JFrame frame;
 	private JPanel panel;
 	private JTextField search;
 	private JButton addButton;
@@ -60,11 +60,11 @@ public class SongView extends JFrame implements Observer {
 	 */
 	public void gui(ViewListener controller) {
 		// creates frame
-		frame = new JFrame("Songs");
-		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		//frame = new JFrame("Songs");
+		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		setResizable(false);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		panel = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.CYAN);
@@ -128,7 +128,7 @@ public class SongView extends JFrame implements Observer {
 		c.gridwidth = 2;
 		panel.add(exitButton, c);
 
-		frame.add(panel);
+		this.add(panel);
 
 		// makes frame visible and exits on close
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -143,8 +143,23 @@ public class SongView extends JFrame implements Observer {
 					addSubViewSong = new AddSubViewSong(mediaView, self);
 					addSubViewSong.addController(controller);
 				} else {
-					addSubViewSong.setVisible(true);
+					//addSubViewSong.setVisible(true);
+					
+					
 				}
+				java.awt.EventQueue.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						//frame.toBack();
+						mediaView.setVisible(false);
+						addSubViewSong.setVisible(true);
+
+						//addSubViewSong.toFront();
+						//addSubViewSong.repaint();
+						self.setVisible(false);
+						
+					}
+				});
 			}
 		});
 		homeButton.addActionListener(new ActionListener() {
@@ -153,19 +168,19 @@ public class SongView extends JFrame implements Observer {
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						frame.toBack();
-						mediaView.toFront();
-						mediaView.repaint();
+					self.toBack();
+						mediaView.setVisible(true);	
+						self.setVisible(false);
 					}
 				});
 			}
 		});
-		printButton.addActionListener(new ActionListener() {
+/*		printButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Print Button has been clicked");
 			}
 
-		});
+		});*/
 		printButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Print Button has been clicked");
@@ -179,7 +194,7 @@ public class SongView extends JFrame implements Observer {
 				System.out.println("Exit Button has been clicked");
 				controller.viewEventOccured(new ViewEvent(SongView.class, null,
 						Command.SAVE));
-				self.frame.dispatchEvent(new WindowEvent(self.frame,
+				self.dispatchEvent(new WindowEvent(self,
 						WindowEvent.WINDOW_CLOSING));
 			}
 		});

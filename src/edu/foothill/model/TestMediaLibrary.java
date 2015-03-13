@@ -13,7 +13,7 @@ public class TestMediaLibrary {
 		MediaView view = new MediaView();
 		MediaLibrary model = new MediaLibrary();
 
-		Controller controller = new Controller(model, view);
+		Controller controller = new Controller(model, view, "mediaLibrary.ser");
 
 		// adds the view to be an observer
 		model.addObserver(view);

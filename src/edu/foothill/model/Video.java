@@ -1,12 +1,17 @@
 package edu.foothill.model;
+
+import java.io.Serializable;
+
 /**
  * One object of Video Type class and holds information about one Media object. 
  * This subclass extends Media Class. 
  * Adds parameters star and Video type information. 
  * Author DG.
  */
-public class Video extends Media{
+public class Video extends Media implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String star;
+	
 		
 	/**
 	 * Constructor utilizing the Media Superclass constructor with parameters: title

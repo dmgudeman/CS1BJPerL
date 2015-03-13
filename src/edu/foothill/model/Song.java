@@ -1,12 +1,16 @@
 package edu.foothill.model;
+
+import java.io.Serializable;
+
 /**
  * One object of Song Type class and holds information about one Media object. 
  * This subclass extends Media Class. 
  * Adds parameters artist, genre and Song type to the Media class information
  * Author DG  
  */
-public class Song extends Media{
-
+public class Song extends Media implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private String artist;
 	private String genre;
 	

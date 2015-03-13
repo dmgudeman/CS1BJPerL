@@ -27,7 +27,8 @@ public class AddSubViewSong extends JFrame implements ActionListener
 	
 		
 	// declare variables needed 
-	JFrame frame = new JFrame();
+	//JFrame frame = new JFrame();
+
 	JPanel panel = new JPanel();
 	
 	private JButton addButton;
@@ -49,6 +50,7 @@ public class AddSubViewSong extends JFrame implements ActionListener
 	private JLabel locationPrompt;
 	private JLabel notesPrompt;
 	private final SongView songView;
+	private final MediaView mediaView;
 	
 	/**
 	 * constructor instantiates widgets and adds them to the Frame
@@ -56,12 +58,13 @@ public class AddSubViewSong extends JFrame implements ActionListener
 	public AddSubViewSong(final MediaView mediaView,final SongView songView) 
 	{
 		this.songView = songView;
+		this.mediaView = mediaView;
 		//creates frame
-		frame = new JFrame("Songs");
-		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		//frame = new JFrame("Songs");
+		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		setResizable(false);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		panel = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.CYAN);
@@ -173,7 +176,7 @@ public class AddSubViewSong extends JFrame implements ActionListener
 		c.gridy = 9;
 		panel.add(printButton, c);
 	
-		frame.add(panel);
+		this.add(panel);
 	}
 	
 	/**
@@ -207,10 +210,11 @@ public class AddSubViewSong extends JFrame implements ActionListener
 				@Override
 				public void run() {
 					
-					frame.toBack();
-					self.toBack();
-					songView.toFront();
-					songView.repaint();
+					
+					self.setVisible(false);
+					songView.setVisible(true);
+					//mediaView.setVisible(false);
+					
 				}
 				});									    	
 			} 

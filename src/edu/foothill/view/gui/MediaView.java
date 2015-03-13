@@ -35,7 +35,7 @@ public class MediaView extends JFrame implements Observer {
 	private static final int FRAME_HEIGHT = 500;
 
 	// initialize the elements in the frame
-	private JFrame frame;
+
 	private JPanel panel;
 
 	private JLabel prompt;
@@ -66,9 +66,9 @@ public class MediaView extends JFrame implements Observer {
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
 		// creates frame
-		frame = new JFrame();
-		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		frame.setResizable(false);
+		
+		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		this.setResizable(false);
 
 		// creates panel
 		panel = new JPanel(new GridBagLayout());
@@ -95,7 +95,7 @@ public class MediaView extends JFrame implements Observer {
 		// frame.add(mainVideoGameButton);
 		// frame.add(mainBookButton);
 
-		frame.setVisible(true);
+		//this.setVisible(true);
 
 		// makes an object to allow the grid layout
 		GridBagConstraints c = new GridBagConstraints();
@@ -146,9 +146,9 @@ public class MediaView extends JFrame implements Observer {
 		c.gridwidth = 2;
 		panel.add(exitButton, c);
 
-		frame.add(panel);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.add(panel);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	/**
@@ -181,23 +181,23 @@ public class MediaView extends JFrame implements Observer {
 				if (songView == null) {
 					songView = new SongView(self, controller);
 				} else {
-					songView.setVisible(true);
-					java.awt.EventQueue.invokeLater(new Runnable() {
-						@Override
-						public void run() {
-							frame.toBack();
-							songView.toFront();
-							songView.repaint();
-						}
-					});
+				
+					
 				}
+				java.awt.EventQueue.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						self.setVisible(false);
+						songView.setVisible(true);	
+					}
+				});
 			}
 		});
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Exit Button has been clicked");
 				controller.viewEventOccured(new ViewEvent(MediaView.class, null, Command.SAVE));
-				self.frame.dispatchEvent(new WindowEvent(self.frame, WindowEvent.WINDOW_CLOSING));				
+				self.dispatchEvent(new WindowEvent(self, WindowEvent.WINDOW_CLOSING));				
 			}
 		});
 	}
