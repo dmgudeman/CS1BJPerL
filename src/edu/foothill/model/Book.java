@@ -8,7 +8,7 @@ package edu.foothill.model;
 public class Book extends Media {
    
 	private String author;
-	private String type = "Book";
+	
 	
 	/**
 	 * Constructor utilizing the Media Superclass constructor with parameters: title
@@ -16,7 +16,7 @@ public class Book extends Media {
 	 * Author DG
 	 */
 	public Book(String title, String location, String format, String notes, String author) {
-		super();
+		super(title, location, format,  notes);
 		this.author = author;
 	}
     public Book(){
@@ -32,13 +32,11 @@ public class Book extends Media {
 		this.author = author;
 	}
 
-	public String getType() {
-		return type;
+	public Type getType() {
+		return Type.Book;
 	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
+	
 
 	
 	/**

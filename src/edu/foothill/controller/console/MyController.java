@@ -170,7 +170,7 @@ public class MyController {
 	 */
 	public static void printMediaLibrary(MediaLibrary mediaLibrary) {
 		// System.out.println("Printing the whole library");
-		mediaLibrary.sortByField();
+	//	mediaLibrary.sortByField();
 		System.out.println(mediaLibrary);
 	}
 

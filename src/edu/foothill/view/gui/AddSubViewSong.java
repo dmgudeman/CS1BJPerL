@@ -5,6 +5,7 @@ import javax.swing.*;
 import edu.foothill.controller.gui.ViewEvent;
 import edu.foothill.controller.gui.ViewListener;
 import edu.foothill.model.Command;
+import edu.foothill.model.MediaLibrary;
 import edu.foothill.model.Song;
 
 import java.awt.event.*;     
@@ -20,21 +21,18 @@ import java.awt.event.ActionListener;
 public class AddSubViewSong extends JFrame implements ActionListener
 													
 {	
-	
 	// create a frame
 	private static final int FRAME_WIDTH = 400;
 	private static final int FRAME_HEIGHT = 600;
 	//private static final int FRAME_X_ORIGIN = 150;
 	//private static final int FRAME_Y_ORIGIN = 250;
-	
-	
+		
 	// declare variables needed 
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	
 	private JButton addButton;
 	private JButton backButton;
-	private JButton homeButton;
 	private JButton printButton;
 	
 	private JTextField title;
@@ -51,12 +49,14 @@ public class AddSubViewSong extends JFrame implements ActionListener
 	private JLabel formatPrompt;
 	private JLabel locationPrompt;
 	private JLabel notesPrompt;
+	private final SongView songView;
 	
 	/**
 	 * constructor instantiates widgets and adds them to the Frame
 	 */
-	public AddSubViewSong() 
+	public AddSubViewSong(final MediaView mediaView,final SongView songView) 
 	{
+		this.songView = songView;
 		//creates frame
 		frame = new JFrame("Songs");
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -83,53 +83,35 @@ public class AddSubViewSong extends JFrame implements ActionListener
 		format = new JTextField();
 		location = new JTextField();
 		notes = new JTextArea(5, 20);
-		
-	
-		
+			
 		addButton = new JButton("Add");
 		backButton = new JButton("Back");
-		homeButton = new JButton("Home");
 		printButton = new JButton("Print");
-		// adds the initialized elements to the frame
-/*	this.add(songprompt);
-		this.add(addButton);
-		this.add(title);
-		this.add(format);
-		this.add(location);
-		this.add(notes);
-		this.add(artist);
-		this.add(titlePrompt);
-		this.add(formatPrompt);
-		this.add(locationPrompt);
-		this.add(notesPrompt);
-		this.add(artistPrompt);
-		//this.add(home);
-		//this.add(back);
-	*/	
+
 		this.setVisible(true);
 		
 		// makes frame visible and exits on close
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 		
-GridBagConstraints c = new GridBagConstraints();
+		// declare and instantiate an object to hold the GridBagConstraints
+		GridBagConstraints c = new GridBagConstraints();
 		
-		c.insets = new Insets(10,0,0,0); //sets the distance between elements
-		// adds the initialized elements to the frame
+		c.insets = new Insets(10,10,0,0); //sets the distance between elements
 		
+		// formats the elements on the gird Bag and adds the initialized elements 
+		// to the frame
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 2;
 		panel.add(songPrompt, c);
 		
-	
 		c.gridx = 0;
 		c.gridy = 1;
 		c.gridwidth = 1;
 		panel.add(titlePrompt, c);
-		
-	
+			
 		c.gridx = 1;
 		c.gridy = 1;
 		panel.add(title, c);
@@ -170,17 +152,15 @@ GridBagConstraints c = new GridBagConstraints();
 		c.gridy = 6;
 		panel.add(notesPrompt, c);
 		
+		c.ipady = 20; 
 		c.gridx = 0;
 		c.gridy = 7;
 		c.gridwidth = 2;
 		c.fill = GridBagConstraints.HORIZONTAL;
-		
 		panel.add(notes, c);
 		
 		c.gridx = 0;
 		c.gridy = 8;
-	
-	
 		panel.add(addButton, c);
 		
 		c.gridx = 0;
@@ -190,17 +170,9 @@ GridBagConstraints c = new GridBagConstraints();
 		
 		c.gridx = 1;
 		c.gridy = 9;
-	
-		panel.add(homeButton, c);
-		
-		c.gridx =1;
-		c.gridy = 10;
-		c.gridwidth = 2;
 		panel.add(printButton, c);
 	
-		
 		frame.add(panel);
-
 	}
 	
 	/**
@@ -209,6 +181,7 @@ GridBagConstraints c = new GridBagConstraints();
 	 * to be enacted 
 	 */
 	public void addController(ViewListener controller) {
+		final AddSubViewSong self = this;
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Add Song Button has been clicked");
@@ -221,41 +194,33 @@ GridBagConstraints c = new GridBagConstraints();
 		printButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Print Button has been clicked");
-			     
-				controller.viewEventOccured(new ViewEvent(AddSubViewSong.class, null, Command.PRINT));	    	
+				
+				controller.viewEventOccured(new ViewEvent(AddSubViewSong.class, null , Command.PRINT));
+				
+			}
+		});
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("Back Button has been clicked");
+				java.awt.EventQueue.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					
+					frame.toBack();
+					self.toBack();
+					songView.toFront();
+					songView.repaint();
+				}
+				});									    	
 			} 
-
 		});
 	}
-		
-	/**
-	 * performs action based on incoming event triggered by specific button
-	 */
-		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
-				// triggers add method
-				
-		}	
-		
-		
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
-		
-		
-
-
-
-		
-		
-		
-		
-		
-		
-	
-	
-
-
+	}
 }
 
 

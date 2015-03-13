@@ -9,7 +9,7 @@ public class Song extends Media{
 
 	private String artist;
 	private String genre;
-	private static final String type = "Song";
+	
 	
 	/**
 	 * Constructor utilizing the Media Superclass constructor with parameters: title
@@ -18,7 +18,7 @@ public class Song extends Media{
 	 */
 	public Song(String title, String location, String format, String notes, 
 			String artist, String genre) {
-		super(title, location, format, notes, type);
+		super(title, location, format, notes);
 		this.artist = artist;
 		this.genre = genre;
 		
@@ -43,8 +43,8 @@ public class Song extends Media{
 		this.genre = genre;
 	}
 
-	public String getType() {
-		return type;
+	public Type getType() {
+		return Type.Song;
 	}
 
 

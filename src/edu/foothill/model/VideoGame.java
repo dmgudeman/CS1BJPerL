@@ -7,7 +7,7 @@ package edu.foothill.model;
  */
 public class VideoGame extends Media{
 
-	private String type = "VideoGame";
+
 	
 	/**
 	 * Constructor utilizing the Media Superclass constructor with parameters: title
@@ -15,21 +15,18 @@ public class VideoGame extends Media{
 	 * Author DG
 	 */
 	public VideoGame(String title, String location, String format, String notes) {
-		super();
+		super(title, location, format, notes);
 	}
 
 	public VideoGame() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getType() {
-		return type;
+	public Type getType() {
+		return getType();
 	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
-
+	
 	/**
 	* Returns a String containing all the data stored in this object.
     */

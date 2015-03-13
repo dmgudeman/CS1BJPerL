@@ -12,7 +12,6 @@ import java.io.*;
 public class Persistence {
 
 	private String mediaLibraryFileName;
-
 	private File mediaLibraryFile;
 	private MediaLibrary mediaLibraryFromDisk;
 

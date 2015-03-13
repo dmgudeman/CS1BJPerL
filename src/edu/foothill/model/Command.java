@@ -1,9 +1,16 @@
 package edu.foothill.model;
 
-public interface Command {
+public enum Command {
 
-	public static final String ADD = "add";
-	public static final String DELETE = "delete";
-	public static final String PRINT = "print";
-
+	ADD ("Add"), DELETE("delete"), PRINT("print"), SAVE("save");
+	
+  private final String type;
+	
+	private Command(final String type){
+		this.type = type;
+	}
+	@Override
+	public String toString() {
+		return type;
+	}
 }

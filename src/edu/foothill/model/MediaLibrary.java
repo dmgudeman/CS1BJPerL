@@ -1,90 +1,95 @@
 package edu.foothill.model;
 
-
-
 import java.io.Serializable;
 /**
  */
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 /**
  * One object of MediaLibrary Class represents the library of the various media.
- * one list of the Media Objects. 
- * Version 1: Author DG 
- * Version 2: Shmuel removed references to Collection interface. 
- * 				Added the following methods:addMedia, getLibraryByType, getLibraryByTitle,
+ * one list of the Media Objects. Version 1: Author DG Version 2: Shmuel removed
+ * references to Collection interface. Added the following methods:addMedia,
+ * getLibraryByType, getLibraryByTitle,
  */
 
 public class MediaLibrary extends Observable implements Serializable {
-	
-	private ArrayList<Media> mediaLibrary;
-	private MediaLibraryWrapper mediaLibraryWrapper;
-	
+
+	private MediaLibraryWrapper mediaLibraryWrapper = new MediaLibraryWrapper();
 	private List<Observer> observers = new ArrayList<Observer>();
-	
+
 	/**
 	 * Default Constructor for List Class Author DG
 	 */
 	public MediaLibrary() {
-		mediaLibraryWrapper = new MediaLibraryWrapper();
-		mediaLibraryWrapper.setMediaLibrary(new ArrayList<Media>());
-		
+
 	}
 
 	/**
 	 * Method adds media to the library - Author Shmuel
 	 */
 	public void addMedia(Media media) {
-		mediaLibraryWrapper.getMediaLibrary().add(media);
-		System.out.println("Added media to library");
+		switch (media.getType()) {
+		case Book:
+			mediaLibraryWrapper.getBooks().add((Book) media);
+			break;
+		case Song:
+			mediaLibraryWrapper.getSongs().add((Song) media);
+			break;
+		case Video:
+			mediaLibraryWrapper.getVideos().add((Video) media);
+			break;
+		case VideoGame:
+			mediaLibraryWrapper.getVideogames().add((VideoGame) media);
+			break;
+		default:
+			break;
+		}
+
+		System.out.println("Added " + media.getType() + " to library");
 		System.out.println(mediaLibraryWrapper.toString());
-		
+
 		notifyObservers(mediaLibraryWrapper);
 	}
 
 	/**
-	 * Method returns a library object with all of the media elements of
-	 * a certain type -Author Shmuel
+	 * Method returns a library object with all of the media elements of a
+	 * certain type -Author Shmuel
 	 */
 	public MediaLibrary getLibraryByType(String mediaType) {
-		MediaLibrary tempLibrary= new MediaLibrary();
+		MediaLibrary tempLibrary = new MediaLibrary();
 		System.out
 				.println(" Method populates temp library with elements of a specific type");
 		return tempLibrary;
 	}
 
 	/**
-	 * Method returns library object with all of the media elements of
-	 * a certain title. Author - Shmuel
+	 * Method returns library object with all of the media elements of a certain
+	 * title. Author - Shmuel
 	 */
 	public MediaLibrary getLibraryByTitle(String mediaTitle) {
-		MediaLibrary tempLibrary= new MediaLibrary();
+		MediaLibrary tempLibrary = new MediaLibrary();
 		System.out
 				.println(" Method populates temp library with elements of a specific title");
 		return tempLibrary;
 	}
 
-
 	/**
 	 * Method returns a printable string containing all of the elements in the
-	 * library - Author  Shmuel
+	 * library - Author Shmuel
 	 * 
 	 */
+	@Override
 	public String toString() {
-		String libraryString = "Library as a printable string";
-		if(mediaLibrary.size()==0){
-			libraryString = "There are no items in the library";
-		}
-		else{
-			libraryString = "Your library contains:"+"\n";
-		}
-			for (int i = 0; i < mediaLibrary.size(); i++) {
-				libraryString+=mediaLibrary.get(i)+"\n";
-		}
-		return (libraryString);
+		return mediaLibraryWrapper.toString();
+	}
+	
+	public String toStringSongs() {
+		return mediaLibraryWrapper.toStringSongs();
 	}
 
 	/**
@@ -100,61 +105,45 @@ public class MediaLibrary extends Observable implements Serializable {
 		System.out.println("Deleted specific entries from the media library");
 
 	}
+
 	/**
-	 * The is a method of the class Observable that allows
-	 * the model to be observed.  
+	 * The is a method of the class Observable that allows the model to be
+	 * observed.
 	 */
 	public void addObserver(Observer observe) {
 		observers.add(observe);
 	}
+
 	/**
-	 * This method notifies the observer view object to call 
-	 * update and show the result in the output textField
+	 * This method notifies the observer view object to call update and show the
+	 * result in the output textField
 	 */
 	public void notifyObservers(Object mediaLibraryWrapper) {
-		for (Observer observer : observers){
-			observer.update(this, mediaLibraryWrapper);	
+		for (Observer observer : observers) {
+			observer.update(this, mediaLibraryWrapper);
 		}
 		clearChanged();
 	}
-	/**
-	 * Method sorts the media library by type of entry and within type of entry, sorted by title.
-	 * Author - Shmuel
-	 * @param sortField
-	 */
-	public void sortByField() {
-		String sortFieldI;
-		String sortFieldIIPlusOne;
-		Media tempMedia = new Media();
-		
-			for (int sortIndex = 0; sortIndex < 2; sortIndex++) {
-				for (int i = 0; i < mediaLibrary.size() - 1; i++) {
-					for (int j = 0; j < mediaLibrary.size() - 1 - i; j++) {
 
-						if (sortIndex == 0) { // first sort on first name
-							sortFieldI = mediaLibrary.get(j).getTitle();
-							sortFieldIIPlusOne = mediaLibrary.get(j + 1)
-									.getTitle();
-						} else { // Sort on second name after the sort on first
-									// name
-									// is complete
-							sortFieldI = mediaLibrary.get(j).getType();
-							sortFieldIIPlusOne = mediaLibrary.get(j + 1)
-									.getType();
-						}
-						sortFieldI = sortFieldI.toLowerCase();
-						sortFieldIIPlusOne = sortFieldIIPlusOne.toLowerCase();
-						if (sortFieldI.compareTo(sortFieldIIPlusOne) > 0) {
-							// need to swap Person Objects
-							tempMedia = mediaLibrary.get(j);
-							mediaLibrary.remove(j);
-							mediaLibrary.add(j + 1, tempMedia);
-
+	public void sortByTitle(Type type) {
+		if (type.equals(Type.Book)) {
+			Collections.sort(mediaLibraryWrapper.getBooks(),
+					new Comparator<Book>() {
+						@Override
+						public int compare(Book book1, Book book2) {
+							return book1.getTitle().compareTo(book2.getTitle());
 						}
 
-					}
-				}
+					});
+		}else if (type.equals(Type.Song)) {
+			Collections.sort(mediaLibraryWrapper.getSongs(),
+					new Comparator<Song>() {
+						@Override
+						public int compare(Song song1, Song song2) {
+							return song1.getTitle().compareTo(song2.getTitle());
+						}
 
-			}
-}
+					});
+		}
+	}
 }

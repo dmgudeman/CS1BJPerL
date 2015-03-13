@@ -10,12 +10,11 @@ import java.util.List;
 */
 
 // variables holding basic information that all media types have in common DG
-public class Media {
+public abstract class Media {
 	private String title; 
 	private String location;
 	private String format;
 	private String notes;
-	private String type;
 	private String searchText;
 	
 	
@@ -25,7 +24,7 @@ public class Media {
 	 * Should not take a null string for title.
 	 * Author DG 
 	 */
-	public Media(String title, String location, String format, String notes, String type) {
+	public Media(String title, String location, String format, String notes) {
 		this.title = title;
 		this.location = location;
 		this.format = format;
@@ -35,15 +34,9 @@ public class Media {
 	public Media() {
 		
 	}
-	// getters and setters for the variables of this class, DG
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
+	
+	public abstract Type getType();
+	
 	public String getTitle() {
 		return title;
 	}
@@ -85,7 +78,7 @@ public class Media {
     {
         String result = "Title: " + this.getTitle() + "\nLocation: " + this.getLocation()
                 + "\nFormat: " + this.getFormat() + "\nNotes: " + this.getNotes()
-                + "\nType: " + this.getType() + "\n";
+                + "\n";
         return result;
     }
 	

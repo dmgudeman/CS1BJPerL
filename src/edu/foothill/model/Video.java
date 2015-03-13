@@ -7,15 +7,14 @@ package edu.foothill.model;
  */
 public class Video extends Media{
 	private String star;
-	private String type = "Video";
-	
+		
 	/**
 	 * Constructor utilizing the Media Superclass constructor with parameters: title
 	 * location, format and notes.  It adds parameters star and Video type.
 	 * Author DG
 	 */
 	public Video(String title, String location, String format, String notes, String star) {
-		super();
+		super(title, location, format, notes);
 		this.star = star;
 	}
 
@@ -31,12 +30,8 @@ public class Video extends Media{
 		this.star = star;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
+	public Type getType() {
+		return Type.Video;
 	}
 
 	/**
@@ -49,8 +44,4 @@ public class Video extends Media{
         String result = super.toString() +"Author: " + this.getStar() +  "\n";
         return result;
     }	
-    
-    
-	
-
 }
