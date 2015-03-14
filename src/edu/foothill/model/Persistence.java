@@ -18,8 +18,6 @@ public class Persistence {
 	/**
 	 * Non-parameterized constructor for the Disk Class. Note that if you do not
 	 * specify file name it defaults to Temp.ser
-	 * 
-	 * @param
 	 */
 
 	Persistence() {
@@ -27,9 +25,8 @@ public class Persistence {
 	}
 
 	/**
-	 * parameterized constructor for the Disk Class.
+	 * parameterized constructor for the Persistence Class.
 	 * 
-	 * @param
 	 */
 
 	public Persistence(String diskFileName) {
@@ -81,8 +78,10 @@ public class Persistence {
 	 * succeeds the method returns true and populates the MediaLibrary object
 	 * with the MediaLibrary object from the disk file.
 	 * 
-	 * @return - Returns true if read is successful and false if operation
-	 *         failed.
+	 * Returns true if read is successful and false if operation failed.
+	 * V1 Schmuel; 
+	 * V2 Gudeman changed to send data to the Wrapper class where arraylists are
+	 *         
 	 */
 	public boolean readFromDisk() {
 		// boolean successfullyreadFromDisk = true;
@@ -108,6 +107,8 @@ public class Persistence {
 			try {
 				//mediaLibraryFromDisk = (MediaLibrary) objectInputStream S
 				//		.readObject(); S
+				
+				// put data into the mediaWrapper class
 				mediaLibraryWrapperFromDisk = (MediaLibraryWrapper) objectInputStream
 						.readObject();
 			} catch (IOException e) {
@@ -142,10 +143,11 @@ public class Persistence {
 		}
 		return mediaLibraryFromDisk;
 	} S */ 
+	
+	// getter for the file 
 	public MediaLibraryWrapper getDiskFileObject() {
 		if (!mediaLibraryFile.exists()) {
 			mediaLibraryWrapperFromDisk = null;
-
 		}
 		return mediaLibraryWrapperFromDisk;
 	}

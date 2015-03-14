@@ -27,8 +27,7 @@ public class ViewEvent extends EventObject {
 	public ViewEvent(Object source, Media media, Command command) {
 		super(source);
 		this.command = command;
-		this.media = media;
-		
+		this.media = media;	
 	}
 
 	/**
@@ -38,7 +37,6 @@ public class ViewEvent extends EventObject {
 	public Command getCommand() {
 		return command;
 	}
-	
 	/**
 	 * A getter for the media object
 	 * David Gudeman

@@ -32,11 +32,11 @@ public class SongView extends JFrame {
 	// set constants for the frame
 	private static final int FRAME_WIDTH = 400;
 	private static final int FRAME_HEIGHT = 700;
-	// private static final int FRAME_X_ORIGIN = 50;
-	// private static final int FRAME_Y_ORIGIN = 50;
+	
+	// variable used in searching to collect media object whose title is a match
 	private Song matchedSong;
 
-	// initialize the elements in the frame and panel
+	// initialize the elements in the frame and panel DG
 	// private JFrame frame;
 	private JPanel panel;
 	private JTextField search;
@@ -69,21 +69,20 @@ public class SongView extends JFrame {
 	 */
 	public void gui(ViewListener controller) {
 		// removes the buttons from the standard upper left area to force the
-		// user to use the exit button to close, ensuring saving of the data
+		// user to use the exit button to close, ensuring saving of the data DG
 		setUndecorated(true);
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 		
-		// creates frame
-		// frame = new JFrame("Songs");
+		// specifics for the frame DG
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		
+		// create a panel
 		panel = new JPanel(new GridBagLayout());
-		panel.setBackground(Color.CYAN);
-		// frame.getContentPane().setBackground(new Color(255, 255, 102));
-		// panel.setBackground(new Color(255, 255, 102));
+		//panel.setBackground(Color.CYAN);
+	    panel.setBackground(new Color(255, 180, 180));
 
 		// declares the elements in the panel
 		prompt = new JLabel("Your Songs");
@@ -99,12 +98,12 @@ public class SongView extends JFrame {
 		printButton = new JButton("PRINT");
 		exitButton = new JButton("EXIT");
 
-		// makes an object to allow the grid layout
+		// makes an object of constraints to allow the grid layout DG
 		GridBagConstraints c = new GridBagConstraints();
 
 		c.insets = new Insets(10, 10, 10, 10); // sets the distance between
-												// elements
-		// adds the initialized elements to the frame
+												// elements DG
+		// adds the initialized elements to the frame DG
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 2;
@@ -146,14 +145,21 @@ public class SongView extends JFrame {
 
 		this.add(panel);
 
-		// makes frame visible and exits on close
+		// makes frame visible and exits on close DG
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 		
 		
 
-		// add ActionListeners
+		/**
+		 * Add Action Listeners to Buttons
+		 * Gudeman
+		 */
+		
+		// variable to be able to specify this view when progressing
+		// through the JFrames DG
 		final SongView self = this;
+		// add ActionListeners to the various buttons
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("add Button has been clicked");
@@ -164,44 +170,39 @@ public class SongView extends JFrame {
 					// addSubViewSong.setVisible(true);
 
 				}
+				// sets the visibility of the JFrames to show the 
+				// next view
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						// frame.toBack();
 						mediaView.setVisible(false);
 						addSubViewSong.setVisible(true);
-
-						// addSubViewSong.toFront();
-						// addSubViewSong.repaint();
 						self.setVisible(false);
 
 					}
 				});
 			}
 		});
+		
 		homeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Home Button has been clicked");
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						self.toBack();
+						// self.toBack();
 						mediaView.setVisible(true);
 						self.setVisible(false);
 					}
 				});
 			}
 		});
-		/*
-		 * printButton.addActionListener(new ActionListener() { public void
-		 * actionPerformed(ActionEvent ae) {
-		 * System.out.println("Print Button has been clicked"); }
-		 * 
-		 * });
-		 */
+		
 		printButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Print Button has been clicked");
+				// this utilizes the mechanism of the AddSubViewSong without
+				// duplicating code
 				controller.viewEventOccured(new ViewEvent(AddSubViewSong.class,
 						null, Command.PRINT));
 
@@ -216,6 +217,7 @@ public class SongView extends JFrame {
 						WindowEvent.WINDOW_CLOSING));
 			}
 		});
+		//implements keylisteners to the search bar to active delete button
 		search.addKeyListener(new KeyListener() {
 
 			@Override
@@ -229,7 +231,9 @@ public class SongView extends JFrame {
 				// TODO Auto-generated method stub
 
 			}
-
+			// enables the delete button when there
+			// is a match in the search bar to the
+			// mediaWrapper arrayList
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if(searchHelper(search.getText())){
@@ -240,6 +244,11 @@ public class SongView extends JFrame {
 			}
 
 		});
+		/**
+		 * Add mouse Listener to the search bar and  
+		 * the delete button
+		 * Gudeman
+		 */
 		search.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent mouseEvent){
@@ -249,6 +258,8 @@ public class SongView extends JFrame {
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Delete Button has been clicked");
+				
+				// sends info to the controller of what to delete
 				controller.viewEventOccured(new ViewEvent(SongView.class, matchedSong,
 						Command.DELETE));
 				deleteButton.setEnabled(false);
@@ -258,27 +269,49 @@ public class SongView extends JFrame {
 		});
 		
 	}
-
+	// getter for the addSubView Song
 	public AddSubViewSong getAddSubViewSong() {
 		return addSubViewSong;
 	}
 
+	/**
+	 * A method to get the Data to repopulate the textArea
+	 * box.  Takes the parameter  mediaLibraryWrapper.
+	 * Gudeman
+	 */
 	public void setMediaLibraryWrapper(MediaLibraryWrapper mediaLibraryWrapper) {
 		this.mediaLibraryWrapper = mediaLibraryWrapper;
 		repopulateTextArea();
 
 	}
-
+    /**
+     * This method iterates through the song class
+     * and appends the title to a viewable output
+     * to display in the textArea box 
+     * Gudeman
+     */
 	private void repopulateTextArea() {
 		textArea.setText("");
 		for (Song song : mediaLibraryWrapper.getSongs()) {
 			textArea.append(song.getTitle() + "\n");
 		}
 	}
+	/**
+	 * Sets the text in the search bar and then calls
+	 * the searchHelper method to determine how to 
+	 * proceed
+	 * Gudeman
+	 * 
+	 */
 	public void setSearchText(String text){
 		this.search.setText(text);
 		searchHelper(text);
 	}
+	/**
+	 * Method to manage the text in the search bar.
+	 * text as a parameter examined to determine a match
+	 * Gudeman
+	 */
 	private boolean searchHelper(String text){
 		if (text.isEmpty()) {
 			repopulateTextArea();
@@ -289,6 +322,8 @@ public class SongView extends JFrame {
 					.equalsIgnoreCase(song.getTitle())) {
 				textArea.setText(song.getTitle().trim());
 				textArea.repaint();
+				
+				// identifies an object whose title is a match
 				this.matchedSong = song;
 				return true;
 			} else {

@@ -27,8 +27,8 @@ public class Controller implements ViewListener {
 
 	/**
 	 * parameterized Constructor for this controller class that takes both the
-	 * model (ConvertModel) and the view (ConvertView). Allows the
-	 * actionPerformed method of the ActionListener to be called from this class
+	 * model (mediaLibrary) and the view (mediaView) and an obhect from the 
+	 * Persistence class 
 	 */
 	public Controller(MediaLibrary mediaLibrary, MediaView mediaView,
 			String filename) {
@@ -37,6 +37,7 @@ public class Controller implements ViewListener {
 		this.persistence = new Persistence(filename);
 	}
 
+	// reads binary file from the Persistence class
 	public void loadFile() {
 		if (persistence.readFromDisk()) {
 			mediaLibrary

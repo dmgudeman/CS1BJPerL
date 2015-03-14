@@ -4,7 +4,10 @@ package edu.foothill.view.gui;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.*;
+
+import edu.foothill.controller.gui.ViewListener;
 
 
 /**
@@ -30,8 +33,10 @@ public class AllMediaView extends JFrame implements ActionListener {
 	/**
 	 * Non parameterized constructor for this class, creates a JFrame and places
 	 * buttons in the frame
+	 * @param controller 
+	 * @param self 
 	 */
-	public AllMediaView() {
+	public AllMediaView(MediaView self, ViewListener controller) {
 		// creates frame
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		setResizable(false);

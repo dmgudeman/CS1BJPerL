@@ -88,24 +88,18 @@ public class MediaView extends JFrame implements Observer {
 		mainBookButton = new JButton("BOOK");
 		exitButton = new JButton("EXIT");
 
-		// // adds the initialized elements to the frame
-		// frame.add(mainSearch);
-		// frame.add(prompt);
-		// frame.add(mainAllButton);
-		// frame.add(mainSongButton);
-		// frame.add(mainVideoButton);
-		// frame.add(mainVideoGameButton);
-		// frame.add(mainBookButton);
-
 		//this.setVisible(true);
 
+		/**
+		 * Uses Layout tool to position the elements in the panel
+		 * Gudeman
+		 */
 		// makes an object to allow the grid layout
 		GridBagConstraints c = new GridBagConstraints();
 
-		c.insets = new Insets(10, 10, 10, 10); // sets the distance between
-												// elements
-		// adds the initialized elements to the frame
-
+		// sets the distance between elements
+		c.insets = new Insets(10, 10, 10, 10); 
+												
 		// use GridBagLayout specs to position the components
 		c.weightx = 0.5;
 		c.gridx = 0;
@@ -158,19 +152,23 @@ public class MediaView extends JFrame implements Observer {
 	 * object as a listener for the convertButton to be enacted
 	 */
 	public void addController(ViewListener controller) {
-		// this declaration allows the view to send itself to the back when
-		// going to
-		// the next JFrame
+		// this declaration allows the view to identify itself when
+		// calling making Action Listeners DG
 		final MediaView self = this;
+		
+		//need to instantiate the next tier of views so the 
+		// contollers can be added
 		songView = new SongView(self, controller);
 		songView.setVisible(false);
-		allMediaView = new AllMediaView();
+		allMediaView = new AllMediaView(self, controller);
 		allMediaView.setVisible(false);
 
 		// add ActionListeners
 		mainAllButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Button has been clicked");
+				// use the visibility property to adjust the 
+				// procession of JFrame views
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
@@ -182,15 +180,17 @@ public class MediaView extends JFrame implements Observer {
 				// null));
 			}
 		});
-		// instantiates the SongView and sends itself to the back
+		// instantiates the SongView and makes mediaView invisible
 		mainSongButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Button has been clicked");
+				System.out.println("Add Button has been clicked");
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
 						self.setVisible(false);
-						songView.setVisible(true);	
+						songView.setVisible(true);
+						// populates the search bar in songView appropriately
+						// if mediaView search bar is empty
 						if (!mainSearch.getText().isEmpty()){
 						songView.setSearchText(mainSearch.getText());
 						}
@@ -198,6 +198,8 @@ public class MediaView extends JFrame implements Observer {
 				});
 			}
 		});
+		
+		// the exit button 
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Exit Button has been clicked");
@@ -205,6 +207,7 @@ public class MediaView extends JFrame implements Observer {
 				self.dispatchEvent(new WindowEvent(self, WindowEvent.WINDOW_CLOSING));				
 			}
 		});
+		// empties the search Bar when mouse cursor enters it, so new text may be typed
 		mainSearch.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent mouseEvent){
