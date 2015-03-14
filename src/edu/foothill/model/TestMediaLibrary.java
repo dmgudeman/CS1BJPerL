@@ -16,7 +16,7 @@ public class TestMediaLibrary {
 		// adds the view to be an observer
 		model.addObserver(view);
 
-				
+		// testing	
 
 		Controller controller = new Controller(model, view, "mediaLibrary.ser");
 		
