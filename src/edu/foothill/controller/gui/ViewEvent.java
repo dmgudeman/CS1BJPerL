@@ -38,7 +38,9 @@ public class ViewEvent extends EventObject {
 		return command;
 	}
 	/**
-	 * A getter for the media object
+	 * A getter for the media object, used by the controller to collect
+	 * the media
+	 * 
 	 * David Gudeman
 	 */
 	public Media getMedia() {

@@ -11,6 +11,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
+ * This class holds the business logic and implements The Observer 
+ * Observable Pattern Gudeman
  * One object of MediaLibrary Class represents the library of the various media.
  * one list of the Media Objects. Version 1: Author DG Version 2: Shmuel removed
  * references to Collection interface. Added the following methods:addMedia,

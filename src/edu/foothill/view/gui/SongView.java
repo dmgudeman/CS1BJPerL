@@ -28,6 +28,10 @@ import edu.foothill.model.Song;
  * Gudeman
  */
 public class SongView extends JFrame {
+	
+	// include the views needed to process through the UI tree
+	private AddSubViewSong addSubViewSong;
+	private MediaView mediaView;
 
 	// set constants for the frame
 	private static final int FRAME_WIDTH = 400;
@@ -48,9 +52,7 @@ public class SongView extends JFrame {
 	private JButton printButton;
 	private JButton exitButton;
 
-	// private static JTextField output;
-	private AddSubViewSong addSubViewSong;
-	private MediaView mediaView;
+	// needed to populate the textArea and for the search Bar
 	private MediaLibraryWrapper mediaLibraryWrapper;
 
 	/**
@@ -82,14 +84,15 @@ public class SongView extends JFrame {
 		// create a panel
 		panel = new JPanel(new GridBagLayout());
 		//panel.setBackground(Color.CYAN);
-	    panel.setBackground(new Color(255, 180, 180));
+		Color myNewMuaveMedium = new Color (255, 180, 180, 150);
+		 panel.setBackground(myNewMuaveMedium);
 
 		// declares the elements in the panel
 		prompt = new JLabel("Your Songs");
 		prompt.setFont(new Font("Papyrus", Font.ITALIC, 30));
 		search = new JTextField("Search for a song here", 20);
 		addButton = new JButton("  ADD SONG ");
-		deleteButton = new JButton("DELETE SONG");
+		deleteButton = new JButton("DELETE THE SONG IN SEARCH BAR");
 		deleteButton.setEnabled(false);
 		textArea = new TextArea("After a search your songs will\nappear here",
 				15, 30);
@@ -126,21 +129,20 @@ public class SongView extends JFrame {
 
 		c.gridx = 1;
 		c.gridy = 3;
-		panel.add(deleteButton, c);
+		panel.add(printButton, c);
 
 		c.gridx = 0;
 		c.gridy = 4;
+		c.gridwidth = 2;
+		panel.add(deleteButton, c);
+
+		c.gridx = 0;
+		c.gridy = 5;
 		c.gridwidth = 1;
 		panel.add(homeButton, c);
 
 		c.gridx = 1;
-		c.gridy = 4;
-
-		panel.add(printButton, c);
-
-		c.gridx = 0;
 		c.gridy = 5;
-		c.gridwidth = 2;
 		panel.add(exitButton, c);
 
 		this.add(panel);
@@ -152,7 +154,7 @@ public class SongView extends JFrame {
 		
 
 		/**
-		 * Add Action Listeners to Buttons
+		 * Add Action Listeners to Buttons, uses anonymous classes to add each Listener
 		 * Gudeman
 		 */
 		
@@ -166,12 +168,12 @@ public class SongView extends JFrame {
 				if (addSubViewSong == null) {
 					addSubViewSong = new AddSubViewSong(mediaView, self);
 					addSubViewSong.addController(controller);
-				} else {
+				} //else {
 					// addSubViewSong.setVisible(true);
 
-				}
-				// sets the visibility of the JFrames to show the 
-				// next view
+				//}
+				// sets the visibility of the JFrames to show the next view
+				// uses invokeLater method because needs it own java thread
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
@@ -190,7 +192,6 @@ public class SongView extends JFrame {
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						// self.toBack();
 						mediaView.setVisible(true);
 						self.setVisible(false);
 					}
@@ -222,13 +223,12 @@ public class SongView extends JFrame {
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
+				// to complete interface
 			}
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
+				// to complete interface
 
 			}
 			// enables the delete button when there
@@ -263,8 +263,7 @@ public class SongView extends JFrame {
 				controller.viewEventOccured(new ViewEvent(SongView.class, matchedSong,
 						Command.DELETE));
 				deleteButton.setEnabled(false);
-				search.setText("");
-				
+				search.setText("");			
 			}
 		});
 		

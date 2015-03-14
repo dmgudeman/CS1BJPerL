@@ -21,16 +21,18 @@ import java.awt.event.ActionListener;
 public class AddSubViewSong extends JFrame implements ActionListener
 													
 {	
-	// create a frame
+	// include the view needed to process through the UI tree
+	private final SongView songView;
+//	private final MediaView mediaView;
+
+	// constants for the frame
 	private static final int FRAME_WIDTH = 400;
 	private static final int FRAME_HEIGHT = 600;
 	
+	// create a panel
+	JPanel panel = new JPanel();
 		
 	// declare variables needed 
-	//JFrame frame = new JFrame();
-
-	JPanel panel = new JPanel();
-	
 	private JButton addButton;
 	private JButton backButton;
 	private JButton printButton;
@@ -49,8 +51,7 @@ public class AddSubViewSong extends JFrame implements ActionListener
 	private JLabel formatPrompt;
 	private JLabel locationPrompt;
 	private JLabel notesPrompt;
-	private final SongView songView;
-	private final MediaView mediaView;
+	
 	
 	/**
 	 * constructor instantiates widgets and adds them to the Frame
@@ -63,7 +64,7 @@ public class AddSubViewSong extends JFrame implements ActionListener
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 		
 		this.songView = songView;
-		this.mediaView = mediaView;
+	//	this.mediaView = mediaView;
 		//creates frame
 		//frame = new JFrame("Songs");
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -72,10 +73,11 @@ public class AddSubViewSong extends JFrame implements ActionListener
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		panel = new JPanel(new GridBagLayout());
-		panel.setBackground(Color.CYAN);
+		Color myNewMuaveLight = new Color (255, 180, 180, 100);
+		 panel.setBackground(myNewMuaveLight);
 		
 		// declares the elements in the frame
-		songPrompt = new JLabel("New Song Entry");
+		songPrompt = new JLabel("Add a Song");
 		songPrompt.setFont(new Font("Papyrus", Font.ITALIC, 30)); 
 		titlePrompt = new JLabel("Enter title:");
 		artistPrompt = new JLabel("Enter artist:");
@@ -186,7 +188,7 @@ public class AddSubViewSong extends JFrame implements ActionListener
 	
 	/**
 	 * Takes in a controller Object as a parameter registers
-	 * the controller object as a listener for the convertButton
+	 * the controller object as a listener for the addButton
 	 * to be enacted 
 	 */
 	public void addController(ViewListener controller) {

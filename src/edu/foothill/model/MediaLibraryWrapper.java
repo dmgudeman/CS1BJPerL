@@ -5,19 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 /**
- * In observerObservable pattern, you cannot pass a list (only an Object) so created a wrapper to wrap 
- * list in an object
- * This creates ArrayLists for each of the four media types. Allows
+ * Main class to hold the data for the MediaLibrary.  Wrapper class for data is needed because
+ * in observer/Observable pattern, you cannot pass a list (only an Object) so this class
+ * creates a wrapper to wrap lists in an object.
+ * This creates ArrayLists for each of the four media types. 4 lists allows
  * more efficient searching of the various media groups. Faciliates
- * populating the search bar in the various views. Holds the data.
+ * populating the search bar in the various views.
  * David Gudeman
  */
 public class MediaLibraryWrapper extends Observable implements Serializable {
 	private static final long serialVersionUID = 1L;
     
 	//creates four array lists based on media type. makes manipulation
-	// if the media types as a group more efficient for sorting and presenting
-	// and populating the textAreas in the the various Media View. DG
+	// in the media types as a group more efficient for sorting and presenting
+	// and populating the textAreas in the the various 4 media type GUIs. DG
 	private List<Song> songs = new ArrayList<Song>();
 	private List<Book> books = new ArrayList<Book>();
 	private List<Video> videos = new ArrayList<Video>();

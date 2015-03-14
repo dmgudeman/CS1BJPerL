@@ -6,7 +6,8 @@ import java.util.List;
 /** 
 *Each Object of this class is identified by title. And contains information location, 
 *format and notes. This is the SuperClass that provides basic information common to 
-*all Media Types.
+*all Media Types. It is an abstract class because no media element will be populated.
+*All media objects are constructed in a subclass
 *Author DG
 */
 
