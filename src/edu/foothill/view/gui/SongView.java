@@ -8,6 +8,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -18,8 +20,10 @@ import javax.swing.border.EmptyBorder;
 import edu.foothill.controller.gui.ViewEvent;
 import edu.foothill.controller.gui.ViewListener;
 import edu.foothill.model.Command;
+import edu.foothill.model.MediaLibrary;
 import edu.foothill.model.MediaLibraryWrapper;
 import edu.foothill.model.Song;
+import edu.foothill.model.Type;
 
 /**
  * This class creates a JFrame to takes search Text and search the Song Class.
@@ -54,6 +58,7 @@ public class SongView extends JFrame {
 
 	// needed to populate the textArea and for the search Bar
 	private MediaLibraryWrapper mediaLibraryWrapper;
+	
 
 	/**
 	 * Non parameterized constructor for this class. It calls the method gui
@@ -291,6 +296,14 @@ public class SongView extends JFrame {
      */
 	private void repopulateTextArea() {
 		textArea.setText("");
+		Collections.sort(mediaLibraryWrapper.getSongs(),
+				new Comparator<Song>() {
+					@Override
+					public int compare(Song song1, Song song2) {
+						return song1.getTitle().toLowerCase().compareTo(song2.getTitle().toLowerCase());
+					}
+
+				});
 		for (Song song : mediaLibraryWrapper.getSongs()) {
 			textArea.append(song.getTitle() + "\n");
 		}

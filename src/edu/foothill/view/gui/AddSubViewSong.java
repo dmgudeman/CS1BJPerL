@@ -206,7 +206,7 @@ public class AddSubViewSong extends JFrame implements ActionListener
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Print Button has been clicked");
 				
-				controller.viewEventOccured(new ViewEvent(AddSubViewSong.class, null , Command.PRINT));
+				controller.viewEventOccured(new ViewEvent(AddSubViewSong.class, null, Command.PRINT));
 				
 			}
 		});

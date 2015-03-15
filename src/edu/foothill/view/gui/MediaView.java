@@ -197,7 +197,7 @@ public class MediaView extends JFrame implements Observer {
 			}
 		});
 		// instantiates the SongView and makes mediaView invisible
-		// utilizes an anoymous class to add the action listener
+		// utilizes an anonymous class to add the action listener
 		// and a Runnable object is needed to make a thread
 		mainSongButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
@@ -236,7 +236,6 @@ public class MediaView extends JFrame implements Observer {
 				mainSearch.setText("");
 			}
 		});
-
 	}
 
 	/**
