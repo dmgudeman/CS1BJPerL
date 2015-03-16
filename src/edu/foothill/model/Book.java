@@ -40,8 +40,6 @@ public class Book extends Media implements Serializable {
 	}
 
 	
-
-	
 	/**
 	* Returns a String containing all the data stored in this object. DG
     */
@@ -51,8 +49,4 @@ public class Book extends Media implements Serializable {
         String result = super.toString() +"Author: " + this.getAuthor() +  "\n";
         return result;
     }	
-    
-    
-	
-
 }

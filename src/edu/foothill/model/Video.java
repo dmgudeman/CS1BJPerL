@@ -46,7 +46,7 @@ public class Video extends Media implements Serializable{
     @Override
     public String toString()
     {
-        String result = super.toString() +"Author: " + this.getStar() +  "\n";
+        String result = super.toString() + "Star: " + this.getStar() +  "\n";
         return result;
     }	
 }
