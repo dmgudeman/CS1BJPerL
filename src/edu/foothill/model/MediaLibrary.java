@@ -204,6 +204,27 @@ public class MediaLibrary extends Observable implements Serializable {
 						}
 
 					});
+			
+		} else if (type.equals(Type.Video)) {
+			Collections.sort(mediaLibraryWrapper.getVideos(),
+					new Comparator<Video>() {
+						@Override
+						public int compare(Video video1, Video video2) {
+							return video1.getTitle().toLowerCase().compareTo(video2.getTitle().toLowerCase());
+						}
+
+					});
+			
+		} else if (type.equals(Type.VideoGame)) {
+			Collections.sort(mediaLibraryWrapper.getVideogames(),
+					new Comparator<VideoGame>() {
+						@Override
+						public int compare(VideoGame videoGame1, VideoGame videoGame2) {
+							return videoGame1.getTitle().toLowerCase().compareTo(videoGame2.getTitle().toLowerCase());
+						}
+
+					});
+			
 		}
 		// need to add the sortByTitle for video, videoGame
 	}

@@ -61,9 +61,19 @@ public class Controller implements ViewListener {
 		} else if (event.getCommand().equals(Command.DELETE_WITH_SORT)){
 			mediaLibrary.removeMediaWithSortByTitle(event.getMedia());	
 		} else if (event.getCommand().equals(Command.PRINT)) {
-			mediaLibrary.sortByTitle(event.getMedia().getType());
+			mediaLibrary.sortByTitle(Type.Song);
+			mediaLibrary.sortByTitle(Type.Book);
+			mediaLibrary.sortByTitle(Type.Video);
+			mediaLibrary.sortByTitle(Type.VideoGame);
+			System.out.println(mediaLibrary.toString());
+		} else if(event.getCommand().equals(Command.PRINT_SONGS)) {
+			mediaLibrary.sortByTitle(Type.Song);
 			System.out.println(mediaLibrary.toStringSongs());
-		} else if (event.getCommand().equals(Command.ADD_WITH_SORT)) {
+		// build tostring methods per media type 
+	    // add the command statements in else ifs
+		
+		
+		}else if (event.getCommand().equals(Command.ADD_WITH_SORT)) {
 			mediaLibrary.addMediaWithSortByTitle(event.getMedia());
 		} else if (event.getCommand().equals(Command.ADD)) {
 			mediaLibrary.addMedia(event.getMedia());

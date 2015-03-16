@@ -9,7 +9,8 @@ package edu.foothill.model;
 public enum Command {
 
 	ADD ("Add"), DELETE("delete"), PRINT("print"), SAVE("save"), ADD_WITH_SORT("addWithSort"), 
-		DELETE_WITH_SORT("deleteWithSort");
+		DELETE_WITH_SORT("deleteWithSort"), PRINT_SONGS("printSongs"), PRINT_BOOKS("printBooks"),
+				PRINT_VIDEOS("printVideos"), PRINT_VIDEO_GAMES("printVideoGames");
 	
   private final String type;
 	
