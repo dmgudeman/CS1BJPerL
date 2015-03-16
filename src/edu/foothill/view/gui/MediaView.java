@@ -22,11 +22,10 @@ import edu.foothill.model.MediaLibrary;
 import edu.foothill.model.MediaLibraryWrapper;
 
 /**
- * This class creates a JFrame to function as the Home GUI from which
- * GUI's specific from which each media type are launched.
- * When a button is activated it navigates to a JFrame that is specific 
- * to a media type and carries the text in the search bar forward to the next GUI. 
- * Version 1 Gudeman
+ * This class creates a JFrame to function as the Home GUI from which GUI's
+ * specific from which each media type are launched. When a button is activated
+ * it navigates to a JFrame that is specific to a media type and carries the
+ * text in the search bar forward to the next GUI. Version 1 Gudeman
  */
 public class MediaView extends JFrame implements Observer {
 
@@ -59,8 +58,7 @@ public class MediaView extends JFrame implements Observer {
 
 	/**
 	 * Non parameterized constructor for this class, creates a JFrame and places
-	 * buttons in the frame
-	 * Gudeman
+	 * buttons in the frame Gudeman
 	 */
 	public MediaView() {
 
@@ -77,7 +75,7 @@ public class MediaView extends JFrame implements Observer {
 		panel = new JPanel(new GridBagLayout());
 		Color myNewMuaveHeavy = new Color(255, 180, 180, 200);
 		panel.setBackground(myNewMuaveHeavy);
-		
+
 		// declares the elements in the frame DG
 		mainSearch = new JTextField(
 				"Search for a title and/or choose a media type", 25);
@@ -140,20 +138,19 @@ public class MediaView extends JFrame implements Observer {
 		c.gridy = 5;
 		c.gridwidth = 2;
 		panel.add(exitButton, c);
-		
+
 		// add layout to the panel
 		this.add(panel);
-		
+
 		// completes the JFrame specifications
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	/**
-	 * This method uses anonymous classes to Add ActionListeners
-	 * to all the buttons. A media view SELF variable is utilized
-	 * to identify the mediaView wihtin the classes
-	 * Gudeman
+	 * This method uses anonymous classes to Add ActionListeners to all the
+	 * buttons. A media view SELF variable is utilized to identify the mediaView
+	 * wihtin the classes Gudeman
 	 */
 	public void addController(ViewListener controller) {
 		// this declaration allows the view to identify itself when
@@ -168,14 +165,12 @@ public class MediaView extends JFrame implements Observer {
 		allMediaView.setVisible(false);
 		// -- need the other views
 
-
 		/**
 		 * Add action listeners. Utilizes anonymous classes to create new
-		 * ActionListeners for each element. Uses Runnable interface within
-		 * an anonymous class when needed to process through the GUIs
-		 * Gudeman
+		 * ActionListeners for each element. Uses Runnable interface within an
+		 * anonymous class when needed to process through the GUIs Gudeman
 		 */
-		
+
 		// instantiates the SongView and makes mediaView invisible
 		// utilizes an anonymous class to add the action listener
 		// and a Runnable object is needed to make a thread
@@ -191,13 +186,11 @@ public class MediaView extends JFrame implements Observer {
 						allMediaView.setVisible(true);
 					}
 				});
-				// controller.viewEventOccured(new ViewEvent(MediaView.class,
-				// null));
 			}
 		});
 		// instantiates the SongView and makes mediaView invisible
 		// utilizes an anonymous class to add the action listener
-		// and a Runnable object is needed to make a thread
+		// and a Runnable object is needed to make a thread DG
 		mainSongButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Add Button has been clicked");
@@ -206,7 +199,7 @@ public class MediaView extends JFrame implements Observer {
 					public void run() {
 						SELF.setVisible(false);
 						songView.setVisible(true);
-						
+
 						// populates the search bar in songView appropriately
 						// if mediaView search bar is empty
 						if (!mainSearch.getText().isEmpty()) {
@@ -228,7 +221,7 @@ public class MediaView extends JFrame implements Observer {
 			}
 		});
 		// empties the search Bar when mouse cursor enters it, so new text may
-		// be typed
+		// be typed DG
 		mainSearch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent mouseEvent) {
@@ -240,9 +233,8 @@ public class MediaView extends JFrame implements Observer {
 	/**
 	 * This is a method necessary to implement the Observer interface. It takes
 	 * two parameters o is the observable object and arg an argument passed to
-	 * the notifyObservers method. This allows the mediaView to update the other 
-	 * views. 
-	 * Gudeman
+	 * the notifyObservers method. This allows the mediaView to update the other
+	 * views. Gudeman
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
