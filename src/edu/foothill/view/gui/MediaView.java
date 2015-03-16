@@ -161,6 +161,12 @@ public class MediaView extends JFrame implements Observer {
 		// controllers can be added
 		songView = new SongView(SELF, controller);
 		songView.setVisible(false);
+		bookView = new BookView(SELF, controller);
+		bookView.setVisible(false);
+	//	videoView = new VideoView(SELF, controller);
+	//	videoView.setVisible(false);
+	//	videoGameViewView = new VideoGameView(SELF, controller);
+	//	videoGameViewView.setVisible(false);
 		allMediaView = new AllMediaView(SELF, controller);
 		allMediaView.setVisible(false);
 		// -- need the other views
@@ -209,6 +215,27 @@ public class MediaView extends JFrame implements Observer {
 				});
 			}
 		});
+		// instantiates the SongView and makes mediaView invisible
+				// utilizes an anonymous class to add the action listener
+				// and a Runnable object is needed to make a thread DG
+				mainBookButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent ae) {
+						System.out.println("Book Button has been clicked");
+						java.awt.EventQueue.invokeLater(new Runnable() {
+							@Override
+							public void run() {
+								SELF.setVisible(false);
+								bookView.setVisible(true);
+
+								// populates the search bar in songView appropriately
+								// if mediaView search bar is empty
+								if (!mainSearch.getText().isEmpty()) {
+									bookView.setSearchText(mainSearch.getText());
+								}
+							}
+						});
+					}
+				});
 		mainAllButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("All Media Button has been clicked");
@@ -260,7 +287,7 @@ public class MediaView extends JFrame implements Observer {
 		if (o instanceof MediaLibrary) {
 			this.mediaLibraryWrapper = (MediaLibraryWrapper) arg;
 			songView.setMediaLibraryWrapper(mediaLibraryWrapper);
-		//	bookView.setMediaLibraryWrapper(mediaLibraryWrapper);
+			bookView.setMediaLibraryWrapper(mediaLibraryWrapper);
 		//	videoView.setMediaLibraryWrapper(mediaLibraryWrapper);
 		//	videoGameView.setMediaLibraryWrapper(mediaLibraryWrapper);
             allMediaView.setMediaLibraryWrapper(mediaLibraryWrapper);
