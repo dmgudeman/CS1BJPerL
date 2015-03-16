@@ -17,16 +17,15 @@ import edu.foothill.model.Command;
 import edu.foothill.model.MediaLibraryWrapper;
 import edu.foothill.model.Song;
 
-
 /**
- * This class creates a GUI JFrame to takes search Text and search the Song Class.
- * When a button is activates it navigates to a ADD GUI JFrame. When search text
- * is specified to a song object the DELETE button becomes active.  You can print
- * the mediaLibrary list, navigate back to HOME and EXIT from this GUI. 
- *  Version 1 Gudeman
+ * This class creates a GUI JFrame to takes search Text and search the Song
+ * Class. When a button is activates it navigates to a ADD GUI JFrame. When
+ * search text is specified to a song object the DELETE button becomes active.
+ * You can print the mediaLibrary list, navigate back to HOME and EXIT from this
+ * GUI. Version 1 Gudeman
  */
 public class SongView extends JFrame {
-	
+
 	// include the views needed to process through the UI tree
 	private AddSubViewSong addSubViewSong;
 	private MediaView mediaView;
@@ -34,7 +33,7 @@ public class SongView extends JFrame {
 	// set constants for the frame
 	private static final int FRAME_WIDTH = 400;
 	private static final int FRAME_HEIGHT = 700;
-	
+
 	// variable used in searching to collect media object whose title is a match
 	private Song matchedSong;
 
@@ -51,15 +50,14 @@ public class SongView extends JFrame {
 
 	// needed to populate the textArea and for the search Bar
 	private MediaLibraryWrapper mediaLibraryWrapper;
-	
+
 	/**
-	 * Constructor for this class that takes a MediaView and a ViewListener
-	 * as parameters. The mediaView is necessary so that visibility of the 
-	 * GUIs can be manipulated.
-	 * Gudeman
+	 * Constructor for this class that takes a MediaView and a ViewListener as
+	 * parameters. The mediaView is necessary so that visibility of the GUIs can
+	 * be manipulated. Gudeman
 	 */
 	public SongView(MediaView mediaView, ViewListener controller) {
-		
+
 		gui(controller);
 		this.mediaView = mediaView;
 	}
@@ -73,18 +71,18 @@ public class SongView extends JFrame {
 		// user to use the exit button to close, ensuring saving of the data DG
 		setUndecorated(true);
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
-		
+
 		// specifics for the frame DG
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		// create a panel
 		panel = new JPanel(new GridBagLayout());
-		//panel.setBackground(Color.CYAN);
-		Color myNewMuaveMedium = new Color (255, 180, 180, 150);
-		 panel.setBackground(myNewMuaveMedium);
+		// panel.setBackground(Color.CYAN);
+		Color myNewMuaveMedium = new Color(255, 180, 180, 150);
+		panel.setBackground(myNewMuaveMedium);
 
 		// declares the elements in the panel
 		prompt = new JLabel("Your Songs");
@@ -104,8 +102,8 @@ public class SongView extends JFrame {
 		GridBagConstraints c = new GridBagConstraints();
 
 		// sets the distance between elements DG
-		c.insets = new Insets(10, 10, 10, 10); 
-												
+		c.insets = new Insets(10, 10, 10, 10);
+
 		// adds the initialized elements to the frame DG
 		c.gridx = 0;
 		c.gridy = 0;
@@ -150,18 +148,19 @@ public class SongView extends JFrame {
 		// makes frame visible and exits on close DG
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
-		
+
 		/**
-		 * Add Action Listeners to Buttons, uses anonymous classes to add each Listener.
-		 * Action performed methods are within each class.  Action performed methods
-		 * perform functions of printing etc., and also adjust the visibility
-		 * of the procession of GUIs when navigating between GUIs.
-		 * Gudeman
+		 * Add Action Listeners to Buttons, uses anonymous classes to add each
+		 * Listener. Action performed methods are within each class. Action
+		 * performed methods perform functions of printing etc., and also adjust
+		 * the visibility of the procession of GUIs when navigating between
+		 * GUIs. Gudeman
 		 */
-		
-		// variable to be able to specify the songView within the anonymous classes DG
+
+		// variable to be able to specify the songView within the anonymous
+		// classes DG
 		final SongView SELF = this;
-		
+
 		// add ActionListeners to the various buttons
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
@@ -186,7 +185,7 @@ public class SongView extends JFrame {
 				});
 			}
 		});
-		 // ActionListener added to HOME button DG
+		// ActionListener added to HOME button DG
 		homeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Home Button has been clicked");
@@ -220,8 +219,9 @@ public class SongView extends JFrame {
 						WindowEvent.WINDOW_CLOSING));
 			}
 		});
-		//implements keylisteners to the search bar to active delete button upon a 
-		//title match in the search bar. DG
+		// implements keylisteners to the search bar to active delete button
+		// upon a
+		// title match in the search bar. DG
 		search.addKeyListener(new KeyListener() {
 
 			@Override
@@ -234,73 +234,72 @@ public class SongView extends JFrame {
 				// to complete interface
 
 			}
+
 			// enables the delete button when there
 			// is a match in the search bar to the
 			// mediaWrapper arrayList
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(searchHelper(search.getText())){
+				if (searchHelper(search.getText())) {
 					deleteButton.setEnabled(true);
-				}else{
+				} else {
 					deleteButton.setEnabled(false);
 				}
 			}
 
 		});
 		/**
-		 * Add mouse Listener to the search bar and  
-		 * the delete button
-		 * Gudeman
+		 * Add mouse Listener to the search bar and the delete button Gudeman
 		 */
-		search.addMouseListener(new MouseAdapter(){
+		search.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent mouseEvent){
+			public void mouseClicked(MouseEvent mouseEvent) {
 				search.setText("");
 			}
 		});
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Delete Button has been clicked");
-				
+
 				// sends info to the controller of what to delete
-				controller.viewEventOccured(new ViewEvent(SongView.class, matchedSong,
-						Command.DELETE));
+				controller.viewEventOccured(new ViewEvent(SongView.class,
+						matchedSong, Command.DELETE));
 				deleteButton.setEnabled(false);
-				search.setText("");			
+				search.setText("");
 			}
 		});
-		
+
 	}
+
 	// getter for the addSubView Song
 	public AddSubViewSong getAddSubViewSong() {
 		return addSubViewSong;
 	}
 
 	/**
-	 * A method to get the Data to repopulate the textArea
-	 * box.  Takes the parameter  mediaLibraryWrapper.
-	 * Gudeman
+	 * A method to get the Data to repopulate the textArea box. Takes the
+	 * parameter mediaLibraryWrapper. Gudeman
 	 */
 	public void setMediaLibraryWrapper(MediaLibraryWrapper mediaLibraryWrapper) {
 		this.mediaLibraryWrapper = mediaLibraryWrapper;
 		repopulateTextArea();
 
 	}
-    /**
-     * This method iterates through the song class
-     * and appends the title to a viewable output
-     * to display in the textArea box 
-     * Gudeman
-     */
+
+	/**
+	 * This method iterates through the song class and appends the title to a
+	 * viewable output to display in the textArea box Gudeman
+	 */
 	private void repopulateTextArea() {
 		textArea.setText("");
-		
+
 		// sorts the song list alphabetically by title
 		Collections.sort(mediaLibraryWrapper.getSongs(),
 				new Comparator<Song>() {
 					@Override
 					public int compare(Song song1, Song song2) {
-						return song1.getTitle().toLowerCase().compareTo(song2.getTitle().toLowerCase());
+						return song1.getTitle().toLowerCase()
+								.compareTo(song2.getTitle().toLowerCase());
 					}
 
 				});
@@ -308,33 +307,31 @@ public class SongView extends JFrame {
 			textArea.append(song.getTitle() + "\n");
 		}
 	}
+
 	/**
-	 * Sets the text in the search bar and then calls
-	 * the searchHelper method to determine how to 
-	 * proceed
-	 * Gudeman
+	 * Sets the text in the search bar and then calls the searchHelper method to
+	 * determine how to proceed Gudeman
 	 * 
 	 */
-	public void setSearchText(String text){
+	public void setSearchText(String text) {
 		this.search.setText(text);
 		searchHelper(text);
 	}
+
 	/**
-	 * Method to manage the text in the search bar.
-	 * text as a parameter examined to determine a match
-	 * Gudeman
+	 * Method to manage the text in the search bar. text as a parameter examined
+	 * to determine a match Gudeman
 	 */
-	private boolean searchHelper(String text){
+	private boolean searchHelper(String text) {
 		if (text.isEmpty()) {
 			repopulateTextArea();
 			return false;
 		}
 		for (Song song : mediaLibraryWrapper.getSongs()) {
-			if (text.trim()
-					.equalsIgnoreCase(song.getTitle())) {
+			if (text.trim().equalsIgnoreCase(song.getTitle())) {
 				textArea.setText(song.getTitle().trim());
 				textArea.repaint();
-				
+
 				// identifies an object whose title is a match
 				this.matchedSong = song;
 				return true;

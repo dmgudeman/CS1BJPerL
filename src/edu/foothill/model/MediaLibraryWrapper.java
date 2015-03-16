@@ -4,19 +4,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+
 /**
- * Main class to hold the data for the MediaLibrary.  Wrapper class for data is needed because
- * in observer/Observable pattern, you cannot pass a list (only an Object) so this class
- * creates a wrapper to wrap lists in an object.
- * This creates ArrayLists for each of the four media types. 4 lists allows
- * more efficient searching of the various media groups. Faciliates
- * populating the search bar in the various views.
- * David Gudeman
+ * Main class to hold the data for the MediaLibrary. Wrapper class for data is
+ * needed because in observer/Observable pattern, you cannot pass a list (only
+ * an Object) so this class creates a wrapper to wrap lists in an object. This
+ * creates ArrayLists for each of the four media types. 4 lists allows more
+ * efficient searching of the various media groups. Faciliates populating the
+ * search bar in the various views. David Gudeman
  */
 public class MediaLibraryWrapper extends Observable implements Serializable {
 	private static final long serialVersionUID = 1L;
-    
-	//creates four array lists based on media type. makes manipulation
+
+	// creates four array lists based on media type. makes manipulation
 	// in the media types as a group more efficient for sorting and presenting
 	// and populating the textAreas in the the various 4 media type GUIs. DG
 	private List<Song> songs = new ArrayList<Song>();
@@ -40,7 +40,8 @@ public class MediaLibraryWrapper extends Observable implements Serializable {
 	public List<VideoGame> getVideogames() {
 		return videogames;
 	}
-    // toString function for entire library DG
+
+	// toString function for entire library DG
 	public String toString() {
 		String libraryString = "Library as a printable string";
 		if (!(songs.isEmpty() && books.isEmpty() && videos.isEmpty() && videogames
@@ -63,7 +64,8 @@ public class MediaLibraryWrapper extends Observable implements Serializable {
 		}
 		return (libraryString);
 	}
-    // toString for Songs DG
+
+	// toString for Songs DG
 	public String toStringSongs() {
 		String libraryString = "Songs as a printable string";
 		if (songs.isEmpty()) {
@@ -76,5 +78,5 @@ public class MediaLibraryWrapper extends Observable implements Serializable {
 			}
 		}
 		return (libraryString);
-	} 
+	}
 }

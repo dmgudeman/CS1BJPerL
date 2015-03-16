@@ -56,14 +56,15 @@ public class AddSubViewSong extends JFrame implements ActionListener
 	private JLabel notesPrompt;
 
 	/**
-	 * Constructor for this class that takes a mediaView and a songView
-	 * as parameters. The mediaView is necessary so that visibility of the 
-	 * GUIs can be manipulated.
-	 * Gudeman
+	 * Constructor for this class that takes a mediaView and a songViewS as
+	 * parameters. The mediaView is necessary so that visibility of the GUIs can
+	 * be manipulated. Gudeman
 	 */
 	public AddSubViewSong(final MediaView mediaView, final SongView songView) {
-		// the next two lines remove the buttons from the standard upper left area 
-		//to force the user to use the exit button to close, ensuring saving of the data
+		// the next two lines remove the buttons from the standard upper left
+		// area
+		// to force the user to use the exit button to close, ensuring saving of
+		// the data
 		setUndecorated(true);
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
@@ -81,7 +82,9 @@ public class AddSubViewSong extends JFrame implements ActionListener
 		// declares the elements in the frame
 		songPrompt = new JLabel("Add a Song");
 		songPrompt.setFont(new Font("Papyrus", Font.ITALIC, 30));
-		titlePrompt = new JLabel("Enter title:");
+		titlePrompt = new JLabel("*Enter title:");
+		titlePrompt.setFont(new Font("Arial", Font.BOLD, 14));
+		titlePrompt.setForeground(Color.red);
 		artistPrompt = new JLabel("Enter artist:");
 		genrePrompt = new JLabel("Enter genre:");
 		formatPrompt = new JLabel("Enter format:");
@@ -107,8 +110,8 @@ public class AddSubViewSong extends JFrame implements ActionListener
 		GridBagConstraints c = new GridBagConstraints();
 
 		// sets the distance between elements
-		c.insets = new Insets(10, 10, 0, 0); 
-												
+		c.insets = new Insets(10, 10, 0, 0);
+
 		// formats the elements on the gridBagLayout and adds the initialized
 		// elements
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -120,7 +123,6 @@ public class AddSubViewSong extends JFrame implements ActionListener
 		c.gridx = 0;
 		c.gridy = 1;
 		c.gridwidth = 1;
-		c.anchor = GridBagConstraints.EAST;
 		panel.add(titlePrompt, c);
 
 		c.gridx = 1;
@@ -173,7 +175,8 @@ public class AddSubViewSong extends JFrame implements ActionListener
 		c.gridx = 0;
 		c.gridy = 8;
 		panel.add(addButton, c);
-
+		
+		
 		c.gridx = 0;
 		c.gridy = 9;
 		c.gridwidth = 1;
@@ -187,17 +190,18 @@ public class AddSubViewSong extends JFrame implements ActionListener
 	}
 
 	/**
-	 * Add Action Listeners to Buttons, uses anonymous classes to add each Listener.
-	 * Action performed methods are within each class.  Action performed methods
-	 * perform functions of printing etc. and also adjust the visibility
-	 * of the procession of GUIs when navigating between GUIs.
+	 * Add Action Listeners to Buttons, uses anonymous classes to add each
+	 * Listener. Action performed methods are within each class. Action
+	 * performed methods perform functions of printing etc. and also adjust the
+	 * visibility of the procession of GUIs when navigating between GUIs.
 	 * Gudeman
 	 */
 	public void addController(ViewListener controller) {
-		
-		// variable to be able to specify the addSubViewSong within the anonymous classes DG
+
+		// variable to be able to specify the addSubViewSong within the
+		// anonymous classes DG
 		final AddSubViewSong self = this;
-		
+
 		// ActionListener added to ADD button DG
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
