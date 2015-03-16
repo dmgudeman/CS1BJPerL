@@ -10,26 +10,20 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Observable;
-import java.util.Observer;
-
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-
 import edu.foothill.controller.gui.ViewEvent;
 import edu.foothill.controller.gui.ViewListener;
 import edu.foothill.model.Command;
-import edu.foothill.model.MediaLibrary;
 import edu.foothill.model.MediaLibraryWrapper;
 import edu.foothill.model.Song;
-import edu.foothill.model.Type;
+
 
 /**
- * This class creates a JFrame to takes search Text and search the Song Class.
- * When a button is activates it navigates to a JFrame that is specific to a
- * media type or a JFrame that addresses the entire list. Version 1 David
- * Gudeman
+ * This class creates a GUI JFrame to takes search Text and search the Song Class.
+ * When a button is activates it navigates to a ADD GUI JFrame. When search text
+ * is specified to a song object the DELETE button becomes active.  You can print
+ * the mediaLibrary list, navigate back to HOME and EXIT from this GUI. 
+ *  Version 1 Gudeman
  */
 public class SongView extends JFrame {
 	
@@ -44,8 +38,7 @@ public class SongView extends JFrame {
 	// variable used in searching to collect media object whose title is a match
 	private Song matchedSong;
 
-	// initialize the elements in the frame and panel DG
-	// private JFrame frame;
+	// initialize the elements in the panel DG
 	private JPanel panel;
 	private JTextField search;
 	private JButton addButton;
@@ -59,10 +52,11 @@ public class SongView extends JFrame {
 	// needed to populate the textArea and for the search Bar
 	private MediaLibraryWrapper mediaLibraryWrapper;
 	
-
 	/**
-	 * Non parameterized constructor for this class. It calls the method gui
-	 * which creates a JFrame a JPanel and places buttons in the frame.
+	 * Constructor for this class that takes a MediaView and a ViewListener
+	 * as parameters. The mediaView is necessary so that visibility of the 
+	 * GUIs can be manipulated.
+	 * Gudeman
 	 */
 	public SongView(MediaView mediaView, ViewListener controller) {
 		
@@ -109,8 +103,9 @@ public class SongView extends JFrame {
 		// makes an object of constraints to allow the grid layout DG
 		GridBagConstraints c = new GridBagConstraints();
 
-		c.insets = new Insets(10, 10, 10, 10); // sets the distance between
-												// elements DG
+		// sets the distance between elements DG
+		c.insets = new Insets(10, 10, 10, 10); 
+												
 		// adds the initialized elements to the frame DG
 		c.gridx = 0;
 		c.gridy = 0;
@@ -156,27 +151,28 @@ public class SongView extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 		
-		
-
 		/**
-		 * Add Action Listeners to Buttons, uses anonymous classes to add each Listener
+		 * Add Action Listeners to Buttons, uses anonymous classes to add each Listener.
+		 * Action performed methods are within each class.  Action performed methods
+		 * perform functions of printing etc., and also adjust the visibility
+		 * of the procession of GUIs when navigating between GUIs.
 		 * Gudeman
 		 */
 		
-		// variable to be able to specify this view when progressing
-		// through the JFrames DG
-		final SongView self = this;
+		// variable to be able to specify the songView within the anonymous classes DG
+		final SongView SELF = this;
+		
 		// add ActionListeners to the various buttons
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("add Button has been clicked");
 				if (addSubViewSong == null) {
-					addSubViewSong = new AddSubViewSong(mediaView, self);
+					addSubViewSong = new AddSubViewSong(mediaView, SELF);
 					addSubViewSong.addController(controller);
-				} //else {
-					// addSubViewSong.setVisible(true);
+				} else {
+					addSubViewSong.setVisible(true);
 
-				//}
+				}
 				// sets the visibility of the JFrames to show the next view
 				// uses invokeLater method because needs it own java thread
 				java.awt.EventQueue.invokeLater(new Runnable() {
@@ -184,13 +180,13 @@ public class SongView extends JFrame {
 					public void run() {
 						mediaView.setVisible(false);
 						addSubViewSong.setVisible(true);
-						self.setVisible(false);
+						SELF.setVisible(false);
 
 					}
 				});
 			}
 		});
-		
+		 // ActionListener added to HOME button DG
 		homeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Home Button has been clicked");
@@ -198,12 +194,12 @@ public class SongView extends JFrame {
 					@Override
 					public void run() {
 						mediaView.setVisible(true);
-						self.setVisible(false);
+						SELF.setVisible(false);
 					}
 				});
 			}
 		});
-		
+		// ActionListener added to PRINT button DG
 		printButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Print Button has been clicked");
@@ -214,16 +210,18 @@ public class SongView extends JFrame {
 
 			}
 		});
+		// ActionListener added to EXIT button DG
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Exit Button has been clicked");
 				controller.viewEventOccured(new ViewEvent(SongView.class, null,
 						Command.SAVE));
-				self.dispatchEvent(new WindowEvent(self,
+				SELF.dispatchEvent(new WindowEvent(SELF,
 						WindowEvent.WINDOW_CLOSING));
 			}
 		});
-		//implements keylisteners to the search bar to active delete button
+		//implements keylisteners to the search bar to active delete button upon a 
+		//title match in the search bar. DG
 		search.addKeyListener(new KeyListener() {
 
 			@Override
@@ -296,6 +294,8 @@ public class SongView extends JFrame {
      */
 	private void repopulateTextArea() {
 		textArea.setText("");
+		
+		// sorts the song list alphabetically by title
 		Collections.sort(mediaLibraryWrapper.getSongs(),
 				new Comparator<Song>() {
 					@Override

@@ -1,7 +1,6 @@
 package edu.foothill.view.gui;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,8 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,14 +18,14 @@ import javax.swing.*;
 import edu.foothill.controller.gui.ViewEvent;
 import edu.foothill.controller.gui.ViewListener;
 import edu.foothill.model.Command;
-import edu.foothill.model.Media;
 import edu.foothill.model.MediaLibrary;
 import edu.foothill.model.MediaLibraryWrapper;
 
 /**
- * This class creates a JFrame to takes search Text for Media type. When a button
- * is activates it navigates to a JFrame that is specific to a media type and carries the
- * text in the search bar forward to the next GUI. 
+ * This class creates a JFrame to function as the Home GUI from which
+ * GUI's specific from which each media type are launched.
+ * When a button is activated it navigates to a JFrame that is specific 
+ * to a media type and carries the text in the search bar forward to the next GUI. 
  * Version 1 Gudeman
  */
 public class MediaView extends JFrame implements Observer {
@@ -153,19 +150,21 @@ public class MediaView extends JFrame implements Observer {
 	}
 
 	/**
-	 * Takes in a controller Object as a parameter registers the controller
-	 * object as a listener for the convertButton to be enacted
+	 * This method uses anonymous classes to Add ActionListeners
+	 * to all the buttons. A media view SELF variable is utilized
+	 * to identify the mediaView wihtin the classes
+	 * Gudeman
 	 */
 	public void addController(ViewListener controller) {
 		// this declaration allows the view to identify itself when
 		// calling making Action Listeners DG
-		final MediaView self = this;
+		final MediaView SELF = this;
 
 		// need to instantiate the next tier of views so the
 		// controllers can be added
-		songView = new SongView(self, controller);
+		songView = new SongView(SELF, controller);
 		songView.setVisible(false);
-		allMediaView = new AllMediaView(self, controller);
+		allMediaView = new AllMediaView(SELF, controller);
 		allMediaView.setVisible(false);
 		// -- need the other views
 
@@ -188,7 +187,7 @@ public class MediaView extends JFrame implements Observer {
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						self.setVisible(false);
+						SELF.setVisible(false);
 						allMediaView.setVisible(true);
 					}
 				});
@@ -205,7 +204,7 @@ public class MediaView extends JFrame implements Observer {
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						self.setVisible(false);
+						SELF.setVisible(false);
 						songView.setVisible(true);
 						
 						// populates the search bar in songView appropriately
@@ -224,7 +223,7 @@ public class MediaView extends JFrame implements Observer {
 				System.out.println("Exit Button has been clicked");
 				controller.viewEventOccured(new ViewEvent(MediaView.class,
 						null, Command.SAVE));
-				self.dispatchEvent(new WindowEvent(self,
+				SELF.dispatchEvent(new WindowEvent(SELF,
 						WindowEvent.WINDOW_CLOSING));
 			}
 		});
