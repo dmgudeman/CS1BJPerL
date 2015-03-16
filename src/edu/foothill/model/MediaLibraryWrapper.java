@@ -64,6 +64,29 @@ public class MediaLibraryWrapper extends Observable implements Serializable {
 		}
 		return (libraryString);
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Media> getMedia (){
+		List<Media> allMedia = new ArrayList<Media>();
+		
+		for (Song song : songs){
+			allMedia.add(song);
+		}
+		for (Book book : books){
+			allMedia.add(book);
+		}
+		for (Video video : videos){
+			allMedia.add(video);
+		}
+		for (VideoGame videoGame : videogames){
+			allMedia.add(videoGame);
+		}
+		return allMedia;
+		
+	}
 
 	// toString for Songs DG
 	public String toStringSongs() {

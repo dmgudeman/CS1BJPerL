@@ -193,7 +193,7 @@ public class MediaView extends JFrame implements Observer {
 		// and a Runnable object is needed to make a thread DG
 		mainSongButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Add Button has been clicked");
+				System.out.println("Song Button has been clicked");
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
@@ -209,6 +209,25 @@ public class MediaView extends JFrame implements Observer {
 				});
 			}
 		});
+		mainAllButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("All Media Button has been clicked");
+				java.awt.EventQueue.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						SELF.setVisible(false);
+						allMediaView.setVisible(true);
+
+						// populates the search bar in songView appropriately
+						// if mediaView search bar is empty
+						if (!mainSearch.getText().isEmpty()) {
+				//			allMediaView.setSearchText(mainSearch.getText());
+						}
+					}
+				});
+			}
+		});
+
 
 		// the exit button
 		exitButton.addActionListener(new ActionListener() {
@@ -241,8 +260,10 @@ public class MediaView extends JFrame implements Observer {
 		if (o instanceof MediaLibrary) {
 			this.mediaLibraryWrapper = (MediaLibraryWrapper) arg;
 			songView.setMediaLibraryWrapper(mediaLibraryWrapper);
-
+		//	bookView.setMediaLibraryWrapper(mediaLibraryWrapper);
+		//	videoView.setMediaLibraryWrapper(mediaLibraryWrapper);
+		//	videoGameView.setMediaLibraryWrapper(mediaLibraryWrapper);
+            allMediaView.setMediaLibraryWrapper(mediaLibraryWrapper);
 		}
 	}
-	// -- need update methods for bookView, videoView and videoGameView
 }

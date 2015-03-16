@@ -27,8 +27,8 @@ public class Controller implements ViewListener {
 
 	/**
 	 * parameterized Constructor for this controller class that takes both the
-	 * model (mediaLibrary) and the view (mediaView) and an obhect from the 
-	 * Persistence class 
+	 * model (mediaLibrary) and the view (mediaView) and an obhect from the
+	 * Persistence class
 	 */
 	public Controller(MediaLibrary mediaLibrary, MediaView mediaView,
 			String filename) {
@@ -58,18 +58,15 @@ public class Controller implements ViewListener {
 
 		} else if (event.getCommand().equals(Command.DELETE)) {
 			mediaLibrary.removeMedia(event.getMedia());
-		} else if (event.getSource() == AddSubViewSong.class) {
-			System.out.println(event.getCommand());
-			if (event.getCommand().equals(Command.ADD)) {
-				mediaLibrary.addMedia(event.getMedia());
-
-			} else if (event.getCommand().equals(Command.PRINT)) {
-				mediaLibrary.sortByTitle(Type.Song);
-				System.out.println(mediaLibrary.toStringSongs());
-			}
-		} else if (event.getSource() == SongView.class) {
-
+		} else if (event.getCommand().equals(Command.DELETE_WITH_SORT)){
+			mediaLibrary.removeMediaWithSortByTitle(event.getMedia());	
+		} else if (event.getCommand().equals(Command.PRINT)) {
+			mediaLibrary.sortByTitle(event.getMedia().getType());
+			System.out.println(mediaLibrary.toStringSongs());
+		} else if (event.getCommand().equals(Command.ADD_WITH_SORT)) {
+			mediaLibrary.addMediaWithSortByTitle(event.getMedia());
+		} else if (event.getCommand().equals(Command.ADD)) {
+			mediaLibrary.addMedia(event.getMedia());
 		}
-
 	}
 }

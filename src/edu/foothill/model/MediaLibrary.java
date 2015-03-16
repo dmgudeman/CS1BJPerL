@@ -42,6 +42,20 @@ public class MediaLibrary extends Observable implements Serializable {
 	 * Method adds media to the library - Author Shmuel
 	 */
 	public void addMedia(Media media) {
+		addToMediaWrapper(media);
+		notifyObservers(mediaLibraryWrapper);
+	}
+	
+	
+	public void addMediaWithSortByTitle(Media media){
+		addToMediaWrapper(media);
+		sortByTitle(media.getType());
+		notifyObservers(mediaLibraryWrapper);
+		
+	}
+	
+	
+	private void addToMediaWrapper(Media media) {
 		switch (media.getType()) {
 		case Book:
 			mediaLibraryWrapper.getBooks().add((Book) media);
@@ -58,13 +72,21 @@ public class MediaLibrary extends Observable implements Serializable {
 		default:
 			break;
 		}
-
 		System.out.println("Added " + media.getType() + " to library");
 		System.out.println(mediaLibraryWrapper.toString());
 
+		
+	}
+	
+	
+	public void removeMedia(Media media) {
+		removeFromMediaWrapper(media);
+
 		notifyObservers(mediaLibraryWrapper);
 	}
-	public void removeMedia(Media media) {
+	
+	
+	private void removeFromMediaWrapper(Media media) {
 		switch (media.getType()) {
 		case Book:
 			mediaLibraryWrapper.getBooks().remove((Book) media);
@@ -84,10 +106,14 @@ public class MediaLibrary extends Observable implements Serializable {
 
 		System.out.println("Removed " + media.getType() + " from library");
 		System.out.println(mediaLibraryWrapper.toString());
-
-		notifyObservers(mediaLibraryWrapper);
 	}
 
+	public void removeMediaWithSortByTitle(Media media){
+		removeFromMediaWrapper(media);
+		sortByTitle(media.getType());
+		notifyObservers(mediaLibraryWrapper);
+		
+	}
 	/**
 	 * Method returns a library object with all of the media elements of a
 	 * certain type -Author Shmuel

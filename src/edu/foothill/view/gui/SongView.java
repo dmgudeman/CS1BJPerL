@@ -166,7 +166,7 @@ public class SongView extends JFrame {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("add Button has been clicked");
 				if (addSubViewSong == null) {
-					addSubViewSong = new AddSubViewSong(mediaView, SELF);
+					addSubViewSong = new AddSubViewSong(SELF);
 					addSubViewSong.addController(controller);
 				} else {
 					addSubViewSong.setVisible(true);
@@ -263,7 +263,7 @@ public class SongView extends JFrame {
 
 				// sends info to the controller of what to delete
 				controller.viewEventOccured(new ViewEvent(SongView.class,
-						matchedSong, Command.DELETE));
+						matchedSong, Command.DELETE_WITH_SORT));
 				deleteButton.setEnabled(false);
 				search.setText("");
 			}
@@ -293,16 +293,6 @@ public class SongView extends JFrame {
 	private void repopulateTextArea() {
 		textArea.setText("");
 
-		// sorts the song list alphabetically by title
-		Collections.sort(mediaLibraryWrapper.getSongs(),
-				new Comparator<Song>() {
-					@Override
-					public int compare(Song song1, Song song2) {
-						return song1.getTitle().toLowerCase()
-								.compareTo(song2.getTitle().toLowerCase());
-					}
-
-				});
 		for (Song song : mediaLibraryWrapper.getSongs()) {
 			textArea.append(song.getTitle() + "\n");
 		}
@@ -323,23 +313,27 @@ public class SongView extends JFrame {
 	 * to determine a match Gudeman
 	 */
 	private boolean searchHelper(String text) {
+		boolean found = false;
 		if (text.isEmpty()) {
 			repopulateTextArea();
-			return false;
-		}
-		for (Song song : mediaLibraryWrapper.getSongs()) {
-			if (text.trim().equalsIgnoreCase(song.getTitle())) {
-				textArea.setText(song.getTitle().trim());
-				textArea.repaint();
+			found = false;
+		} else {
+			for (Song song : mediaLibraryWrapper.getSongs()) {
+				if (text.trim().equalsIgnoreCase(song.getTitle())) {
+					textArea.setText(song.getTitle().trim());
+					textArea.repaint();
 
-				// identifies an object whose title is a match
-				this.matchedSong = song;
-				return true;
-			} else {
-				this.matchedSong = null;
-				repopulateTextArea();
+					// identifies an object whose title is a match
+					this.matchedSong = song;
+					found = true;
+					break;
+				} else {
+					this.matchedSong = null;
+					repopulateTextArea();
+					found = false;
+				}
 			}
 		}
-		return false;
+		return found;
 	}
 }

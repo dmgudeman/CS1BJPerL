@@ -6,6 +6,7 @@ import edu.foothill.controller.gui.ViewEvent;
 import edu.foothill.controller.gui.ViewListener;
 import edu.foothill.model.Command;
 import edu.foothill.model.Song;
+
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -14,6 +15,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * This class creates a GUI JFrame to be able to add a song object. It has a
@@ -26,7 +29,6 @@ public class AddSubViewSong extends JFrame implements ActionListener
 {
 	// include the view needed to process through the UI tree
 	private final SongView songView;
-	// private final MediaView mediaView;
 
 	// constants for the frame
 	private static final int FRAME_WIDTH = 400;
@@ -60,7 +62,7 @@ public class AddSubViewSong extends JFrame implements ActionListener
 	 * parameters. The mediaView is necessary so that visibility of the GUIs can
 	 * be manipulated. Gudeman
 	 */
-	public AddSubViewSong(final MediaView mediaView, final SongView songView) {
+	public AddSubViewSong(final SongView songView) {
 		// the next two lines remove the buttons from the standard upper left
 		// area
 		// to force the user to use the exit button to close, ensuring saving of
@@ -99,6 +101,7 @@ public class AddSubViewSong extends JFrame implements ActionListener
 		notes = new JTextArea(5, 20);
 
 		addButton = new JButton("Add");
+		addButton.setEnabled(false);
 		backButton = new JButton("Back");
 		printButton = new JButton("Print");
 
@@ -175,8 +178,7 @@ public class AddSubViewSong extends JFrame implements ActionListener
 		c.gridx = 0;
 		c.gridy = 8;
 		panel.add(addButton, c);
-		
-		
+
 		c.gridx = 0;
 		c.gridy = 9;
 		c.gridwidth = 1;
@@ -206,12 +208,13 @@ public class AddSubViewSong extends JFrame implements ActionListener
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Add Song Button has been clicked");
+
 				Song song = new Song(title.getText(), location.getText(),
 						format.getText(), notes.getText(), artist.getText(),
 						genre.getText());
 				controller.viewEventOccured(new ViewEvent(AddSubViewSong.class,
-						song, Command.ADD));
-
+						song, Command.ADD_WITH_SORT));
+				clearTextFields();
 			}
 		});
 		// ActionListener added to PRINT button DG
@@ -237,6 +240,49 @@ public class AddSubViewSong extends JFrame implements ActionListener
 				});
 			}
 		});
+		// implements keylisteners to the search bar to active delete button
+		// upon a
+		// title match in the search bar. DG
+		title.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// to complete interface
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// to complete interface
+
+			}
+
+			// enables the delete button when there
+			// is a match in the search bar to the
+			// mediaWrapper arrayList
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (!title.getText().trim().isEmpty()) {
+					addButton.setEnabled(true);
+				} else {
+					addButton.setEnabled(false);
+				}
+			}
+
+		});
+
+	}
+	/**
+	 * Helper method to clear text fields
+	 * Gudeman
+	 */
+
+	private void clearTextFields() {
+		title.setText("");
+		artist.setText("");
+		genre.setText("");
+		location.setText("");
+		format.setText("");
+		notes.setText("");
 	}
 
 	@Override

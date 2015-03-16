@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import edu.foothill.controller.gui.ViewListener;
+import edu.foothill.model.MediaLibraryWrapper;
+import edu.foothill.model.Song;
 
 
 /**
@@ -17,18 +19,20 @@ import edu.foothill.controller.gui.ViewListener;
  * Version 1 David Gudeman
  */
 public class AllMediaView extends JFrame implements ActionListener {
+	
+	private MediaLibraryWrapper mediaLibraryWrapper;
 	// set constants for the frame
 	private static final int FRAME_WIDTH = 300;
 	private static final int FRAME_HEIGHT = 200;
-	private static final int FRAME_X_ORIGIN = 150;
-	private static final int FRAME_Y_ORIGIN = 250;
-
+	
 	// initialize the elements in the frame
-	private JTextField allMediaSearch;
-	private JButton allMediaAddButton;
-	private JButton allMediaDeleteButton;
-	private JLabel allMediaPrompt;
-	private JTextField allMediaOutput;
+	private JTextField search;
+	private JButton addButton;
+	private JButton deleteButton;
+	private JLabel prompt;
+	private JTextArea textArea;
+	
+	private boolean matchedMedia;
 
 	/**
 	 * Non parameterized constructor for this class, creates a JFrame and places
@@ -44,29 +48,79 @@ public class AllMediaView extends JFrame implements ActionListener {
 		this.setLayout(new FlowLayout());
 
 		// declares the elements in the frame
-		allMediaSearch = new JTextField("  ");
-		allMediaAddButton = new JButton("ADD an item");
-		allMediaDeleteButton = new JButton("DELETE an item");
-		allMediaPrompt = new JLabel("Your Library");
-		allMediaOutput = new JTextField("");
+		search = new JTextField("  ");
+		addButton = new JButton("ADD an item");
+		deleteButton = new JButton("DELETE an item");
+		prompt = new JLabel("Your Library");
+		textArea = new JTextArea("");
 
 		// adds the initialized elements to the frame
-		this.add(allMediaPrompt);
-		this.add(allMediaAddButton);
-		this.add(allMediaDeleteButton);
-		this.add(allMediaOutput);
+		this.add(prompt);
+		this.add(addButton);
+		this.add(deleteButton);
+		this.add(textArea);
 
 		// adds ActionListener to buttons and search bar
-		allMediaSearch.addActionListener(this);
-		allMediaAddButton.addActionListener(this);
-		allMediaDeleteButton.addActionListener(this);
+		search.addActionListener(this);
+		addButton.addActionListener(this);
+		deleteButton.addActionListener(this);
 		this.setVisible(true);
 
 		// makes frame visible and exits on close
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
+	public void setSearchText(String text) {
+		this.search.setText(text);
+	//	searchHelper(text);
+	}
 
+	/**
+	 * Method to manage the text in the search bar. text as a parameter examined
+	 * to determine a match Gudeman
+	 */
+/*	private boolean searchHelper(String text) {
+		boolean found = false;
+		if (text.isEmpty()) {
+			repopulateTextArea();
+			found = false;
+		} else {
+			for (Song song : mediaLibraryWrapper.getSongs()) {
+				if (text.trim().equalsIgnoreCase(song.getTitle())) {
+					textArea.setText(song.getTitle().trim());
+					textArea.repaint();
+
+					// identifies an object whose title is a match
+					this.matchedSong = song;
+					found = true;
+					break;
+				} else {
+					this.matchedSong = null;
+					repopulateTextArea();
+					found = false;
+				}
+			}
+		}
+		return found;
+	}
+    
+	*/
+	/**
+	 * This method iterates through the song class and appends the title to a
+	 * viewable output to display in the textArea box Gudeman
+	 */
+	private void repopulateTextArea() {
+		textArea.setText("");
+
+		for (Song song : mediaLibraryWrapper.getSongs()) {
+			textArea.append(song.getTitle() + "\n");
+		}
+	}
+
+	public void setMediaLibraryWrapper(MediaLibraryWrapper mediaLibraryWrapper) {
+		this.mediaLibraryWrapper = mediaLibraryWrapper;
+	}
+	
 	/**
 	 * Performs method specific to an event triggered by a specific button
 	 */
