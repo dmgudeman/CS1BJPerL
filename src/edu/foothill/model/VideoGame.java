@@ -22,17 +22,23 @@ public class VideoGame extends Media implements Serializable{
 		super(title, location, format, notes);
 	}
 
+	/**
+	 * Default constructor
+	 * Shaffer
+	 */
 	public VideoGame() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
+	// getter for media type DG
 	public Type getType() {
-		return getType();
+		return Type.VideoGame;
 	}
 
 	
 	/**
 	* Returns a String containing all the data stored in this object.
+	* Gudeman
     */
     @Override
     public String toString()

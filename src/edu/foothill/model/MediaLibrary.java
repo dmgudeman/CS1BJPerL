@@ -158,19 +158,19 @@ public class MediaLibrary extends Observable implements Serializable {
 	/**
 	 * Method deletes entries with the specified media type and media title from
 	 * the media library - Author Shmuel
-	 * 
 	 * @param mediaType
 	 * @param mediaTitle
 	 */
 
 	public void deleteEntries(String mediaType, String mediaTitle) {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Deleted specific entries from the media library");
 	}
 
 	/**
 	 * The is a method of the class Observable that allows the model to be
 	 * observed.
+	 * Gudeman & Shaffer
 	 */
 	public void addObserver(Observer observe) {
 		observers.add(observe);
@@ -179,6 +179,7 @@ public class MediaLibrary extends Observable implements Serializable {
 	/**
 	 * This method notifies the observer view object to call update and show the
 	 * result in the output textField
+	 * Gudeman
 	 */
 	public void notifyObservers(Object mediaLibraryWrapper) {
 		for (Observer observer : observers) {
@@ -190,6 +191,12 @@ public class MediaLibrary extends Observable implements Serializable {
 	public void notifyObservers() {
 		this.notifyObservers(mediaLibraryWrapper);
 	}
+	
+	/**
+	 * This is a sort method that sorts a mediaLibrary object by title and type
+	 * @param type
+	 * Gudeman & Shaffer
+	 */
 	public void sortByTitle(Type type) {
 		if (type.equals(Type.Book)) {
 			Collections.sort(mediaLibraryWrapper.getBooks(),
@@ -231,6 +238,6 @@ public class MediaLibrary extends Observable implements Serializable {
 					});
 			
 		}
-		// need to add the sortByTitle for video, videoGame
+		
 	}
 }

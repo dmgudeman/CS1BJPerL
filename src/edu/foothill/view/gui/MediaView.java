@@ -163,10 +163,10 @@ public class MediaView extends JFrame implements Observer {
 		songView.setVisible(false);
 		bookView = new BookView(SELF, controller);
 		bookView.setVisible(false);
-	//	videoView = new VideoView(SELF, controller);
-	//	videoView.setVisible(false);
-	//	videoGameViewView = new VideoGameView(SELF, controller);
-	//	videoGameViewView.setVisible(false);
+		videoView = new VideoView(SELF, controller);
+		videoView.setVisible(false);
+		videoGameView = new VideoGameView(SELF, controller);
+		videoGameView.setVisible(false);
 		allMediaView = new AllMediaView(SELF, controller);
 		allMediaView.setVisible(false);
 		// -- need the other views
@@ -177,7 +177,7 @@ public class MediaView extends JFrame implements Observer {
 		 * anonymous class when needed to process through the GUIs Gudeman
 		 */
 
-		// instantiates the SongView and makes mediaView invisible
+		// instantiates the AllView and makes mediaView invisible
 		// utilizes an anonymous class to add the action listener
 		// and a Runnable object is needed to make a thread
 		mainAllButton.addActionListener(new ActionListener() {
@@ -215,27 +215,34 @@ public class MediaView extends JFrame implements Observer {
 				});
 			}
 		});
-		// instantiates the SongView and makes mediaView invisible
-				// utilizes an anonymous class to add the action listener
-				// and a Runnable object is needed to make a thread DG
-				mainBookButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent ae) {
-						System.out.println("Book Button has been clicked");
-						java.awt.EventQueue.invokeLater(new Runnable() {
-							@Override
-							public void run() {
-								SELF.setVisible(false);
-								bookView.setVisible(true);
+		/**
+		 * instantiates the SongView and makes mediaView invisible utilizes an
+		 * anonymous class to add the action listener and a Runnable object is
+		 * needed to make a thread DG Shaffer and Gudeman
+		 */
+		mainBookButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("Book Button has been clicked");
+				java.awt.EventQueue.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						SELF.setVisible(false);
+						bookView.setVisible(true);
 
-								// populates the search bar in songView appropriately
-								// if mediaView search bar is empty
-								if (!mainSearch.getText().isEmpty()) {
-									bookView.setSearchText(mainSearch.getText());
-								}
-							}
-						});
+						// populates the search bar in songView appropriately
+						// if mediaView search bar is empty
+						if (!mainSearch.getText().isEmpty()) {
+							bookView.setSearchText(mainSearch.getText());
+						}
 					}
 				});
+			}
+		});
+		/**
+		 * instantiates the AllMediaView and makes mediaView invisible utilizes an
+		 * anonymous class to add the action listener and a Runnable object is
+		 * needed to make a thread DG Shaffer and Gudeman
+		 */
 		mainAllButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("All Media Button has been clicked");
@@ -248,14 +255,59 @@ public class MediaView extends JFrame implements Observer {
 						// populates the search bar in songView appropriately
 						// if mediaView search bar is empty
 						if (!mainSearch.getText().isEmpty()) {
-				//			allMediaView.setSearchText(mainSearch.getText());
+							// allMediaView.setSearchText(mainSearch.getText());
+						}
+					}
+				});
+			}
+		});
+		/**
+		 * instantiates the VideoView and makes mediaView invisible utilizes an
+		 * anonymous class to add the action listener and a Runnable object is
+		 * needed to make a thread DG Shaffer and Gudeman
+		 */
+		mainVideoButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("Video Button has been clicked");
+				java.awt.EventQueue.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						SELF.setVisible(false);
+						videoView.setVisible(true);
+
+						// populates the search bar in songView appropriately
+						// if mediaView search bar is empty
+						if (!mainSearch.getText().isEmpty()) {
+							 videoView.setSearchText(mainSearch.getText());
 						}
 					}
 				});
 			}
 		});
 
+		/**
+		 * instantiates the VideoGameView and makes mediaView invisible utilizes an
+		 * anonymous class to add the action listener and a Runnable object is
+		 * needed to make a thread DG Shaffer and Gudeman
+		 */
+		mainVideoGameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("VideoGame Button has been clicked");
+				java.awt.EventQueue.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						SELF.setVisible(false);
+						videoGameView.setVisible(true);
 
+						// populates the search bar in songView appropriately
+						// if mediaView search bar is empty
+						if (!mainSearch.getText().isEmpty()) {
+							videoGameView.setSearchText(mainSearch.getText());
+						}
+					}
+				});
+			}
+		});
 		// the exit button
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
@@ -280,7 +332,7 @@ public class MediaView extends JFrame implements Observer {
 	 * This is a method necessary to implement the Observer interface. It takes
 	 * two parameters o is the observable object and arg an argument passed to
 	 * the notifyObservers method. This allows the mediaView to update the other
-	 * views. Gudeman
+	 * views. Gudeman & Shaffer
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
@@ -288,9 +340,9 @@ public class MediaView extends JFrame implements Observer {
 			this.mediaLibraryWrapper = (MediaLibraryWrapper) arg;
 			songView.setMediaLibraryWrapper(mediaLibraryWrapper);
 			bookView.setMediaLibraryWrapper(mediaLibraryWrapper);
-		//	videoView.setMediaLibraryWrapper(mediaLibraryWrapper);
-		//	videoGameView.setMediaLibraryWrapper(mediaLibraryWrapper);
-            allMediaView.setMediaLibraryWrapper(mediaLibraryWrapper);
+			videoView.setMediaLibraryWrapper(mediaLibraryWrapper);
+			videoGameView.setMediaLibraryWrapper(mediaLibraryWrapper);
+			allMediaView.setMediaLibraryWrapper(mediaLibraryWrapper);
 		}
 	}
 }
