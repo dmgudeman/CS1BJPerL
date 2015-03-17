@@ -1,7 +1,6 @@
 package edu.foothill.view.gui;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -18,10 +17,13 @@ import javax.swing.*;
 
 import edu.foothill.controller.gui.ViewEvent;
 import edu.foothill.controller.gui.ViewListener;
+import edu.foothill.model.Book;
 import edu.foothill.model.Command;
 import edu.foothill.model.Media;
 import edu.foothill.model.MediaLibraryWrapper;
 import edu.foothill.model.Song;
+import edu.foothill.model.Video;
+import edu.foothill.model.VideoGame;
 
 /**
  * This class creates a JFrame to takes search Text and search the VideoGame
@@ -30,6 +32,7 @@ import edu.foothill.model.Song;
  * Gudeman
  */
 public class AllMediaView extends JFrame implements ActionListener {
+	private static final long serialVersionUID = 1L;
 
 	private MediaLibraryWrapper mediaLibraryWrapper;
 	private MediaView mediaView;
@@ -64,8 +67,8 @@ public class AllMediaView extends JFrame implements ActionListener {
 		// Scottolini & Gudeman
 		setUndecorated(true);
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
-		
-	    // mediaView object needed to be able to set invisible
+
+		// mediaView object needed to be able to set invisible
 		this.mediaView = mediaView;
 		// creates frame
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -119,10 +122,15 @@ public class AllMediaView extends JFrame implements ActionListener {
 		c.ipady = 20;
 		panel.add(printButton, c);
 
-		c.gridx = 0;
-		c.gridy = 4;
-		c.gridwidth = 2;
-		panel.add(deleteButton, c);
+		/*
+		 * Need to troubleshoot mechanism so won't add this 
+		 * button to panel as of (3/17/2015) DG
+		
+		 c.gridx = 0; 
+		 c.gridy = 4; 
+		 c.gridwidth = 2; 
+		 panel.add(deleteButton, c);
+		*/ 
 
 		c.gridx = 0;
 		c.gridy = 5;
@@ -191,8 +199,7 @@ public class AllMediaView extends JFrame implements ActionListener {
 
 		/**
 		 * implements keylisteners to the search bar to active delete button
-		 * upon a title match in the search bar. 
-		 * Gudeman and Scottilini
+		 * upon a title match in the search bar. Gudeman and Scottilini
 		 */
 		search.addKeyListener(new KeyListener() {
 
@@ -220,6 +227,7 @@ public class AllMediaView extends JFrame implements ActionListener {
 			}
 
 		});
+
 		/**
 		 * Add mouse Listener to the search bar and the delete button Gudeman
 		 */
@@ -300,13 +308,58 @@ public class AllMediaView extends JFrame implements ActionListener {
 					found = false;
 				}
 			}
+			for (Video video: mediaLibraryWrapper.getVideos()) {
+				if (text.trim().equalsIgnoreCase(video.getTitle())) {
+					textArea.setText(video.getTitle().trim());
+					textArea.repaint();
+
+					// identifies an object whose title is a match
+					this.matchedMedia = video;
+					found = true;
+					break;
+				} else {
+					this.matchedMedia = null;
+					repopulateTextArea();
+					found = false;
+				}
+			}
+			for (Book book: mediaLibraryWrapper.getBooks()) {
+				if (text.trim().equalsIgnoreCase(book.getTitle())) {
+					textArea.setText(book.getTitle().trim());
+					textArea.repaint();
+
+					// identifies an object whose title is a match
+					this.matchedMedia = book;
+					found = true;
+					break;
+				} else {
+					this.matchedMedia = null;
+					repopulateTextArea();
+					found = false;
+				}
+			}
+			for (VideoGame videoGame: mediaLibraryWrapper.getVideogames()) {
+				if (text.trim().equalsIgnoreCase(videoGame.getTitle())) {
+					textArea.setText(videoGame.getTitle().trim());
+					textArea.repaint();
+
+					// identifies an object whose title is a match
+					this.matchedMedia = videoGame;
+					found = true;
+					break;
+				} else {
+					this.matchedMedia = null;
+					repopulateTextArea();
+					found = false;
+				}
+			}
 		}
 		return found;
 	}
+
 	// needed to implement ActionListener Interface DG
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
 
 	}
 }

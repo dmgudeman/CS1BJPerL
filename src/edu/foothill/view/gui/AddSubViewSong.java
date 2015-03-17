@@ -240,9 +240,8 @@ public class AddSubViewSong extends JFrame implements ActionListener
 				});
 			}
 		});
-		// implements keylisteners to the search bar to active delete button
-		// upon a
-		// title match in the search bar. DG
+		// implements keylisteners to the title text Field to active delete button
+		// upon a title match in the search bar. DS & DG
 		title.addKeyListener(new KeyListener() {
 
 			@Override

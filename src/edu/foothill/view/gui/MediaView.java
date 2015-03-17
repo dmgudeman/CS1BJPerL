@@ -22,8 +22,8 @@ import edu.foothill.model.MediaLibrary;
 import edu.foothill.model.MediaLibraryWrapper;
 
 /**
- * This class creates a JFrame to function as the Home GUI from which GUI's
- * specific from which each media type are launched. When a button is activated
+ * This class creates a JFrame to function as the Welcome GUI from which GUI's
+ * specific for each each media type are launched. When a button is activated
  * it navigates to a JFrame that is specific to a media type and carries the
  * text in the search bar forward to the next GUI. Version 1 Gudeman
  */
@@ -169,7 +169,7 @@ public class MediaView extends JFrame implements Observer {
 		videoGameView.setVisible(false);
 		allMediaView = new AllMediaView(SELF, controller);
 		allMediaView.setVisible(false);
-		// -- need the other views
+		
 
 		/**
 		 * Add action listeners. Utilizes anonymous classes to create new

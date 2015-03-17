@@ -1,19 +1,12 @@
 package edu.foothill.controller.gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.LinkedList;
-import java.util.List;
 
 import edu.foothill.model.Command;
 import edu.foothill.model.MediaLibrary;
-import edu.foothill.model.MediaLibraryWrapper;
 import edu.foothill.model.Persistence;
 import edu.foothill.model.Type;
-import edu.foothill.view.gui.AddSubViewBook;
-import edu.foothill.view.gui.AddSubViewSong;
 import edu.foothill.view.gui.MediaView;
-import edu.foothill.view.gui.SongView;
+
 
 /**
  * Controller Class. Drives the program and communicates between the View (GUI)
@@ -29,6 +22,8 @@ public class Controller implements ViewListener {
 	 * parameterized Constructor for this controller class that takes both the
 	 * model (mediaLibrary) and the view (mediaView) and an obhect from the
 	 * Persistence class
+	 * V1 Shaffer
+	 * V2 Gudeman
 	 */
 	public Controller(MediaLibrary mediaLibrary, MediaView mediaView,
 			String filename) {
@@ -37,7 +32,7 @@ public class Controller implements ViewListener {
 		this.persistence = new Persistence(filename);
 	}
 
-	// reads binary file from the Persistence class
+	// reads binary file from the Persistence class Shaffer
 	public void loadFile() {
 		if (persistence.readFromDisk()) {
 			mediaLibrary
@@ -46,7 +41,12 @@ public class Controller implements ViewListener {
 		}
 
 	}
-
+	/**
+	 * A method to call the appropriate method when an event occurs in
+	 * one of the views
+	 * V1 Shaffer
+	 * V2 Gudeman
+	 */
 	@Override
 	public void viewEventOccured(ViewEvent event) {
 		if (event.getCommand().equals(Command.SAVE)) {
@@ -55,7 +55,6 @@ public class Controller implements ViewListener {
 			persistence.readFromDisk();
 			System.out.println("writing from disk");
 			System.out.println(persistence.getDiskFileObject().toString());
-
 		} else if (event.getCommand().equals(Command.DELETE)) {
 			mediaLibrary.removeMedia(event.getMedia());
 		} else if (event.getCommand().equals(Command.DELETE_WITH_SORT)){
@@ -78,11 +77,7 @@ public class Controller implements ViewListener {
 		} else if(event.getCommand().equals(Command.PRINT_VIDEO_GAMES)) {
 				mediaLibrary.sortByTitle(Type.VideoGame);
 				System.out.println(mediaLibrary.toStringBooks());
-		// build tostring methods per media type 
-	    // add the command statements in else ifs
-		
-		
-		}else if (event.getCommand().equals(Command.ADD_WITH_SORT)) {
+		} else if (event.getCommand().equals(Command.ADD_WITH_SORT)) {
 			mediaLibrary.addMediaWithSortByTitle(event.getMedia());
 		} else if (event.getCommand().equals(Command.ADD)) {
 			mediaLibrary.addMedia(event.getMedia());

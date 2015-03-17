@@ -60,7 +60,7 @@ public class AddSubViewBook extends JFrame implements ActionListener
 	 * parameters. The mediaView is necessary so that visibility of the GUIs can
 	 * be manipulated. Scottolini & Gudeman
 	 */
-	public AddSubViewBook(final BookView bookView) {
+	public AddSubViewBook(final BookView BOOKVIEW) {
 		// the next two lines remove the buttons from the standard upper left
 		// area
 		// to force the user to use the exit button to close, ensuring saving of
@@ -68,7 +68,7 @@ public class AddSubViewBook extends JFrame implements ActionListener
 		setUndecorated(true);
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
-		this.bookView = bookView;
+		this.bookView = BOOKVIEW;
 
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		setResizable(false);
@@ -227,9 +227,8 @@ public class AddSubViewBook extends JFrame implements ActionListener
 				});
 			}
 		});
-		// implements keylisteners to the search bar to active delete button
-		// upon a
-		// title match in the search bar. DS & DG
+		// implements keylisteners to the title text Field to active delete button
+		// upon a title match in the search bar. DS & DG
 		title.addKeyListener(new KeyListener() {
 
 			@Override
