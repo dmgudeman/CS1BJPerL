@@ -1,122 +1,278 @@
 package edu.foothill.view.gui;
 
+import javax.swing.*;
 
+import edu.foothill.controller.gui.ViewEvent;
+import edu.foothill.controller.gui.ViewListener;
+import edu.foothill.model.Command;
+import edu.foothill.model.Video;
 
-/**
- * Contains a GUI View for an interface that allows you to add a new video entry based on title, format, location, notes, and star
- * Author Dominick Scottolini
- * 
-<<<<<<< HEAD
-=======
- * 
->>>>>>> e5d69dd67718c233c7b81d5a02501092a2a4a192
- */
- 
-import javax.swing.*;   
-import java.awt.event.*;     
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+/**
+ * This class creates a GUI JFrame to be able to add a video object. It has a
+ * button to navigate back to the videoView and a button to print the list.
+ * Version 1 Dominick Scottolini & David Gudeman
+ */
 
 public class AddSubViewVideo extends JFrame implements ActionListener
-													
-{	
-	// create a frame
-	private static final int FRAME_WIDTH = 300;
-	private static final int FRAME_HEIGHT = 200;
-	private static final int FRAME_X_ORIGIN = 150;
-	private static final int FRAME_Y_ORIGIN = 250;
-	
-	// declare variables needed 
-	private JLabel videoprompt;
+
+{
+	// include the view needed to process through the UI tree
+	private final VideoView videoView;
+
+	// constants for the frame
+	private static final int FRAME_WIDTH = 400;
+	private static final int FRAME_HEIGHT = 600;
+
+	// create a panel
+	JPanel panel = new JPanel();
+
+	// declare variables needed
 	private JButton addButton;
+	private JButton backButton;
+	private JButton printButton;
+
 	private JTextField title;
+	private JTextField star;
 	private JTextField format;
 	private JTextField location;
-	private JTextField notes;
-	private JTextField star;
+	private JTextArea notes;
+
+	private JLabel videoPrompt;
 	private JLabel titlePrompt;
+	private JLabel starPrompt;
 	private JLabel formatPrompt;
 	private JLabel locationPrompt;
 	private JLabel notesPrompt;
-	private JLabel starPrompt;
+
 	/**
-	 * constructor instantiates widgets and adds them to the Frame
+	 * Constructor for this class that takes a mediaView and a videoView as
+	 * parameters. The mediaView is necessary so that visibility of the GUIs can
+	 * be manipulated. Scottolini & Gudeman
 	 */
-	public AddSubViewVideo() 
-	{
-		//creates frame
-		setSize(FRAME_WIDTH, FRAME_HEIGHT);
+	public AddSubViewVideo(final VideoView videoView) {
+		// the next two lines remove the buttons from the standard upper left
+		// area
+		// to force the user to use the exit button to close, ensuring saving of
+		// the data
+		setUndecorated(true);
+		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+
+		this.videoView = videoView;
+
+		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		setResizable(false);
-		setLocation(FRAME_X_ORIGIN, FRAME_Y_ORIGIN);
-		this.setLayout(new FlowLayout());
-		
-		// declares the elements in the frame
-		videoprompt = new JLabel("Add New Video Entry");
-		titlePrompt = new JLabel("Enter title of Video: ");
-		formatPrompt = new JLabel("Enter format of Video: ");
-		locationPrompt = new JLabel("Enter location of Video: ");
-		notesPrompt = new JLabel("Enter notes for Video: ");
-		starPrompt = new JLabel("Enter star of Video: ");
-		title = new JTextField("");
-		format = new JTextField("");
-		location = new JTextField("");
-		notes = new JTextField("");
-		star = new JTextField("");
-		addButton = new JButton("Add");
-		// adds the initialized elements to the frame
-		this.add(videoprompt);
-		this.add(addButton);
-		this.add(title);
-		this.add(format);
-		this.add(location);
-		this.add(notes);
-		this.add(star);
-		this.add(titlePrompt);
-		this.add(formatPrompt);
-		this.add(locationPrompt);
-		this.add(notesPrompt);
-		this.add(starPrompt);
-		
 		this.setVisible(true);
-		
-		// add action listeners
-		addButton.addActionListener(this);
-		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		panel = new JPanel(new GridBagLayout());
+		Color myNewMuaveLight = new Color(255, 180, 180, 100);
+		panel.setBackground(myNewMuaveLight);
+
+		// declares the elements in the frame
+		videoPrompt = new JLabel("Add a Video");
+		videoPrompt.setFont(new Font("Papyrus", Font.ITALIC, 30));
+		titlePrompt = new JLabel("*Enter title:");
+		titlePrompt.setFont(new Font("Arial", Font.BOLD, 14));
+		titlePrompt.setForeground(Color.red);
+		starPrompt = new JLabel("Enter star:");
+		formatPrompt = new JLabel("Enter format:");
+		locationPrompt = new JLabel("Enter location: ");
+		notesPrompt = new JLabel("Enter notes:");
+
+		title = new JTextField();
+		star = new JTextField();
+		format = new JTextField();
+		location = new JTextField();
+		notes = new JTextArea(5, 20);
+
+		addButton = new JButton("Add");
+		addButton.setEnabled(false);
+		backButton = new JButton("Back");
+		printButton = new JButton("Print");
+
 		// makes frame visible and exits on close
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
-	
+
+		// declare and instantiate an object to hold the GridBagConstraints
+		GridBagConstraints c = new GridBagConstraints();
+
+		// sets the distance between elements
+		c.insets = new Insets(10, 10, 0, 0);
+
+		// formats the elements on the gridBagLayout and adds the initialized
+		// elements
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 2;
+		panel.add(videoPrompt, c);
+
+		c.gridx = 0;
+		c.gridy = 1;
+		c.gridwidth = 1;
+		panel.add(titlePrompt, c);
+
+		c.gridx = 1;
+		c.gridy = 1;
+		panel.add(title, c);
+
+		c.gridx = 0;
+		c.gridy = 2;
+		panel.add(starPrompt, c);
+
+		c.gridx = 1;
+		c.gridy = 2;
+		panel.add(star, c);
+
+		c.gridx = 0;
+		c.gridy = 4;
+		panel.add(formatPrompt, c);
+
+		c.gridx = 1;
+		c.gridy = 4;
+		panel.add(format, c);
+
+		c.gridx = 0;
+		c.gridy = 5;
+		panel.add(locationPrompt, c);
+
+		c.gridx = 1;
+		c.gridy = 5;
+		panel.add(location, c);
+
+		c.gridx = 0;
+		c.gridy = 6;
+		panel.add(notesPrompt, c);
+
+		c.ipady = 20;
+		c.gridx = 0;
+		c.gridy = 7;
+		c.gridwidth = 2;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		panel.add(notes, c);
+
+		c.gridx = 0;
+		c.gridy = 8;
+		panel.add(addButton, c);
+
+		c.gridx = 0;
+		c.gridy = 9;
+		c.gridwidth = 1;
+		panel.add(backButton, c);
+
+		c.gridx = 1;
+		c.gridy = 9;
+		panel.add(printButton, c);
+
+		this.add(panel);
 	}
-		
+
 	/**
-	 * performs action based on incoming event triggered by specific button
+	 * Add Action Listeners to Buttons, uses anonymous classes to add each
+	 * Listener. Action performed methods are within each class. Action
+	 * performed methods perform functions of printing etc. and also adjust the
+	 * visibility of the procession of GUIs when navigating between GUIs.
+	 * Scottolini & Gudeman
 	 */
-		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
-				// triggers add method
-				
-		}	
-		
-		
+	public void addController(ViewListener controller) {
 
-		
-		
-		
+		// variable to be able to specify the addSubViewVideo within the
+		// anonymous classes DS & DG
+		final AddSubViewVideo self = this;
 
+		// ActionListener added to ADD button DS & DG 
+		addButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("Add Video Button has been clicked");
 
+				Video video = new Video(title.getText(), location.getText(),
+					format.getText(), notes.getText(), star.getText());
+				controller.viewEventOccured(new ViewEvent(AddSubViewVideo.class,
+						video, Command.ADD_WITH_SORT));
+				clearTextFields();
+			}
+		});
+		// ActionListener added to PRINT button DS & DG
+		printButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("Print Button has been clicked");
 
-		
-		
-		
-		
-		
-		
-	
-	
+				controller.viewEventOccured(new ViewEvent(AddSubViewVideo.class,
+						null, Command.PRINT));
 
+			}
+		});
+		// ActionListener added to BACK button DS & DG
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("Back Button has been clicked");
+				java.awt.EventQueue.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						self.setVisible(false);
+						videoView.setVisible(true);
+					}
+				});
+			}
+		});
+		// implements keylisteners to the search bar to active delete button
+		// upon a
+		// title match in the search bar. DS & DG
+		title.addKeyListener(new KeyListener() {
 
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// to complete interface
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// to complete interface
+
+			}
+
+			// enables the delete button when there
+			// is a match in the search bar to the
+			// mediaWrapper arrayList
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (!title.getText().trim().isEmpty()) {
+					addButton.setEnabled(true);
+				} else {
+					addButton.setEnabled(false);
+				}
+			}
+
+		});
+
+	}
+	/**
+	 * Helper method to clear text fields
+	 * Scottolini & Gudeman
+	 */
+
+	private void clearTextFields() {
+		title.setText("");
+		star.setText("");
+		location.setText("");
+		format.setText("");
+		notes.setText("");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// method signature needed to implement ActionListener
+	}
 }
-
-
