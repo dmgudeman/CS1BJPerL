@@ -35,7 +35,7 @@ public class AddSubViewBook extends JFrame implements ActionListener
 	private static final int FRAME_HEIGHT = 600;
 
 	// create a panel
-	JPanel panel = new JPanel();
+	private JPanel panel = new JPanel();
 
 	// declare variables needed
 	private JButton addButton;

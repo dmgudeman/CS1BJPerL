@@ -1,7 +1,5 @@
 package edu.foothill.model;
 import java.io.Serializable;
-import java.util.List;
-
 
 /** 
 *Each Object of this class is identified by title. And contains information location, 
