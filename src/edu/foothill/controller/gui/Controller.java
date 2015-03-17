@@ -73,10 +73,10 @@ public class Controller implements ViewListener {
 			System.out.println(mediaLibrary.toStringBooks());
 		} else if(event.getCommand().equals(Command.PRINT_VIDEOS)) {
 			mediaLibrary.sortByTitle(Type.Video);
-			System.out.println(mediaLibrary.toStringVideoGames());
+			System.out.println(mediaLibrary.toStringVideos());
 		} else if(event.getCommand().equals(Command.PRINT_VIDEO_GAMES)) {
 				mediaLibrary.sortByTitle(Type.VideoGame);
-				System.out.println(mediaLibrary.toStringBooks());
+				System.out.println(mediaLibrary.toStringVideoGames());
 		} else if (event.getCommand().equals(Command.ADD_WITH_SORT)) {
 			mediaLibrary.addMediaWithSortByTitle(event.getMedia());
 		} else if (event.getCommand().equals(Command.ADD)) {
