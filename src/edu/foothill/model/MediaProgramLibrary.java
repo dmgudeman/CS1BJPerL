@@ -4,7 +4,7 @@ import edu.foothill.controller.gui.Controller;
 import edu.foothill.view.console.ConsoleView;
 import edu.foothill.view.gui.MediaView;
 
-public class TestMediaLibrary {
+public class MediaProgramLibrary {
 
 	/**
 	 * @param args

@@ -107,14 +107,10 @@ public class AllMediaView extends JFrame implements ActionListener {
 				panel.add(textArea, c);
 
 				c.fill = GridBagConstraints.HORIZONTAL;
-			/*	c.gridx = 0;
-				c.gridy = 3;
-				c.gridwidth = 1;
-				c.ipady = 20;
-				panel.add(addButton, c);
-*/
+		
 				c.gridx = 1;
 				c.gridy = 3;
+				c.ipady = 20;
 				panel.add(printButton, c);
 
 				c.gridx = 0;
@@ -124,6 +120,7 @@ public class AllMediaView extends JFrame implements ActionListener {
 
 				c.gridx = 0;
 				c.gridy = 5;
+				c.weightx = 0.5;
 				c.gridwidth = 1;
 				panel.add(homeButton, c);
 
@@ -185,6 +182,8 @@ public class AllMediaView extends JFrame implements ActionListener {
 								WindowEvent.WINDOW_CLOSING));
 					}
 				});
+				
+	
 				// implements keylisteners to the search bar to active delete button
 				// upon a
 				// title match in the search bar. DG
@@ -255,8 +254,8 @@ public class AllMediaView extends JFrame implements ActionListener {
 			private void repopulateTextArea() {
 				textArea.setText("");
 
-				for (Song song : mediaLibraryWrapper.getSongs()) {
-					textArea.append(song.getTitle() + "\n");
+				for (Media media : mediaLibraryWrapper.getMedia()) {
+					textArea.append(media.getTitle() + "\n");
 				}
 			}
 

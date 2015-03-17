@@ -84,7 +84,7 @@ public class BookView extends JFrame {
 		// create a panel
 		panel = new JPanel(new GridBagLayout());
 		// panel.setBackground(Color.CYAN);
-		Color myNewMuaveMedium = new Color(255, 180, 180, 150);
+		Color myNewMuaveMedium = new Color(255, 125, 180, 150);
 		panel.setBackground(myNewMuaveMedium);
 
 		// declares the elements in the panel

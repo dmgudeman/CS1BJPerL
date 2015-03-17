@@ -76,7 +76,7 @@ public class AddSubViewBook extends JFrame implements ActionListener
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		panel = new JPanel(new GridBagLayout());
-		Color myNewMuaveLight = new Color(255, 180, 180, 100);
+		Color myNewMuaveLight = new Color(255, 125, 180, 100);
 		panel.setBackground(myNewMuaveLight);
 
 		// declares the elements in the frame
