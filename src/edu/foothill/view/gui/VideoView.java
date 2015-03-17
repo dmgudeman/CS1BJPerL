@@ -208,7 +208,7 @@ public class VideoView extends JFrame {
 				// this utilizes the mechanism of the AddSubViewVideo without
 				// duplicating code
 				controller.viewEventOccured(new ViewEvent(AddSubViewVideo.class,
-						null, Command.PRINT));
+						null, Command.PRINT_VIDEOS));
 
 			}
 		});

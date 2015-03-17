@@ -209,7 +209,7 @@ public class AddSubViewVideo extends JFrame implements ActionListener
 				System.out.println("Print Button has been clicked");
 
 				controller.viewEventOccured(new ViewEvent(AddSubViewVideo.class,
-						null, Command.PRINT));
+						null, Command.PRINT_VIDEOS));
 
 			}
 		});

@@ -212,7 +212,7 @@ public class VideoGameView extends JFrame {
 				// this utilizes the mechanism of the AddSubViewVideoGame without
 				// duplicating code
 				controller.viewEventOccured(new ViewEvent(AddSubViewVideoGame.class,
-						null, Command.PRINT));
+						null, Command.PRINT_VIDEO_GAMES));
 
 			}
 		});

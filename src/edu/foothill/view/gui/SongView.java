@@ -206,7 +206,7 @@ public class SongView extends JFrame {
 				// this utilizes the mechanism of the AddSubViewSong without
 				// duplicating code
 				controller.viewEventOccured(new ViewEvent(AddSubViewSong.class,
-						null, Command.PRINT));
+						null, Command.PRINT_SONGS));
 
 			}
 		});

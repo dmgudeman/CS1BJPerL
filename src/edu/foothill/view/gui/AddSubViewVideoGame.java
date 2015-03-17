@@ -198,7 +198,7 @@ public class AddSubViewVideoGame extends JFrame implements ActionListener
 				System.out.println("Print Button has been clicked");
 
 				controller.viewEventOccured(new ViewEvent(AddSubViewVideoGame.class,
-						null, Command.PRINT));
+						null, Command.PRINT_VIDEO_GAMES));
 
 			}
 		});

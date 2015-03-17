@@ -210,7 +210,7 @@ public class AddSubViewBook extends JFrame implements ActionListener
 				System.out.println("Print Button has been clicked");
 
 				controller.viewEventOccured(new ViewEvent(AddSubViewBook.class,
-						null, Command.PRINT));
+						null, Command.PRINT_BOOKS));
 
 			}
 		});

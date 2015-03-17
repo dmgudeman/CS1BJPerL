@@ -11,12 +11,12 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * This class holds the business logic and implements The Observer 
- * Observable Pattern Gudeman
- * One object of MediaLibrary Class represents the library of the various media.
- * one list of the Media Objects. Version 1: Author DG Version 2: Shmuel removed
- * references to Collection interface. Added the following methods:addMedia,
- * getLibraryByType, getLibraryByTitle,  Mainly used for business logic.
+ * This class holds the business logic and implements The Observer Observable
+ * Pattern Gudeman One object of MediaLibrary Class represents the library of
+ * the various media. one list of the Media Objects. Version 1: Author DG
+ * Version 2: Shmuel removed references to Collection interface. Added the
+ * following methods:addMedia, getLibraryByType, getLibraryByTitle, Mainly used
+ * for business logic.
  */
 
 public class MediaLibrary extends Observable implements Serializable {
@@ -31,13 +31,15 @@ public class MediaLibrary extends Observable implements Serializable {
 	public MediaLibrary() {
 
 	}
-    public void setMediaLibraryWrapper(MediaLibraryWrapper mediaLibraryWrapper){
-    	this.mediaLibraryWrapper = mediaLibraryWrapper;
-    }
-    public MediaLibraryWrapper getMediaLibraryWrapper() {
-    	return mediaLibraryWrapper;
-    }
-    
+
+	public void setMediaLibraryWrapper(MediaLibraryWrapper mediaLibraryWrapper) {
+		this.mediaLibraryWrapper = mediaLibraryWrapper;
+	}
+
+	public MediaLibraryWrapper getMediaLibraryWrapper() {
+		return mediaLibraryWrapper;
+	}
+
 	/**
 	 * Method adds media to the library - Author Shmuel
 	 */
@@ -45,20 +47,23 @@ public class MediaLibrary extends Observable implements Serializable {
 		addToMediaWrapper(media);
 		notifyObservers(mediaLibraryWrapper);
 	}
-	
-	
-	public void addMediaWithSortByTitle(Media media){
+
+	/**
+	 * Method to add media and sort it and notifies the observer in the view
+	 * 
+	 * @param media
+	 */
+
+	public void addMediaWithSortByTitle(Media media) {
 		addToMediaWrapper(media);
 		sortByTitle(media.getType());
 		notifyObservers(mediaLibraryWrapper);
-		
+
 	}
-	
+
 	/**
-	 * Method to add the various media types to the mediaLibraryWrapper.
-	 * 
-	 * V1 SHaffer
-	 * V2 Gudeman
+	 * Method to add the various media types to the mediaLibraryWrapper. V1
+	 * SHaffer V2 Gudeman
 	 */
 	private void addToMediaWrapper(Media media) {
 		switch (media.getType()) {
@@ -80,17 +85,27 @@ public class MediaLibrary extends Observable implements Serializable {
 		System.out.println("Added " + media.getType() + " to library");
 		System.out.println(mediaLibraryWrapper.toString());
 
-		
 	}
-	
-	
+
+	/**
+	 * method to remove media and notify the observers
+	 * 
+	 * @param media
+	 *            Gudeman
+	 */
+
 	public void removeMedia(Media media) {
 		removeFromMediaWrapper(media);
 
 		notifyObservers(mediaLibraryWrapper);
 	}
-	
-	
+
+	/**
+	 * method to determine which media type and which object to remove
+	 * 
+	 * @param media
+	 *            V1 Shaffer V2 Gudeman
+	 */
 	private void removeFromMediaWrapper(Media media) {
 		switch (media.getType()) {
 		case Book:
@@ -113,12 +128,19 @@ public class MediaLibrary extends Observable implements Serializable {
 		System.out.println(mediaLibraryWrapper.toString());
 	}
 
-	public void removeMediaWithSortByTitle(Media media){
+	/**
+	 * Removes a media object and sorts the remaining list
+	 * 
+	 * @param media
+	 *            V1 Shaffer V2 Gudeman
+	 */
+	public void removeMediaWithSortByTitle(Media media) {
 		removeFromMediaWrapper(media);
 		sortByTitle(media.getType());
 		notifyObservers(mediaLibraryWrapper);
-		
+
 	}
+
 	/**
 	 * Method returns a library object with all of the media elements of a
 	 * certain type -Author Shmuel
@@ -150,27 +172,39 @@ public class MediaLibrary extends Observable implements Serializable {
 	public String toString() {
 		return mediaLibraryWrapper.toString();
 	}
-	
+
 	public String toStringSongs() {
 		return mediaLibraryWrapper.toStringSongs();
+	}
+
+	public String toStringBooks() {
+		return mediaLibraryWrapper.toStringBooks();
+	}
+
+	public String toStringVideos() {
+		return mediaLibraryWrapper.toStringVideos();
+	}
+
+	public String toStringVideoGames() {
+		return mediaLibraryWrapper.toStringVideoGames();
 	}
 
 	/**
 	 * Method deletes entries with the specified media type and media title from
 	 * the media library - Author Shmuel
+	 * 
 	 * @param mediaType
 	 * @param mediaTitle
 	 */
 
 	public void deleteEntries(String mediaType, String mediaTitle) {
-		
+
 		System.out.println("Deleted specific entries from the media library");
 	}
 
 	/**
 	 * The is a method of the class Observable that allows the model to be
-	 * observed.
-	 * Gudeman & Shaffer
+	 * observed. Gudeman & Shaffer
 	 */
 	public void addObserver(Observer observe) {
 		observers.add(observe);
@@ -178,8 +212,7 @@ public class MediaLibrary extends Observable implements Serializable {
 
 	/**
 	 * This method notifies the observer view object to call update and show the
-	 * result in the output textField
-	 * Gudeman
+	 * result in the output textField Gudeman
 	 */
 	public void notifyObservers(Object mediaLibraryWrapper) {
 		for (Observer observer : observers) {
@@ -188,14 +221,18 @@ public class MediaLibrary extends Observable implements Serializable {
 		clearChanged();
 	}
 
+	/**
+	 * non parameterized notifyObserver method
+	 */
 	public void notifyObservers() {
 		this.notifyObservers(mediaLibraryWrapper);
 	}
-	
+
 	/**
 	 * This is a sort method that sorts a mediaLibrary object by title and type
+	 * 
 	 * @param type
-	 * Gudeman & Shaffer
+	 *            V1 Shaffer V21 Gudeman
 	 */
 	public void sortByTitle(Type type) {
 		if (type.equals(Type.Book)) {
@@ -203,7 +240,8 @@ public class MediaLibrary extends Observable implements Serializable {
 					new Comparator<Book>() {
 						@Override
 						public int compare(Book book1, Book book2) {
-							return book1.getTitle().toLowerCase().compareTo(book2.getTitle().toLowerCase());
+							return book1.getTitle().toLowerCase()
+									.compareTo(book2.getTitle().toLowerCase());
 						}
 
 					});
@@ -212,32 +250,39 @@ public class MediaLibrary extends Observable implements Serializable {
 					new Comparator<Song>() {
 						@Override
 						public int compare(Song song1, Song song2) {
-							return song1.getTitle().toLowerCase().compareTo(song2.getTitle().toLowerCase());
+							return song1.getTitle().toLowerCase()
+									.compareTo(song2.getTitle().toLowerCase());
 						}
 
 					});
-			
+
 		} else if (type.equals(Type.Video)) {
 			Collections.sort(mediaLibraryWrapper.getVideos(),
 					new Comparator<Video>() {
 						@Override
 						public int compare(Video video1, Video video2) {
-							return video1.getTitle().toLowerCase().compareTo(video2.getTitle().toLowerCase());
+							return video1.getTitle().toLowerCase()
+									.compareTo(video2.getTitle().toLowerCase());
 						}
 
 					});
-			
+
 		} else if (type.equals(Type.VideoGame)) {
 			Collections.sort(mediaLibraryWrapper.getVideogames(),
 					new Comparator<VideoGame>() {
 						@Override
-						public int compare(VideoGame videoGame1, VideoGame videoGame2) {
-							return videoGame1.getTitle().toLowerCase().compareTo(videoGame2.getTitle().toLowerCase());
+						public int compare(VideoGame videoGame1,
+								VideoGame videoGame2) {
+							return videoGame1
+									.getTitle()
+									.toLowerCase()
+									.compareTo(
+											videoGame2.getTitle().toLowerCase());
 						}
 
 					});
-			
+
 		}
-		
+
 	}
 }

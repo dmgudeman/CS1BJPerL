@@ -204,7 +204,7 @@ public class BookView extends JFrame {
 				// this utilizes the mechanism of the AddSubViewBook without
 				// duplicating code
 				controller.viewEventOccured(new ViewEvent(AddSubViewBook.class,
-						null, Command.PRINT));
+						null, Command.PRINT_BOOKS));
 
 			}
 		});

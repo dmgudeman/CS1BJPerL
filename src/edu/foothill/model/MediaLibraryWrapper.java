@@ -64,28 +64,27 @@ public class MediaLibraryWrapper extends Observable implements Serializable {
 		}
 		return (libraryString);
 	}
-	
+
 	/**
-	 * 
-	 * @return
+	 * A getter for a list of all Media Gudeman
 	 */
-	public List<Media> getMedia (){
+	public List<Media> getMedia() {
 		List<Media> allMedia = new ArrayList<Media>();
-		
-		for (Song song : songs){
+
+		for (Song song : songs) {
 			allMedia.add(song);
 		}
-		for (Book book : books){
+		for (Book book : books) {
 			allMedia.add(book);
 		}
-		for (Video video : videos){
+		for (Video video : videos) {
 			allMedia.add(video);
 		}
-		for (VideoGame videoGame : videogames){
+		for (VideoGame videoGame : videogames) {
 			allMedia.add(videoGame);
 		}
 		return allMedia;
-		
+
 	}
 
 	// toString for Songs DG
@@ -102,4 +101,48 @@ public class MediaLibraryWrapper extends Observable implements Serializable {
 		}
 		return (libraryString);
 	}
+
+	// toString for Books DG
+	public String toStringBooks() {
+		String libraryString = "Books as a printable string";
+		if (songs.isEmpty()) {
+			libraryString = "There are no items in the library";
+		} else {
+			libraryString = "Your Book library contains:" + "\n";
+
+			for (int i = 0; i < books.size(); i++) {
+				libraryString += books.get(i) + "\n";
+			}
+		}
+		return (libraryString);
+	}
+	
+	// toString for Videos DG
+		public String toStringVideos() {
+			String libraryString = "Videos as a printable string";
+			if (songs.isEmpty()) {
+				libraryString = "There are no items in the library";
+			} else {
+				libraryString = "Your Video library contains:" + "\n";
+
+				for (int i = 0; i < videos.size(); i++) {
+					libraryString += videos.get(i) + "\n";
+				}
+			}
+			return (libraryString);
+		}
+		// toString for VideoGames DG
+		public String toStringVideoGames() {
+			String libraryString = "VideoGames as a printable string";
+			if (songs.isEmpty()) {
+				libraryString = "There are no items in the library";
+			} else {
+				libraryString = "Your VideoGame library contains:" + "\n";
+
+				for (int i = 0; i < videogames.size(); i++) {
+					libraryString += videogames.get(i) + "\n";
+				}
+			}
+			return (libraryString);
+		}
 }
