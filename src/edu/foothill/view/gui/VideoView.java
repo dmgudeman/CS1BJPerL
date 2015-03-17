@@ -84,8 +84,8 @@ public class VideoView extends JFrame {
 		// create a panel
 		panel = new JPanel(new GridBagLayout());
 		// panel.setBackground(Color.CYAN);
-		Color myNewMuaveMedium = new Color(255, 180, 180, 150);
-		panel.setBackground(myNewMuaveMedium);
+		Color myLimeHeavy = new Color(140, 255, 140, 255);
+		panel.setBackground(myLimeHeavy);
 
 		// declares the elements in the panel
 		prompt = new JLabel("Your Videos");

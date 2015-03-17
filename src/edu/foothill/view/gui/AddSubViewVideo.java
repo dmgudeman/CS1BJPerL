@@ -62,9 +62,8 @@ public class AddSubViewVideo extends JFrame implements ActionListener
 	 */
 	public AddSubViewVideo(final VideoView videoView) {
 		// the next two lines remove the buttons from the standard upper left
-		// area
-		// to force the user to use the exit button to close, ensuring saving of
-		// the data
+		// area to force the user to use the exit button to close, ensuring saving of
+		// the data DS & DG
 		setUndecorated(true);
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
@@ -76,10 +75,10 @@ public class AddSubViewVideo extends JFrame implements ActionListener
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		panel = new JPanel(new GridBagLayout());
-		Color myNewMuaveLight = new Color(255, 180, 180, 100);
-		panel.setBackground(myNewMuaveLight);
+		Color myLimeMedium = new Color(140, 255, 140, 255);
+		panel.setBackground(myLimeMedium);
 
-		// declares the elements in the frame
+		// declares the elements in the frame DS
 		videoPrompt = new JLabel("Add a Video");
 		videoPrompt.setFont(new Font("Papyrus", Font.ITALIC, 30));
 		titlePrompt = new JLabel("*Enter title:");
@@ -101,18 +100,18 @@ public class AddSubViewVideo extends JFrame implements ActionListener
 		backButton = new JButton("Back");
 		printButton = new JButton("Print");
 
-		// makes frame visible and exits on close
+		// makes frame visible and exits on close DS
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 
-		// declare and instantiate an object to hold the GridBagConstraints
+		// declare and instantiate an object to hold the GridBagConstraints DS
 		GridBagConstraints c = new GridBagConstraints();
 
-		// sets the distance between elements
+		// sets the distance between elements DS
 		c.insets = new Insets(10, 10, 0, 0);
 
 		// formats the elements on the gridBagLayout and adds the initialized
-		// elements
+		// elements DS
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 0;

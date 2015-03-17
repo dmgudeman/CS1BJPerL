@@ -27,9 +27,14 @@ public class Song extends Media implements Serializable{
 		this.genre = genre;
 		
 	}
+	/**
+	 * Default constructor
+	 * Shaffer
+	 */
 	public Song(){
 		
 	}
+	
 	//getters and setters for subclass, DG
 	public String getArtist() {
 		return artist;

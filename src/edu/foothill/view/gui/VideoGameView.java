@@ -88,7 +88,7 @@ public class VideoGameView extends JFrame {
 		// create a panel
 		panel = new JPanel(new GridBagLayout());
 		// panel.setBackground(Color.CYAN);
-		Color myNewMuaveMedium = new Color(255, 140, 180, 150);
+		Color myNewMuaveMedium = new Color(180, 140, 180, 250);
 		panel.setBackground(myNewMuaveMedium);
 
 		// declares the elements in the panel

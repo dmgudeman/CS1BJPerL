@@ -2,10 +2,7 @@ package edu.foothill.model;
 /**
  * This Class provides interface to the hard disk. The
  * class has methods for saving and retrieving the  whole media library to/from a disk. 
- * 
- * @author Shmuel Shaffer
-
- 
+ *  Shmuel Shaffer
  */
 import java.io.*;
 
@@ -13,20 +10,21 @@ public class Persistence {
 
 	private String mediaLibraryFileName;
 	private File mediaLibraryFile;
-	//private MediaLibrary mediaLibraryFromDisk; Schmuels
+	
+	//private MediaLibrary mediaLibraryFromDisk; Schmuel
     private MediaLibraryWrapper mediaLibraryWrapperFromDisk;
 	/**
 	 * Non-parameterized constructor for the Disk Class. Note that if you do not
 	 * specify file name it defaults to Temp.ser
+	 * Shaffer
 	 */
-
 	Persistence() {
 		this("Temp.ser");
 	}
 
 	/**
 	 * parameterized constructor for the Persistence Class.
-	 * 
+	 * Shaffer
 	 */
 
 	public Persistence(String diskFileName) {
@@ -43,6 +41,7 @@ public class Persistence {
 	 * @param - mediaLibraryObject: media library object to be written to disk
 	 * @return - Returns true if write operation was successful and false if it
 	 *         failed.
+	 *         Shaffer
 	 */
 	public boolean writeToDisk(MediaLibraryWrapper mediaLibraryObject) { // changed S
 		FileOutputStream fileOutput = null;
@@ -59,7 +58,6 @@ public class Persistence {
 		} catch (IOException e) {
 			e.printStackTrace();
 			successfulWriteToDisk = false;
-
 		}
 		try {
 			objectOutput.writeObject(mediaLibraryObject);
@@ -135,14 +133,8 @@ public class Persistence {
 	 * 
 	 * @return - Returns ContMediaLibrary object containing the media library object
 	 *         which was read from the disk.
+	 *         Shaffer
 	 */
-/*	public MediaLibrary getDiskFileObject() {
-		if (!mediaLibraryFile.exists()) {
-			mediaLibraryFromDisk = null;
-
-		}
-		return mediaLibraryFromDisk;
-	} S */ 
 	
 	// getter for the file 
 	public MediaLibraryWrapper getDiskFileObject() {
