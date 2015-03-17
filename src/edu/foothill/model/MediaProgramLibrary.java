@@ -14,8 +14,6 @@ public class MediaProgramLibrary {
 	public static void main(String[] args) {
 		MediaView view = new MediaView();
 		MediaLibrary model = new MediaLibrary();
-		
-	    //	final String FILE_NAME = "mediaLibrary.ser";
 
 		// adds the view to be an observer
 		model.addObserver(view);
