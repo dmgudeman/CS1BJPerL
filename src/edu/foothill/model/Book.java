@@ -22,6 +22,11 @@ public class Book extends Media implements Serializable {
 		super(title, location, format,  notes);
 		this.author = author;
 	}
+	
+	/**
+	 * Default Constructor
+	 * DG
+	 */
     public Book(){
     	
     }

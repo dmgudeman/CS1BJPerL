@@ -54,7 +54,12 @@ public class MediaLibrary extends Observable implements Serializable {
 		
 	}
 	
-	
+	/**
+	 * Method to add the various media types to the mediaLibraryWrapper.
+	 * 
+	 * V1 SHaffer
+	 * V2 Gudeman
+	 */
 	private void addToMediaWrapper(Media media) {
 		switch (media.getType()) {
 		case Book:

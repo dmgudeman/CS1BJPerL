@@ -7,7 +7,7 @@ import java.util.List;
 *Each Object of this class is identified by title. And contains information location, 
 *format and notes. This is the SuperClass that provides basic information common to 
 *all Media Types. It is an abstract class because no media element will be populated.
-*All media objects are constructed in a subclass
+*All media objects are constructed in a subclass.
 *Author DG
 */
 
@@ -18,7 +18,7 @@ public abstract class Media implements Serializable{
 	private String location;
 	private String format;
 	private String notes;
-	private String searchText;
+	//private String searchText;
 	
 	
 	/**
@@ -33,11 +33,19 @@ public abstract class Media implements Serializable{
 		this.format = format;
 		this.notes = notes;
 	}
-	
+	/**
+	 * Default Constructor 
+	 * DG
+	 */
 	public Media() {
 		
 	}
 	
+	/**
+	 * Getters and Setters for the Media Class
+	 * V1 Gudeman
+	 * V2 Shaffer
+	 */
 	public abstract Type getType();
 	
 	public String getTitle() {
