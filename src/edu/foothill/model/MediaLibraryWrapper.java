@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Observable;
 
 /**
- * Main class to hold the data for the MediaLibrary. Wrapper class for data is
+ * Primary class to hold the data for the MediaLibrary. Wrapper class for data is
  * needed because in observer/Observable pattern, you cannot pass a list (only
  * an Object) so this class creates a wrapper to wrap lists in an object. This
  * creates ArrayLists for each of the four media types. 4 lists allows more

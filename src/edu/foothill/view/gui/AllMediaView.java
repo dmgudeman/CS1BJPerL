@@ -12,18 +12,18 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
-
-import javax.swing.*;
-
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRootPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import edu.foothill.controller.gui.ViewEvent;
 import edu.foothill.controller.gui.ViewListener;
-import edu.foothill.model.Book;
 import edu.foothill.model.Command;
 import edu.foothill.model.Media;
 import edu.foothill.model.MediaLibraryWrapper;
-import edu.foothill.model.Song;
-import edu.foothill.model.Video;
-import edu.foothill.model.VideoGame;
 
 /**
  * This class creates a JFrame to takes search Text and search the VideoGame
@@ -122,15 +122,10 @@ public class AllMediaView extends JFrame implements ActionListener {
 		c.ipady = 20;
 		panel.add(printButton, c);
 
-		/*
-		 * Need to troubleshoot mechanism so won't add this 
-		 * button to panel as of (3/17/2015) DG
-		
-		 c.gridx = 0; 
-		 c.gridy = 4; 
-		 c.gridwidth = 2; 
-		 panel.add(deleteButton, c);
-		*/ 
+		c.gridx = 0;
+		c.gridy = 4;
+		c.gridwidth = 2;
+		panel.add(deleteButton, c);
 
 		c.gridx = 0;
 		c.gridy = 5;
@@ -293,13 +288,13 @@ public class AllMediaView extends JFrame implements ActionListener {
 			repopulateTextArea();
 			found = false;
 		} else {
-			for (Song song : mediaLibraryWrapper.getSongs()) {
-				if (text.trim().equalsIgnoreCase(song.getTitle())) {
-					textArea.setText(song.getTitle().trim());
+			for (Media media : mediaLibraryWrapper.getMedia()) {
+				if (text.trim().equalsIgnoreCase(media.getTitle())) {
+					textArea.setText(media.getTitle().trim());
 					textArea.repaint();
 
 					// identifies an object whose title is a match
-					this.matchedMedia = song;
+					this.matchedMedia = media;
 					found = true;
 					break;
 				} else {
@@ -308,51 +303,7 @@ public class AllMediaView extends JFrame implements ActionListener {
 					found = false;
 				}
 			}
-			for (Video video: mediaLibraryWrapper.getVideos()) {
-				if (text.trim().equalsIgnoreCase(video.getTitle())) {
-					textArea.setText(video.getTitle().trim());
-					textArea.repaint();
 
-					// identifies an object whose title is a match
-					this.matchedMedia = video;
-					found = true;
-					break;
-				} else {
-					this.matchedMedia = null;
-					repopulateTextArea();
-					found = false;
-				}
-			}
-			for (Book book: mediaLibraryWrapper.getBooks()) {
-				if (text.trim().equalsIgnoreCase(book.getTitle())) {
-					textArea.setText(book.getTitle().trim());
-					textArea.repaint();
-
-					// identifies an object whose title is a match
-					this.matchedMedia = book;
-					found = true;
-					break;
-				} else {
-					this.matchedMedia = null;
-					repopulateTextArea();
-					found = false;
-				}
-			}
-			for (VideoGame videoGame: mediaLibraryWrapper.getVideogames()) {
-				if (text.trim().equalsIgnoreCase(videoGame.getTitle())) {
-					textArea.setText(videoGame.getTitle().trim());
-					textArea.repaint();
-
-					// identifies an object whose title is a match
-					this.matchedMedia = videoGame;
-					found = true;
-					break;
-				} else {
-					this.matchedMedia = null;
-					repopulateTextArea();
-					found = false;
-				}
-			}
 		}
 		return found;
 	}
