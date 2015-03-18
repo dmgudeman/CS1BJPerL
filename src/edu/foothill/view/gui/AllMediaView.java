@@ -173,7 +173,6 @@ public class AllMediaView extends JFrame implements ActionListener {
 		// ActionListener added to PRINT button DG
 		printButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Print Button has been clicked");
 				// this utilizes the mechanism of the AddSubViewSong without
 				// duplicating code
 				controller.viewEventOccured(new ViewEvent(AllMediaView.class,

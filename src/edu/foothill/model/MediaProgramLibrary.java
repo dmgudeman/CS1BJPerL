@@ -3,14 +3,15 @@ package edu.foothill.model;
 import edu.foothill.controller.gui.Controller;
 import edu.foothill.view.gui.MediaView;
 
+/**
+ * Object of this class runs the Media Library 
+ * V1 Shaffer
+ * V2 Gudeman
+ * 
+ */
 public class MediaProgramLibrary {
 
-	/**
-	 * Object of this class runs the Media Library 
-	 * V1 Shaffer
-	 * V2 Gudeman
-	 * 
-	 */
+	
 	public static void main(String[] args) {
 		MediaView view = new MediaView();
 		MediaLibrary model = new MediaLibrary();

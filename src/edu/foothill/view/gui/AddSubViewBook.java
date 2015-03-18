@@ -202,6 +202,7 @@ public class AddSubViewBook extends JFrame implements ActionListener
 				controller.viewEventOccured(new ViewEvent(AddSubViewBook.class,
 						book, Command.ADD_WITH_SORT));
 				clearTextFields();
+				addButton.setEnabled(false);
 			}
 		});
 		// ActionListener added to PRINT button DS & DG

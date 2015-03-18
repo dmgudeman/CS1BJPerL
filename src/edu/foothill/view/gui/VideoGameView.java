@@ -208,7 +208,6 @@ public class VideoGameView extends JFrame {
 		// ActionListener added to PRINT button DG & DS
 		printButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Print Button has been clicked");
 				// this utilizes the mechanism of the AddSubViewVideoGame without
 				// duplicating code
 				controller.viewEventOccured(new ViewEvent(AddSubViewVideoGame.class,

@@ -215,6 +215,7 @@ public class AddSubViewSong extends JFrame implements ActionListener
 				controller.viewEventOccured(new ViewEvent(AddSubViewSong.class,
 						song, Command.ADD_WITH_SORT));
 				clearTextFields();
+				addButton.setEnabled(false);
 			}
 		});
 		// ActionListener added to PRINT button DG

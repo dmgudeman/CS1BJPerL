@@ -43,26 +43,12 @@ public class MediaLibraryWrapper extends Observable implements Serializable {
 
 	// toString function for entire library DG
 	public String toString() {
-		String libraryString = "Library as a printable string";
-		if (!(songs.isEmpty() && books.isEmpty() && videos.isEmpty() && videogames
-				.isEmpty())) {
-			libraryString = "There are no items in the library";
-		} else {
-			libraryString = "Your library contains:" + "\n";
-		}
-		for (int i = 0; i < songs.size(); i++) {
-			libraryString += songs.get(i) + "\n";
-		}
-		for (int i = 0; i < books.size(); i++) {
-			libraryString += books.get(i) + "\n";
-		}
-		for (int i = 0; i < videos.size(); i++) {
-			libraryString += videos.get(i) + "\n";
-		}
-		for (int i = 0; i < videogames.size(); i++) {
-			libraryString += videogames.get(i) + "\n";
-		}
-		return (libraryString);
+		String libraryString = "";
+		libraryString += toStringBooks() + "\n" +
+				toStringSongs() + "\n" +
+				toStringVideos() + "\n" +
+				toStringVideoGames() + "\n";
+		return libraryString;
 	}
 
 	/**
@@ -89,9 +75,9 @@ public class MediaLibraryWrapper extends Observable implements Serializable {
 
 	// toString for Songs DG
 	public String toStringSongs() {
-		String libraryString = "Songs as a printable string";
+		String libraryString = "";
 		if (songs.isEmpty()) {
-			libraryString = "There are no items in the library";
+			libraryString = "There are no songs";
 		} else {
 			libraryString = "Your Song library contains:" + "\n";
 
@@ -104,9 +90,9 @@ public class MediaLibraryWrapper extends Observable implements Serializable {
 
 	// toString for Books DG
 	public String toStringBooks() {
-		String libraryString = "Books as a printable string";
-		if (songs.isEmpty()) {
-			libraryString = "There are no items in the library";
+		String libraryString = "";
+		if (books.isEmpty()) {
+			libraryString = "There are no books";
 		} else {
 			libraryString = "Your Book library contains:" + "\n";
 
@@ -119,9 +105,9 @@ public class MediaLibraryWrapper extends Observable implements Serializable {
 	
 	// toString for Videos DG
 		public String toStringVideos() {
-			String libraryString = "Videos as a printable string";
-			if (songs.isEmpty()) {
-				libraryString = "There are no items in the library";
+			String libraryString = "";
+			if (videos.isEmpty()) {
+				libraryString = "There are no videos";
 			} else {
 				libraryString = "Your Video library contains:" + "\n";
 
@@ -133,9 +119,9 @@ public class MediaLibraryWrapper extends Observable implements Serializable {
 		}
 		// toString for VideoGames DG
 		public String toStringVideoGames() {
-			String libraryString = "VideoGames as a printable string";
-			if (songs.isEmpty()) {
-				libraryString = "There are no items in the library";
+			String libraryString = "";
+			if (videogames.isEmpty()) {
+				libraryString = "There are no videogames";
 			} else {
 				libraryString = "Your VideoGame library contains:" + "\n";
 

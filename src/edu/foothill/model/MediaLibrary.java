@@ -147,8 +147,6 @@ public class MediaLibrary extends Observable implements Serializable {
 	 */
 	public MediaLibrary getLibraryByType(String mediaType) {
 		MediaLibrary tempLibrary = new MediaLibrary();
-		System.out
-				.println(" Method populates temp library with elements of a specific type");
 		return tempLibrary;
 	}
 
@@ -158,8 +156,7 @@ public class MediaLibrary extends Observable implements Serializable {
 	 */
 	public MediaLibrary getLibraryByTitle(String mediaTitle) {
 		MediaLibrary tempLibrary = new MediaLibrary();
-		System.out
-				.println(" Method populates temp library with elements of a specific title");
+
 		return tempLibrary;
 	}
 

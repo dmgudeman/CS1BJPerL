@@ -201,6 +201,7 @@ public class AddSubViewVideo extends JFrame implements ActionListener
 				controller.viewEventOccured(new ViewEvent(AddSubViewVideo.class,
 						video, Command.ADD_WITH_SORT));
 				clearTextFields();
+				addButton.setEnabled(false);
 			}
 		});
 		// ActionListener added to PRINT button DS & DG

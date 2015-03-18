@@ -182,7 +182,6 @@ public class MediaView extends JFrame implements Observer {
 		// and a Runnable object is needed to make a thread
 		mainAllButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Button has been clicked");
 				// use the visibility property to adjust the
 				// procession of JFrame views
 				java.awt.EventQueue.invokeLater(new Runnable() {
@@ -199,7 +198,6 @@ public class MediaView extends JFrame implements Observer {
 		// and a Runnable object is needed to make a thread DG
 		mainSongButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Song Button has been clicked");
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
@@ -222,7 +220,6 @@ public class MediaView extends JFrame implements Observer {
 		 */
 		mainBookButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Book Button has been clicked");
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
@@ -245,7 +242,6 @@ public class MediaView extends JFrame implements Observer {
 		 */
 		mainAllButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("All Media Button has been clicked");
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
@@ -268,7 +264,6 @@ public class MediaView extends JFrame implements Observer {
 		 */
 		mainVideoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Video Button has been clicked");
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
@@ -292,7 +287,6 @@ public class MediaView extends JFrame implements Observer {
 		 */
 		mainVideoGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("VideoGame Button has been clicked");
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
@@ -311,7 +305,6 @@ public class MediaView extends JFrame implements Observer {
 		// the exit button
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Exit Button has been clicked");
 				controller.viewEventOccured(new ViewEvent(MediaView.class,
 						null, Command.SAVE));
 				SELF.dispatchEvent(new WindowEvent(SELF,

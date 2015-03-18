@@ -183,20 +183,17 @@ public class AddSubViewVideoGame extends JFrame implements ActionListener
 		// ActionListener added to ADD button DS & DG 
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Add VideoGame Button has been clicked");
-
 				VideoGame videoGame = new VideoGame(title.getText(), location.getText(),
 					format.getText(), notes.getText());
 				controller.viewEventOccured(new ViewEvent(AddSubViewVideoGame.class,
 						videoGame, Command.ADD_WITH_SORT));
 				clearTextFields();
+				addButton.setEnabled(false);
 			}
 		});
 		// ActionListener added to PRINT button DS & DG
 		printButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Print Button has been clicked");
-
 				controller.viewEventOccured(new ViewEvent(AddSubViewVideoGame.class,
 						null, Command.PRINT_VIDEO_GAMES));
 
@@ -205,7 +202,6 @@ public class AddSubViewVideoGame extends JFrame implements ActionListener
 		// ActionListener added to BACK button DS & DG
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Back Button has been clicked");
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
