@@ -165,7 +165,7 @@ public class SongView extends JFrame {
 		// add ActionListeners to the various buttons
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("add Button has been clicked");
+				
 				if (addSubViewSong == null) {
 					addSubViewSong = new AddSubViewSong(SELF);
 					addSubViewSong.addController(controller);
@@ -189,7 +189,7 @@ public class SongView extends JFrame {
 		// ActionListener added to HOME button DG
 		homeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Home Button has been clicked");
+			
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
@@ -202,7 +202,7 @@ public class SongView extends JFrame {
 		// ActionListener added to PRINT button DG
 		printButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Print Button has been clicked");
+		
 				// this utilizes the mechanism of the AddSubViewSong without
 				// duplicating code
 				controller.viewEventOccured(new ViewEvent(AddSubViewSong.class,
@@ -213,7 +213,7 @@ public class SongView extends JFrame {
 		// ActionListener added to EXIT button DG
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Exit Button has been clicked");
+			
 				controller.viewEventOccured(new ViewEvent(SongView.class, null,
 						Command.SAVE));
 				SELF.dispatchEvent(new WindowEvent(SELF,
@@ -260,7 +260,7 @@ public class SongView extends JFrame {
 		});
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Delete Button has been clicked");
+			
 
 				// sends info to the controller of what to delete
 				controller.viewEventOccured(new ViewEvent(SongView.class,
@@ -292,11 +292,12 @@ public class SongView extends JFrame {
 	 * viewable output to display in the textArea box Gudeman
 	 */
 	private void repopulateTextArea() {
-		textArea.setText("");
-
+		String songString = "";
 		for (Song song : mediaLibraryWrapper.getSongs()) {
-			textArea.append(song.getTitle() + "\n");
+			songString += (song.getTitle() + "\n");
 		}
+		textArea.setText(songString);
+		textArea.repaint();
 	}
 
 	/**

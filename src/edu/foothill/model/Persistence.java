@@ -5,6 +5,7 @@ package edu.foothill.model;
  *  Shmuel Shaffer
  */
 import java.io.*;
+import java.nio.file.Files;
 
 public class Persistence {
 
@@ -143,5 +144,12 @@ public class Persistence {
 		}
 		return mediaLibraryWrapperFromDisk;
 	}
-
+	/**
+	 * 
+	 */
+	 public void deleteLibrary() {
+		boolean didDelete = mediaLibraryFile.delete();
+	    System.out.println(didDelete);
+		 
+	 }
 }

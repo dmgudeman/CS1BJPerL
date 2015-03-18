@@ -81,6 +81,9 @@ public class Controller implements ViewListener {
 			mediaLibrary.addMediaWithSortByTitle(event.getMedia());
 		} else if (event.getCommand().equals(Command.ADD)) {
 			mediaLibrary.addMedia(event.getMedia());
+		} else if (event.getCommand().equals(Command.DELETE_LIBRARY)) {
+			//persistence.deleteLibrary();
+			mediaLibrary.deleteMediaLibrary();
 		}
 	}
 }

@@ -282,4 +282,8 @@ public class MediaLibrary extends Observable implements Serializable {
 		}
 
 	}
+	public void deleteMediaLibrary(){
+		mediaLibraryWrapper = new MediaLibraryWrapper();
+		notifyObservers();
+	}
 }

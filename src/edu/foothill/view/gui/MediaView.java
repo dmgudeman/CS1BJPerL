@@ -203,7 +203,7 @@ public class MediaView extends JFrame implements Observer {
 					public void run() {
 						SELF.setVisible(false);
 						songView.setVisible(true);
-
+						
 						// populates the search bar in songView appropriately
 						// if mediaView search bar is empty
 						if (!mainSearch.getText().isEmpty()) {

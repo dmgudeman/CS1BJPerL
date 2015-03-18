@@ -48,6 +48,7 @@ public class AllMediaView extends JFrame implements ActionListener {
 	private JLabel prompt;
 	private JButton printButton;
 	private JButton exitButton;
+	private JButton deleteEntireLibraryButton;
 
 	private JTextArea textArea;
 
@@ -94,6 +95,7 @@ public class AllMediaView extends JFrame implements ActionListener {
 		homeButton = new JButton("HOME");
 		printButton = new JButton("PRINT");
 		exitButton = new JButton("EXIT");
+		deleteEntireLibraryButton = new JButton("Delete entire Library (CAREFUL)");
 
 		// makes an object of constraints to allow the grid layout DG
 		GridBagConstraints c = new GridBagConstraints();
@@ -136,7 +138,12 @@ public class AllMediaView extends JFrame implements ActionListener {
 		c.gridx = 1;
 		c.gridy = 5;
 		panel.add(exitButton, c);
-
+		
+		c.gridx = 0;
+		c.gridy = 6;
+		c.gridwidth = 2;
+		panel.add(deleteEntireLibraryButton, c);
+		
 		this.add(panel);
 
 		// makes frame visible and exits on close DG
@@ -160,7 +167,7 @@ public class AllMediaView extends JFrame implements ActionListener {
 		// ActionListener added to HOME button DG
 		homeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Home Button has been clicked");
+				
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
@@ -183,11 +190,22 @@ public class AllMediaView extends JFrame implements ActionListener {
 		// ActionListener added to EXIT button DG
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Exit Button has been clicked");
+			
 				controller.viewEventOccured(new ViewEvent(SongView.class, null,
 						Command.SAVE));
 				SELF.dispatchEvent(new WindowEvent(SELF,
 						WindowEvent.WINDOW_CLOSING));
+			}
+		});
+		deleteEntireLibraryButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+			
+				controller.viewEventOccured(new ViewEvent(SongView.class, null,
+						Command.DELETE_LIBRARY));
+				//textArea.setText("");
+				search.setText("Your Library is Empty");
+				
+				
 			}
 		});
 
@@ -233,10 +251,10 @@ public class AllMediaView extends JFrame implements ActionListener {
 		});
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Delete Button has been clicked");
+				
 
 				// sends info to the controller of what to delete
-				controller.viewEventOccured(new ViewEvent(SongView.class,
+				controller.viewEventOccured(new ViewEvent(AllMediaView.class,
 						matchedMedia, Command.DELETE_WITH_SORT));
 				deleteButton.setEnabled(false);
 				search.setText("");
