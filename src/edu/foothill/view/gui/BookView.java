@@ -8,12 +8,15 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+
 import javax.swing.*;
+
 import edu.foothill.controller.gui.ViewEvent;
 import edu.foothill.controller.gui.ViewListener;
 import edu.foothill.model.Book;
 import edu.foothill.model.Command;
 import edu.foothill.model.MediaLibraryWrapper;
+import edu.foothill.model.Video;
 
 
 /**
@@ -290,11 +293,12 @@ public class BookView extends JFrame {
 	 * viewable output to display in the textArea box Gudeman & Scottolini
 	 */
 	private void repopulateTextArea() {
-		textArea.setText("");
-
+		String bookString = "";
 		for (Book book : mediaLibraryWrapper.getBooks()) {
-			textArea.append(book.getTitle() + "\n");
+			bookString += (book.getTitle() + "\n");
 		}
+		textArea.setText(bookString);
+		textArea.repaint();
 	}
 
 	/**
@@ -321,6 +325,7 @@ public class BookView extends JFrame {
 				if (text.trim().equalsIgnoreCase(book.getTitle())) {
 					textArea.setText(book.getTitle().trim());
 					textArea.repaint();
+					deleteButton.setEnabled(true);
 
 					// identifies an object whose title is a match
 					this.matchedBook = book;

@@ -324,6 +324,7 @@ public class SongView extends JFrame {
 				if (text.trim().equalsIgnoreCase(song.getTitle())) {
 					textArea.setText(song.getTitle().trim());
 					textArea.repaint();
+					deleteButton.setEnabled(true);
 
 					// identifies an object whose title is a match
 					this.matchedSong = song;

@@ -15,6 +15,7 @@ import javax.swing.*;
 
 import edu.foothill.controller.gui.ViewEvent;
 import edu.foothill.controller.gui.ViewListener;
+import edu.foothill.model.Song;
 import edu.foothill.model.Video;
 import edu.foothill.model.Command;
 import edu.foothill.model.MediaLibraryWrapper;
@@ -294,11 +295,12 @@ public class VideoView extends JFrame {
 	 * viewable output to display in the textArea box Gudeman & Scottolini
 	 */
 	private void repopulateTextArea() {
-		textArea.setText("");
-
+		String videoString = "";
 		for (Video video : mediaLibraryWrapper.getVideos()) {
-			textArea.append(video.getTitle() + "\n");
+			videoString += (video.getTitle() + "\n");
 		}
+		textArea.setText(videoString);
+		textArea.repaint();
 	}
 
 	/**
@@ -325,6 +327,7 @@ public class VideoView extends JFrame {
 				if (text.trim().equalsIgnoreCase(video.getTitle())) {
 					textArea.setText(video.getTitle().trim());
 					textArea.repaint();
+					deleteButton.setEnabled(true);
 
 					// identifies an object whose title is a match
 					this.matchedVideo = video;

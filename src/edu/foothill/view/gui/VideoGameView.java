@@ -2,6 +2,7 @@ package edu.foothill.view.gui;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 import java.awt.*;
@@ -19,6 +20,7 @@ import javax.swing.*;
 
 import edu.foothill.controller.gui.ViewEvent;
 import edu.foothill.controller.gui.ViewListener;
+import edu.foothill.model.Video;
 import edu.foothill.model.VideoGame;
 import edu.foothill.model.Command;
 import edu.foothill.model.MediaLibraryWrapper;
@@ -297,11 +299,12 @@ public class VideoGameView extends JFrame {
 	 * viewable output to display in the textArea box Gudeman & Scottolini
 	 */
 	private void repopulateTextArea() {
-		textArea.setText("");
-
+		String videoGameString = "";
 		for (VideoGame videoGame : mediaLibraryWrapper.getVideogames()) {
-			textArea.append(videoGame.getTitle() + "\n");
+			videoGameString += (videoGame.getTitle() + "\n");
 		}
+		textArea.setText(videoGameString);
+		textArea.repaint();
 	}
 
 	/**
@@ -328,6 +331,7 @@ public class VideoGameView extends JFrame {
 				if (text.trim().equalsIgnoreCase(videoGame.getTitle())) {
 					textArea.setText(videoGame.getTitle().trim());
 					textArea.repaint();
+					deleteButton.setEnabled(true);
 
 					// identifies an object whose title is a match
 					this.matchedVideoGame = videoGame;
