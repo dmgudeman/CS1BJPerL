@@ -31,7 +31,7 @@ import edu.foothill.model.MediaLibraryWrapper;
  * to a media type or a JFrame that addresses the entire list. Version 1 David
  * Gudeman
  */
-public class AllMediaView extends JFrame implements ActionListener {
+public class AllMediaView extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private MediaLibraryWrapper mediaLibraryWrapper;
@@ -325,9 +325,4 @@ public class AllMediaView extends JFrame implements ActionListener {
 		return found;
 	}
 
-	// needed to implement ActionListener Interface DG
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-	}
 }

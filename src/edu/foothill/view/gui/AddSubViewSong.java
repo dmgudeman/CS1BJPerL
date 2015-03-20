@@ -24,9 +24,7 @@ import java.awt.event.KeyListener;
  * Version 1 Gudeman
  */
 
-public class AddSubViewSong extends JFrame implements ActionListener
-
-{
+public class AddSubViewSong extends JFrame {
 	// include the view needed to process through the UI tree
 	private final SongView songView;
 
@@ -285,8 +283,4 @@ public class AddSubViewSong extends JFrame implements ActionListener
 		notes.setText("");
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// method signature needed to implement ActionListener
-	}
 }

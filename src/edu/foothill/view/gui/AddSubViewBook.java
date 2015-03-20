@@ -8,7 +8,6 @@ import edu.foothill.model.Command;
 import edu.foothill.model.Book;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -24,9 +23,7 @@ import java.awt.event.KeyListener;
  * Version 1 Dominick Scottolini & David Gudeman
  */
 
-public class AddSubViewBook extends JFrame implements ActionListener
-
-{
+public class AddSubViewBook extends JFrame {
 	// include the view needed to process through the UI tree
 	private final BookView bookView;
 
@@ -271,8 +268,4 @@ public class AddSubViewBook extends JFrame implements ActionListener
 		notes.setText("");
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// method signature needed to implement ActionListener
-	}
 }

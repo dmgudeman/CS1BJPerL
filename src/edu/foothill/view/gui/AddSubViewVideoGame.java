@@ -24,9 +24,7 @@ import java.awt.event.KeyListener;
  * Version 1 Dominick Scottolini & David Gudeman
  */
 
-public class AddSubViewVideoGame extends JFrame implements ActionListener
-
-{
+public class AddSubViewVideoGame extends JFrame {
 	// include the view needed to process through the UI tree
 	private final VideoGameView videoGameView;
 
@@ -253,8 +251,4 @@ public class AddSubViewVideoGame extends JFrame implements ActionListener
 		notes.setText("");
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// method signature needed to implement ActionListener
-	}
 }
