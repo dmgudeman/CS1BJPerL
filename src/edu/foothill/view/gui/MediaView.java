@@ -34,31 +34,25 @@ public class MediaView extends JFrame implements Observer {
 	private static final int FRAME_HEIGHT = 500;
 
 	// initialize the elements in the frame
-
 	private JPanel panel;
-
 	private JLabel prompt;
-
 	private JTextField mainSearch;
-
 	private JButton mainAllButton;
 	private JButton mainSongButton;
 	private JButton mainBookButton;
 	private JButton mainVideoButton;
 	private JButton mainVideoGameButton;
 	private JButton exitButton;
-
 	private AllMediaView allMediaView;
 	private SongView songView;
 	private BookView bookView;
 	private VideoView videoView;
 	private VideoGameView videoGameView;
-
 	private MediaLibraryWrapper mediaLibraryWrapper;
 
 	/**
-	 * Non parameterized constructor for this class, creates a JFrame and places
-	 * buttons in the frame Gudeman
+	 * Non parameterized constructor for this class, creates a JFrame and a panel
+	 * and places buttons in the panel Gudeman
 	 */
 	public MediaView() {
 
@@ -154,7 +148,7 @@ public class MediaView extends JFrame implements Observer {
 	 */
 	public void addController(ViewListener controller) {
 		// this declaration allows the view to identify itself when
-		// calling making Action Listeners DG
+		// adding Action Listeners DG
 		final MediaView SELF = this;
 
 		// need to instantiate the next tier of views so the
@@ -322,10 +316,12 @@ public class MediaView extends JFrame implements Observer {
 	}
 
 	/**
-	 * This is a method necessary to implement the Observer interface. It takes
-	 * two parameters o is the observable object and arg an argument passed to
+	 * Makes this class be the sole observer for this program. It takes
+	 * two parameters o is the observable object - MediaLibrary and arg an argument passed to
 	 * the notifyObservers method. This allows the mediaView to update the other
-	 * views. Gudeman & Shaffer
+	 * views. By using the MediaView Class to update the other views MediaView was the
+	 * only view that needed to be an observer, simplifying the notifiation process.
+	 *  Gudeman & Shaffer
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
