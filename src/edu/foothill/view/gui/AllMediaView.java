@@ -281,7 +281,7 @@ public class AllMediaView extends JFrame {
 		textArea.setText("");
 
 		for (Media media : mediaLibraryWrapper.getMedia()) {
-			textArea.append(media.getType() + ": " +media.getTitle() + "\n");
+			textArea.append(media.getType() + ": " + media.getTitle() + "\n");
 		}
 	}
 
@@ -307,7 +307,7 @@ public class AllMediaView extends JFrame {
 		} else {
 			for (Media media : mediaLibraryWrapper.getMedia()) {
 				if (text.trim().equalsIgnoreCase(media.getType() + ": "+ media.getTitle())) {
-					textArea.setText(media.getType() + ": "+ media.getTitle().trim());
+					textArea.setText(media.getType() + ": " + media.getTitle().trim());
 					textArea.repaint();
 
 					// identifies an object whose title is a match

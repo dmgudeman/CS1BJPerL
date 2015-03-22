@@ -4,8 +4,13 @@ package edu.foothill.model;
  * class has methods for saving and retrieving the  whole media library to/from a disk. 
  *  Shmuel Shaffer
  */
-import java.io.*;
-import java.nio.file.Files;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Persistence {
 
@@ -104,8 +109,6 @@ public class Persistence {
 
 			}
 			try {
-				//mediaLibraryFromDisk = (MediaLibrary) objectInputStream S
-				//		.readObject(); S
 				
 				// put data into the mediaWrapper class
 				mediaLibraryWrapperFromDisk = (MediaLibraryWrapper) objectInputStream
