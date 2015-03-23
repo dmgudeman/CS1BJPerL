@@ -13,17 +13,17 @@ public class MediaProgramLibrary {
 
 	
 	public static void main(String[] args) {
-		MediaView view = new MediaView();
-		MediaLibrary model = new MediaLibrary();
+		MediaView mediaView = new MediaView();
+		MediaLibrary mediaLibrary = new MediaLibrary();
 
 		// adds the view to be an observer
-		model.addObserver(view);
+		mediaLibrary.addObserver(mediaView);
 
-		Controller controller = new Controller(model, view, "mediaLibrary.ser");
+		Controller controller = new Controller(mediaLibrary, mediaView, "mediaLibrary.ser");
 		
 		// registers the controller to be a listener of the button activator on
 		// the view.
-		view.addController(controller);
+		mediaView.addController(controller);
 		
 		controller.loadFile();
 

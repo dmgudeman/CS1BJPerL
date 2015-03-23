@@ -206,7 +206,7 @@ public class BookView extends JFrame {
 				System.out.println("Print Button has been clicked");
 				// this utilizes the mechanism of the AddSubViewBook without
 				// duplicating code
-				controller.viewEventOccured(new ViewEvent(AddSubViewBook.class,
+				controller.viewEventOccured(new ViewEvent(BookView.class,
 						null, Command.PRINT_BOOKS));
 
 			}
